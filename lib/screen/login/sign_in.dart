@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gdsc_solution/screen/login/sign_up.dart';
 import 'package:intl/intl.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 //로그인 페이지
@@ -12,8 +14,11 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
+  //사용자 수 출력 형식 지정
   var format = NumberFormat('###,###,###,###');
   int user_count = 2131415;
+
+  final _auth = FirebaseAuth.instance;
 
   final _formKey = GlobalKey<FormState>();
   final emailController = new TextEditingController();
@@ -24,6 +29,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
   @override
   void initState() {
     super.initState();
+    //숫자 카운팅 애니메이션을 위한 컨트롤러 값 설정
     animationController = AnimationController(vsync: this, duration:Duration(seconds: 1));
     animation = IntTween(begin: 0, end: user_count).animate(
       CurvedAnimation(parent: animationController, curve: Curves.ease)
@@ -39,21 +45,23 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
           body: SingleChildScrollView(
             child: Center(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
+                    height: 200,
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text('Total Users',style: TextStyle(fontSize: 20)),
                         Text(format.format(animation!.value), style: TextStyle(fontSize: 30),)
                       ],
                     )
+                    //Text('${format.format(user_count)}'),
                   ),
                   Form(
                     key: _formKey,
                     child: Column(children: [
                     Container(
-                            margin: EdgeInsets.fromLTRB(25, 75, 25, 0),
+                            margin: EdgeInsets.fromLTRB(25, 20, 25, 0),
                             child: TextFormField(
                                 controller: emailController,
                                 keyboardType: TextInputType.emailAddress,
@@ -132,15 +140,14 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
       }
     );
   }
-  signIn(String email, String password){
+  signIn(String email, String password) async{
     if (_formKey.currentState!.validate()) {
       try {
-        /* await _auth.signInWithEmailAndPassword(
+        await _auth.signInWithEmailAndPassword(
             email: email, password: password);
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => Home())); */
+        Get.to(SignUp());
       } catch (e) {
-        //Fluttertoast.showToast(msg: e.toString());
+        Fluttertoast.showToast(msg: e.toString());
       }
     }
   }

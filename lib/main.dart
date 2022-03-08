@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gdsc_solution/screen/login/sign_in.dart';
 import 'package:get/route_manager.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main()=>runApp(MainApp());
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MainApp());
+}
 
 class MainApp extends StatelessWidget {
   const MainApp({ Key? key }) : super(key: key);
