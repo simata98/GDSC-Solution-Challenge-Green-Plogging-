@@ -3,6 +3,7 @@ import 'package:gdsc_solution/screen/login/sign_up.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 
+//로그인 페이지
 class SignIn extends StatefulWidget {
   const SignIn({ Key? key }) : super(key: key);
 
