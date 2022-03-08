@@ -175,7 +175,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                           onPressed: () {
                             signUp(emailController.text, pwController.text);
                           },
-                          child: Text('가입하기')))
+                          child: Text('Sign Up')))
                 ],
               ),
             ),
