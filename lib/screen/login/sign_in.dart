@@ -140,6 +140,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
       }
     );
   }
+  //존재하는 계정이면 로그인 후 페이지 이동
   signIn(String email, String password) async{
     if (_formKey.currentState!.validate()) {
       try {
