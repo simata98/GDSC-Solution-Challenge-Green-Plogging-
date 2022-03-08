@@ -48,6 +48,9 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        //for Flutter GoogleMap API
+        minSdkVersion 20
     }
 
     buildTypes {
