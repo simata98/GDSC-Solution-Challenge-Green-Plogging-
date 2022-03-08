@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+//회원가입 페이지
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
