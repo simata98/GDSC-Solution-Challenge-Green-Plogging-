@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gdsc_solution/screen/login/sign_up.dart';
+import 'package:gdsc_solution/screen/myPage/my_profile.dart';
 import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 //로그인 페이지
@@ -16,7 +18,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
   //사용자 수 출력 형식 지정
   var format = NumberFormat('###,###,###,###');
-  int user_count = 2131415;
+  int user_count=0;
 
   final _auth = FirebaseAuth.instance;
 
@@ -29,12 +31,10 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
   @override
   void initState() {
     super.initState();
+    getUserNum().then((value) => user_count = value);
     //숫자 카운팅 애니메이션을 위한 컨트롤러 값 설정
-    animationController = AnimationController(vsync: this, duration:Duration(seconds: 1));
-    animation = IntTween(begin: 0, end: user_count).animate(
-      CurvedAnimation(parent: animationController, curve: Curves.ease)
-    );
-    animationController.forward();
+    animationController = AnimationController(vsync: this, duration:Duration(seconds: 2));
+    
   }
   @override
   Widget build(BuildContext context) {
@@ -52,10 +52,9 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text('Total Users',style: TextStyle(fontSize: 20)),
-                        Text(format.format(animation!.value), style: TextStyle(fontSize: 30),)
+                        showUserNum()
                       ],
                     )
-                    //Text('${format.format(user_count)}'),
                   ),
                   Form(
                     key: _formKey,
@@ -107,6 +106,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
                             ),
                           )
                   ]),),
+                  //회원가입 페이지 버튼
                   Container(
                     margin: EdgeInsets.only(top: 40),
                     child: TextButton(
@@ -116,6 +116,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
                       },
                     ),
                   ),
+                  //로그인 버튼
                   Container(
                       margin: EdgeInsets.only(top: 20),
                       child: ElevatedButton(
@@ -125,6 +126,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
                         child: Text('Sign in'),
                         style: ElevatedButton.styleFrom(primary: Colors.grey),
                       )),
+                  //구글 로그인 버튼
                   Container(
                       margin: EdgeInsets.only(top: 20),
                       child: ElevatedButton(
@@ -146,7 +148,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
       try {
         await _auth.signInWithEmailAndPassword(
             email: email, password: password);
-        Get.to(SignUp()); //이부분을 홈으로 바꾸면 됨
+        Get.to(MyProfile()); //이부분을 홈으로 바꾸면 됨
       } catch (e) {
         Fluttertoast.showToast(msg: e.toString());
       }
@@ -155,5 +157,25 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
 
   void googleSignIn(){
 
+  }
+
+  //파이어스토어에 저장 되어있는 users 콜렉션의 길이를 구한다.
+  Future getUserNum() async{
+    var snapshot =  await FirebaseFirestore.instance.collection('users').get();
+    int num = snapshot.size;
+    setState(() {
+      
+    });
+    return num;
+  }
+
+  //존재하는 유저 카운팅을 보여주기 위해 0부터 user_count까지 증가하도록 한다.
+  //그 후 텍스트를 출력한다.
+  showUserNum(){
+    animation = IntTween(begin: 0, end: user_count).animate(
+      CurvedAnimation(parent: animationController, curve: Curves.ease)
+    );
+    animationController.forward();
+    return Text(format.format(animation!.value), style: TextStyle(fontSize: 30));
   }
 }
