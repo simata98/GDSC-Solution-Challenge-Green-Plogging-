@@ -10,6 +10,7 @@ class News extends StatefulWidget {
 }
 
 class _NewsState extends State<News> {
+  // 뉴스 API 활용 데이터 리스트로 가져와서 사용
   List data = [];
 
   @override
