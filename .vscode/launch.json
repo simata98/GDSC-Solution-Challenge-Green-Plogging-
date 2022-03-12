@@ -7,7 +7,7 @@
         {
             "name": "gdsc_solution",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
         },
         {
             "name": "gdsc_solution (profile mode)",
