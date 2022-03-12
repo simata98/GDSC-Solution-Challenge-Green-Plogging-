@@ -8,6 +8,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
+import '../main/main.dart';
+
 //로그인 페이지
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
