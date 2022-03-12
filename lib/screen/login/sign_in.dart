@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gdsc_solution/screen/login/sign_up.dart';
+import 'package:gdsc_solution/screen/myPage/my_page.dart';
 import 'package:gdsc_solution/screen/myPage/my_profile.dart';
 import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+
+import '../news/news.dart';
 
 //로그인 페이지
 class SignIn extends StatefulWidget {
@@ -148,7 +151,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin{
       try {
         await _auth.signInWithEmailAndPassword(
             email: email, password: password);
-        Get.to(MyProfile()); //이부분을 홈으로 바꾸면 됨
+        Get.to(MyPage()); //이부분을 홈으로 바꾸면 됨
       } catch (e) {
         Fluttertoast.showToast(msg: e.toString());
       }
