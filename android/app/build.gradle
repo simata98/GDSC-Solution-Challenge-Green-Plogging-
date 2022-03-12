@@ -28,7 +28,12 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion flutter.compileSdkVersion
+    //기존에 있던코드
+    //compileSdkVersion flutter.compileSdkVersion
+
+    //geolocator의 설정에 따른 것
+    //안될 시에 위에 것을 다시 살릴 것
+    compileSdkVersion 31
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
