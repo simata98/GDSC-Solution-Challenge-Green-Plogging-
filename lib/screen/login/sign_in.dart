@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gdsc_solution/screen/login/sign_up.dart';
+<<<<<<< HEAD
 import 'package:gdsc_solution/screen/myPage/my_page.dart';
+=======
+import 'package:gdsc_solution/screen/main/main.dart';
+>>>>>>> d9b6574ccd4560445186b8d74a5d475af215248e
 import 'package:gdsc_solution/screen/myPage/my_profile.dart';
 import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
