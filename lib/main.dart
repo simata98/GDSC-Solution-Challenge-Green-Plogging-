@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gdsc_solution/screen/login/sign_in.dart';
+import 'package:gdsc_solution/splash.dart';
 import 'package:get/route_manager.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -14,6 +14,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(debugShowCheckedModeBanner: false, home: SignIn());
+    return GetMaterialApp(debugShowCheckedModeBanner: false, home: Splash());
   }
 }

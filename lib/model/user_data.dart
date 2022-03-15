@@ -3,20 +3,26 @@ class UserData {
   String? email;
   String? name;
   String? nickname;
+  String? country;
+  String? city;
+  String image = 'https://firebasestorage.googleapis.com/v0/b/flutterfirebaseouthlogin.appspot.com/o/profile_images%2Fno_profile.jpg?alt=media&token=71a9811a-f277-4835-85c5-01a9749bf45d';
   int point = 0;
   int totalRun = 0;
   int totalPlog = 0;
 
-  UserData({this.email, this.name, this.nickname});
+  UserData({this.email, this.name, this.nickname, this.country, this.city});
 
   Map<String, dynamic> toMap(){
     return{
       'email' : email,
       'name' : name,
       'nickname' : nickname,
+      'image' : image,
       'point' : point,
       'totalRun' : totalRun,
-      'totalPlog' : totalPlog
+      'totalPlog' : totalPlog,
+      'country' : country,
+      'city' : city
     };
   }
 }
