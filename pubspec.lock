@@ -188,8 +188,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-<<<<<<< HEAD
-=======
   flutter_blurhash:
     dependency: transitive
     description:
@@ -211,7 +209,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.3"
->>>>>>> bd3a446366568f60092d720a30230623f1c8f923
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -219,8 +216,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
-<<<<<<< HEAD
-=======
   flutter_swiper:
     dependency: "direct main"
     description:
@@ -228,7 +223,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.6"
->>>>>>> bd3a446366568f60092d720a30230623f1c8f923
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -338,11 +332,7 @@ packages:
     source: hosted
     version: "0.10.0+5"
   http:
-<<<<<<< HEAD
-    dependency: transitive
-=======
     dependency: "direct main"
->>>>>>> bd3a446366568f60092d720a30230623f1c8f923
     description:
       name: http
       url: "https://pub.dartlang.org"
@@ -481,8 +471,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
-<<<<<<< HEAD
-=======
   pedantic:
     dependency: transitive
     description:
@@ -490,7 +478,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.11.1"
->>>>>>> bd3a446366568f60092d720a30230623f1c8f923
   platform:
     dependency: transitive
     description:
@@ -708,8 +695,4 @@ packages:
     version: "0.2.0+1"
 sdks:
   dart: ">=2.16.0 <3.0.0"
-<<<<<<< HEAD
-  flutter: ">=2.10.0-0"
-=======
   flutter: ">=2.10.0"
->>>>>>> bd3a446366568f60092d720a30230623f1c8f923
