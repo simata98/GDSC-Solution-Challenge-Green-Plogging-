@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gdsc_solution/screen/guide/guide_line.dart';
 import 'package:gdsc_solution/screen/login/sign_up.dart';
 import 'package:gdsc_solution/screen/myPage/my_page.dart';
 import 'package:gdsc_solution/screen/main/main.dart';

@@ -55,6 +55,7 @@ dependencies:
 
   google_fonts: ^2.3.1
   cached_network_image: ^3.2.0
+  onboarding: ^3.0.0
 
 dev_dependencies:
   flutter_test:
