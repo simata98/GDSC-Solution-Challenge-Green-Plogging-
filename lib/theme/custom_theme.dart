@@ -13,7 +13,9 @@ class CustomTheme {
     //미리 제공되는 견본색상을 뜻 한다.
     //이것은 Material에 대한 color
     //https://stackoverflow.com/questions/50212484/what-is-the-difference-between-primarycolor-and-primaryswatch-in-flutter
-    return ThemeData(primarySwatch: _createMaterialColor(CustomColor.primary));
+    return ThemeData(
+      primarySwatch: _createMaterialColor(CustomColor.primary),
+    );
   }
 
   //Material에 대한 Color을 만드는 작업

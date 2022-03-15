@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../theme/custom_color.dart';
 class GuideItem extends StatefulWidget {
   GuideItem({Key? key, this.num, this.image, this.text, this.textBig})
       : super(key: key);
@@ -26,7 +27,7 @@ class _GuideItemState extends State<GuideItem> {
               margin: EdgeInsets.only(top: 20),
               width: MediaQuery.of(context).size.width,
               height: 80,
-              color: Color.fromARGB(255, 0, 105, 49),
+              color: CustomColor.primary,
               child: Center(
                 child: RichText(
                   text: TextSpan(children: [
@@ -58,7 +59,7 @@ class _GuideItemState extends State<GuideItem> {
               margin: EdgeInsets.only(top: 20),
               width: MediaQuery.of(context).size.width,
               height: 80,
-              color: Color.fromARGB(255, 0, 105, 49),
+              color: CustomColor.primary,
               child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -88,7 +89,7 @@ class _GuideItemState extends State<GuideItem> {
             margin: EdgeInsets.only(top: 20),
             width: MediaQuery.of(context).size.width,
             height: 80,
-            color: Color.fromARGB(255, 0, 105, 49),
+            color: CustomColor.primary,
             child: Center(
               child: RichText(
                 text: TextSpan(children: [

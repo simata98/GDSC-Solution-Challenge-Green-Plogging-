@@ -12,6 +12,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 import '../main/main.dart';
+import '../../theme/custom_color.dart';
 
 //로그인 페이지
 class SignIn extends StatefulWidget {
@@ -100,8 +101,10 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                   textInputAction:
                                       TextInputAction.next, //엔터 치면 다음 위젯으로 이동
                                   decoration: InputDecoration(
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(width: 2, color: Color.fromARGB(255, 25, 131, 69)),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 2,
+                                              color: CustomColor.primary),
                                           borderRadius:
                                               BorderRadius.circular(0)),
                                       contentPadding:
@@ -133,9 +136,11 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                         EdgeInsets.fromLTRB(20, 15, 20, 15),
                                     hintText: "Password",
                                     focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(width: 2, color: Color.fromARGB(255, 25, 131, 69)),
-                                          borderRadius:
-                                              BorderRadius.circular(0)),
+                                        borderSide: BorderSide(
+                                            width: 2,
+                                            color: Color.fromARGB(
+                                                255, 25, 131, 69)),
+                                        borderRadius: BorderRadius.circular(0)),
                                     border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(0))),
@@ -146,24 +151,32 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                       ),
                       //로그인 버튼
                       Container(
-                        width: width,
-                        height: 50,
+                          width: width,
+                          height: 50,
                           margin: EdgeInsets.only(top: 40),
                           child: ElevatedButton(
                             onPressed: () {
                               signIn(emailController.text, pwController.text);
                             },
-                            child: Text('Sign in',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                            style:
-                                ElevatedButton.styleFrom(primary: Color.fromARGB(255, 0, 105, 49),
+                            child: Text('Sign in',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                            style: ElevatedButton.styleFrom(
                                 elevation: 3,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30))),
                           )),
                       //회원가입 페이지 버튼
                       Container(
                         margin: EdgeInsets.only(top: 10),
                         child: TextButton(
-                          child: Text('Sign Up', style: TextStyle(color: Colors.grey, fontSize: 15, fontWeight: FontWeight.bold),),
+                          child: Text(
+                            'Sign Up',
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold),
+                          ),
                           onPressed: () {
                             Get.to(SignUp());
                           },
@@ -171,16 +184,18 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                       ),
                       //구글 로그인 버튼
                       Container(
-                        width: width,
-                        height: 50,
+                          width: width,
+                          height: 50,
                           margin: EdgeInsets.only(top: 20),
                           child: ElevatedButton(
                             onPressed: googleSignIn,
-                            child: Text('Sign in with Google',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                            style:
-                                ElevatedButton.styleFrom(primary: Color.fromARGB(255, 0, 105, 49),
+                            child: Text('Sign in with Google',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                            style: ElevatedButton.styleFrom(
                                 elevation: 3,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30))),
                           ))
                     ],
                   ),
