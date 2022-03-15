@@ -3,6 +3,7 @@ import 'package:gdsc_solution/screen/login/sign_up.dart';
 import 'package:gdsc_solution/screen/myPage/my_page.dart';
 import 'package:gdsc_solution/screen/main/main.dart';
 import 'package:gdsc_solution/screen/myPage/my_profile.dart';
+import 'package:gdsc_solution/screen/news/news.dart';
 import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -195,7 +196,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
       try {
         await _auth.signInWithEmailAndPassword(
             email: email, password: password);
-        Get.to(mapMain()); //이부분을 홈으로 바꾸면 됨
+        Get.to(News()); //이부분을 홈으로 바꾸면 됨
       } catch (e) {
         Fluttertoast.showToast(msg: e.toString());
       }
