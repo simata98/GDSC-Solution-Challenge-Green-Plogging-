@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
 
+import '../../theme/custom_color.dart';
+
 class MyProfile extends StatefulWidget {
   const MyProfile({Key? key}) : super(key: key);
 
@@ -18,18 +20,37 @@ class _MyProfileState extends State<MyProfile> {
       .doc(FirebaseAuth.instance.currentUser!.uid);
   final postData = FirebaseFirestore.instance
       .collection('posts')
-      .orderBy('time',descending: true);
+      .orderBy('time', descending: true);
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         child: Column(children: [
-          Container(
-            margin: EdgeInsets.fromLTRB(20, 30, 20, 0),
-            child: StreamBuilder<DocumentSnapshot>(
-              stream: _info.snapshots(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return Row(children: [
+      Container(
+        margin: EdgeInsets.fromLTRB(20, 30, 20, 0),
+        child: StreamBuilder<DocumentSnapshot>(
+          stream: _info.snapshots(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return Row(children: [
+                CircleAvatar(
+                  backgroundImage: AssetImage('assets/no_profile_image.jpg'),
+                  radius: 60,
+                ),
+                Container(
+                    width: 100,
+                    margin: EdgeInsets.fromLTRB(30, 0, 40, 0),
+                    child: Text('         ',
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold))),
+                IconButton(onPressed: () {}, icon: Icon(Icons.settings))
+              ]);
+            }
+            var data = snapshot.data;
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                     CircleAvatar(
                       backgroundImage:
                           AssetImage('assets/no_profile_image.jpg'),
@@ -38,80 +59,57 @@ class _MyProfileState extends State<MyProfile> {
                     Container(
                         width: 100,
                         margin: EdgeInsets.fromLTRB(30, 0, 40, 0),
-                        child: Text('         ',
+                        child: Text('${data!['nickname']}',
                             style: TextStyle(
                                 fontSize: 25, fontWeight: FontWeight.bold))),
                     IconButton(onPressed: () {}, icon: Icon(Icons.settings))
-                  ]);
-                }
-                var data = snapshot.data;
-                return Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircleAvatar(
-                          backgroundImage:
-                              AssetImage('assets/no_profile_image.jpg'),
-                          radius: 60,
-                        ),
-                        Container(
-                            width: 100,
-                            margin: EdgeInsets.fromLTRB(30, 0, 40, 0),
-                            child: Text('${data!['nickname']}',
-                                style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold))),
-                        IconButton(onPressed: () {}, icon: Icon(Icons.settings))
-                      ],
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Total Point', style: TextStyle(fontSize: 15)),
-                          Text('${data['point']} P',
-                              style: TextStyle(fontSize: 20)),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Total Running', style: TextStyle(fontSize: 15)),
-                          changeM2Km('${data['totalRun']}')
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Total Plogging',
-                              style: TextStyle(fontSize: 15)),
-                          Text('${data['totalPlog']} times',
-                              style: TextStyle(fontSize: 20)),
-                        ],
-                      ),
-                    )
                   ],
-                );
-              },
-            ),
-          ),
-          Container(
-            alignment: Alignment.centerLeft,
-            margin: EdgeInsets.fromLTRB(20, 30, 20, 0),
-            child: Text('Post list',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-          ),
-          showPostData()
-        ])
-    );
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Total Point', style: TextStyle(fontSize: 15)),
+                      Text('${data['point']} P',
+                          style: TextStyle(fontSize: 20)),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Total Running', style: TextStyle(fontSize: 15)),
+                      changeM2Km('${data['totalRun']}')
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(30, 30, 30, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Total Plogging', style: TextStyle(fontSize: 15)),
+                      Text('${data['totalPlog']} times',
+                          style: TextStyle(fontSize: 20)),
+                    ],
+                  ),
+                )
+              ],
+            );
+          },
+        ),
+      ),
+      Container(
+        alignment: Alignment.centerLeft,
+        margin: EdgeInsets.fromLTRB(20, 30, 20, 0),
+        child: Text('Post list',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+      ),
+      showPostData()
+    ]));
   }
 
   //미터 값을 키로미터 값으로 변경
@@ -128,7 +126,7 @@ class _MyProfileState extends State<MyProfile> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
@@ -139,24 +137,30 @@ class _MyProfileState extends State<MyProfile> {
                       children: [
                         Container(
                           padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          color: Color.fromARGB(255, 0, 105, 49),
+                          color: CustomColor.primary,
                           height: 33,
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(DateFormat('yy.MM.dd').format(data['time'].toDate()),
+                                Text(
+                                    DateFormat('yy.MM.dd')
+                                        .format(data['time'].toDate()),
                                     style: TextStyle(
-                                        fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold)),
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)),
                                 Text(data['city'],
                                     style: TextStyle(
-                                        fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold))
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold))
                               ]),
                         ),
                         Container(
                             height: 250,
                             width: MediaQuery.of(context).size.width,
-                            child: Image.network(data['image'],
-                                fit: BoxFit.fill)),
+                            child:
+                                Image.network(data['image'], fit: BoxFit.fill)),
                       ],
                     ),
                   );
