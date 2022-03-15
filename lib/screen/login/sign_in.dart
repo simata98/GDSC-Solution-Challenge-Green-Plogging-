@@ -44,104 +44,145 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return AnimatedBuilder(
         animation: animationController,
         builder: (context, child) {
           return Scaffold(
+            backgroundColor: Color.fromARGB(255, 245, 245, 245),
             body: SingleChildScrollView(
-              child: Center(
-                child: Column(
-                  children: [
-                    Container(
-                        height: 200,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Total Users', style: TextStyle(fontSize: 20)),
-                            showUserNum()
-                          ],
-                        )),
-                    Form(
-                      key: _formKey,
-                      child: Column(children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(25, 20, 25, 0),
-                          child: TextFormField(
-                              controller: emailController,
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (value) {
-                                //이메일 입력 형식
-                                if (value!.isEmpty ||
-                                    !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                        .hasMatch(value)) {
-                                  return ("잘못된 이메일 형식입니다.");
-                                }
-                              },
-                              textInputAction:
-                                  TextInputAction.next, //엔터 치면 다음 위젯으로 이동
-                              decoration: InputDecoration(
-                                  prefixIcon: Icon(Icons.mail),
-                                  contentPadding:
-                                      EdgeInsets.fromLTRB(20, 15, 20, 15),
-                                  hintText: "Email",
-                                  border: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(10)))),
-                        ),
-                        SizedBox(height: 40),
-                        //비밀번호 텍스트필드
-                        Container(
-                          margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                          child: TextFormField(
-                            controller: pwController,
-                            obscureText: true, //비밀번호가 ....으로 표시되도록 한다
-                            validator: (value) {
-                              RegExp regex = new RegExp(r'^.{6,}$');
-                              if (!regex.hasMatch(value!)) {
-                                return ("최소 6자리 이상의 비밀번호가 필요합니다.");
-                              }
-                            },
-                            textInputAction: TextInputAction.next,
-                            decoration: InputDecoration(
-                                prefixIcon: Icon(Icons.vpn_key),
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(20, 15, 20, 15),
-                                hintText: "PassWord",
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10))),
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Center(
+                  child: Column(
+                    children: [
+                      Image(
+                          width: width * 2 / 3,
+                          image: AssetImage(
+                            'assets/logo.png',
+                          )),
+                      Container(
+                          margin: EdgeInsets.only(top: 10, bottom: 20),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              //Text('There are', style: TextStyle(fontSize: 25)),
+                              showUserNum(),
+                              Text(
+                                'Plogging Challengers',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromARGB(255, 25, 131, 69)),
+                              )
+                            ],
+                          )),
+                      Form(
+                        key: _formKey,
+                        child: Column(children: [
+                          Container(
+                            color: Colors.white,
+                            margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                            child: Material(
+                              elevation: 5,
+                              child: TextFormField(
+                                  controller: emailController,
+                                  keyboardType: TextInputType.emailAddress,
+                                  validator: (value) {
+                                    //이메일 입력 형식
+                                    if (value!.isEmpty ||
+                                        !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                            .hasMatch(value)) {
+                                      return ("잘못된 이메일 형식입니다.");
+                                    }
+                                  },
+                                  textInputAction:
+                                      TextInputAction.next, //엔터 치면 다음 위젯으로 이동
+                                  decoration: InputDecoration(
+                                    focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(width: 2, color: Color.fromARGB(255, 25, 131, 69)),
+                                          borderRadius:
+                                              BorderRadius.circular(0)),
+                                      contentPadding:
+                                          EdgeInsets.fromLTRB(20, 15, 20, 15),
+                                      hintText: "E-mail",
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(0)))),
+                            ),
                           ),
-                        )
-                      ]),
-                    ),
-                    //회원가입 페이지 버튼
-                    Container(
-                      margin: EdgeInsets.only(top: 40),
-                      child: TextButton(
-                        child: Text('Sign Up'),
-                        onPressed: () {
-                          Get.to(SignUp());
-                        },
+                          SizedBox(height: 30),
+                          //비밀번호 텍스트필드
+                          Container(
+                            color: Colors.white,
+                            child: Material(
+                              elevation: 5,
+                              child: TextFormField(
+                                controller: pwController,
+                                obscureText: true, //비밀번호가 ....으로 표시되도록 한다
+                                validator: (value) {
+                                  RegExp regex = new RegExp(r'^.{6,}$');
+                                  if (!regex.hasMatch(value!)) {
+                                    return ("최소 6자리 이상의 비밀번호가 필요합니다.");
+                                  }
+                                },
+                                textInputAction: TextInputAction.next,
+                                decoration: InputDecoration(
+                                    contentPadding:
+                                        EdgeInsets.fromLTRB(20, 15, 20, 15),
+                                    hintText: "Password",
+                                    focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(width: 2, color: Color.fromARGB(255, 25, 131, 69)),
+                                          borderRadius:
+                                              BorderRadius.circular(0)),
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(0))),
+                              ),
+                            ),
+                          )
+                        ]),
                       ),
-                    ),
-                    //로그인 버튼
-                    Container(
-                        margin: EdgeInsets.only(top: 20),
-                        child: ElevatedButton(
+                      //로그인 버튼
+                      Container(
+                        width: width,
+                        height: 50,
+                          margin: EdgeInsets.only(top: 40),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              signIn(emailController.text, pwController.text);
+                            },
+                            child: Text('Sign in',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                            style:
+                                ElevatedButton.styleFrom(primary: Color.fromARGB(255, 0, 105, 49),
+                                elevation: 3,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+                          )),
+                      //회원가입 페이지 버튼
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: TextButton(
+                          child: Text('Sign Up', style: TextStyle(color: Colors.grey, fontSize: 15, fontWeight: FontWeight.bold),),
                           onPressed: () {
-                            signIn(emailController.text, pwController.text);
+                            Get.to(SignUp());
                           },
-                          child: Text('Sign in'),
-                          style: ElevatedButton.styleFrom(primary: Colors.grey),
-                        )),
-                    //구글 로그인 버튼
-                    Container(
-                        margin: EdgeInsets.only(top: 20),
-                        child: ElevatedButton(
-                          onPressed: googleSignIn,
-                          child: Text('SignIn with Google'),
-                          style: ElevatedButton.styleFrom(primary: Colors.grey),
-                        ))
-                  ],
+                        ),
+                      ),
+                      //구글 로그인 버튼
+                      Container(
+                        width: width,
+                        height: 50,
+                          margin: EdgeInsets.only(top: 20),
+                          child: ElevatedButton(
+                            onPressed: googleSignIn,
+                            child: Text('Sign in with Google',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                            style:
+                                ElevatedButton.styleFrom(primary: Color.fromARGB(255, 0, 105, 49),
+                                elevation: 3,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+                          ))
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -155,7 +196,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
       try {
         await _auth.signInWithEmailAndPassword(
             email: email, password: password);
-        Get.to(News()); //이부분을 홈으로 바꾸면 됨
+        Get.to(mapMain()); //이부분을 홈으로 바꾸면 됨
       } catch (e) {
         Fluttertoast.showToast(msg: e.toString());
       }
@@ -179,6 +220,6 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
         CurvedAnimation(parent: animationController, curve: Curves.ease));
     animationController.forward();
     return Text(format.format(animation!.value),
-        style: TextStyle(fontSize: 30));
+        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold));
   }
 }
