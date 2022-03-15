@@ -122,7 +122,10 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                                         contentPadding:
                                             EdgeInsets.fromLTRB(20, 15, 20, 15),
                                         hintText: "E-mail",
-                                        hintStyle: TextStyle(color: Colors.grey, fontSize: 15, fontWeight: FontWeight.bold),
+                                        hintStyle: TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
                                         border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(0)))),
@@ -148,7 +151,10 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                                       contentPadding:
                                           EdgeInsets.fromLTRB(20, 15, 20, 15),
                                       hintText: "Password",
-                                      hintStyle: TextStyle(color: Colors.grey, fontSize: 15, fontWeight: FontWeight.bold),
+                                      hintStyle: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
                                       focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                               width: 2,
@@ -188,7 +194,10 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                                         contentPadding:
                                             EdgeInsets.fromLTRB(20, 15, 20, 15),
                                         hintText: "YourName",
-                                        hintStyle: TextStyle(color: Colors.grey, fontSize: 15, fontWeight: FontWeight.bold),
+                                        hintStyle: TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
                                         border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(0)))),
@@ -221,7 +230,10 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                                         contentPadding:
                                             EdgeInsets.fromLTRB(20, 15, 20, 15),
                                         hintText: "NickName",
-                                        hintStyle: TextStyle(color: Colors.grey, fontSize: 15, fontWeight: FontWeight.bold),
+                                        hintStyle: TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
                                         border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(0)))),
@@ -249,15 +261,14 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                                         onChanged: (String? value) {
                                           setState(() {
                                             _selectedCountry = value!;
-                                            if(value == 'South Korea'){
+                                            if (value == 'South Korea') {
                                               _selectedIndex = 0;
                                               _selectedCity = 'Seoul';
-                                            }
-                                            else if(value == 'United States'){
+                                            } else if (value ==
+                                                'United States') {
                                               _selectedIndex = 1;
                                               _selectedCity = 'Washington DC';
                                             }
-                                              
                                           });
                                         }),
                                   ),
@@ -273,7 +284,8 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                                     child: DropdownButton(
                                         isExpanded: true,
                                         value: _selectedCity,
-                                        items: _cityList[_selectedIndex].map((value) {
+                                        items: _cityList[_selectedIndex]
+                                            .map((value) {
                                           return DropdownMenuItem(
                                               value: value, child: Text(value));
                                         }).toList(),
@@ -295,7 +307,6 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                             margin: EdgeInsets.only(top: 40),
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                    primary: Color.fromARGB(255, 0, 105, 49),
                                     elevation: 3,
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
