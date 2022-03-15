@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:gdsc_solution/screen/login/sign_in.dart';
+import 'package:gdsc_solution/screen/guide/guide_line.dart';
 import 'package:get/get.dart';
 
 class Splash extends StatefulWidget {
@@ -17,7 +17,7 @@ class splash extends State<Splash> {
     super.initState();
     Timer(
       const Duration(seconds: 2),
-      () => Get.off(SignIn())
+      () => Get.off(GuideLine())
     );
   }
 
