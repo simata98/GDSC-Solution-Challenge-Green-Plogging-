@@ -138,8 +138,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                     focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                             width: 2,
-                                            color: Color.fromARGB(
-                                                255, 25, 131, 69)),
+                                            color: CustomColor.primary),
                                         borderRadius: BorderRadius.circular(0)),
                                     border: OutlineInputBorder(
                                         borderRadius:
@@ -193,6 +192,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold)),
                             style: ElevatedButton.styleFrom(
+                                primary: CustomColor.primary87,
                                 elevation: 3,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30))),
