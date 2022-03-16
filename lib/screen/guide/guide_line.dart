@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import '../login/sign_in.dart';
 import 'guide_item.dart';
 
+import '../../theme/custom_color.dart';
+
 //앱 처음 실행 시 가이드라인 페이지
 //최초 1회만 뜸
 class GuideLine extends StatefulWidget {
@@ -73,11 +75,10 @@ class _GuideLineState extends State<GuideLine> {
                   child: ElevatedButton(
                     onPressed: () => Get.off(SignIn()),
                     child: Text('START',
-                        style:
-                            TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold)),
                     style: ElevatedButton.styleFrom(
                         elevation: 5,
-                        primary: Color.fromARGB(255, 0, 105, 49),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40))),
                   ),
@@ -115,7 +116,7 @@ class _GuideLineState extends State<GuideLine> {
           height: dotList[0] ? 12 : 8,
           width: dotList[0] ? 12 : 8,
           decoration: BoxDecoration(
-              color: dotList[0] ? Color.fromARGB(255, 0, 105, 49) : Colors.black,
+              color: dotList[0] ? CustomColor.primary : Colors.black,
               borderRadius: BorderRadius.all(Radius.circular(12))),
         ),
         Container(
@@ -123,7 +124,7 @@ class _GuideLineState extends State<GuideLine> {
           height: dotList[1] ? 12 : 8,
           width: dotList[1] ? 12 : 8,
           decoration: BoxDecoration(
-              color: dotList[1] ? Color.fromARGB(255, 0, 105, 49) : Colors.black,
+              color: dotList[1] ? CustomColor.primary : Colors.black,
               borderRadius: BorderRadius.all(Radius.circular(12))),
         ),
         Container(
@@ -131,7 +132,7 @@ class _GuideLineState extends State<GuideLine> {
           height: dotList[2] ? 12 : 8,
           width: dotList[2] ? 12 : 8,
           decoration: BoxDecoration(
-              color: dotList[2] ? Color.fromARGB(255, 0, 105, 49) : Colors.black,
+              color: dotList[2] ? CustomColor.primary : Colors.black,
               borderRadius: BorderRadius.all(Radius.circular(12))),
         )
       ],

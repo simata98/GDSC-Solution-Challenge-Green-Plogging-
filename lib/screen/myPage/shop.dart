@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../theme/custom_color.dart';
+
 class Shop extends StatefulWidget {
   const Shop({Key? key}) : super(key: key);
 
@@ -42,9 +44,11 @@ class _ShopState extends State<Shop> {
                           fontWeight: FontWeight.bold),
                     )),
                 TextButton(
-                    onPressed: () {setState(() {
-                      donDec = !donDec;
-                    });},
+                    onPressed: () {
+                      setState(() {
+                        donDec = !donDec;
+                      });
+                    },
                     child: Text(
                       'Decorate',
                       style: TextStyle(
@@ -81,26 +85,35 @@ class _ShopState extends State<Shop> {
             color: Color.fromARGB(255, 192, 211, 201),
             child: SizedBox(height: 10)),
         //donate 버튼이 눌렸을 때와 decorate 버튼을 눌렀을 때 다른 리스트가 나오도록 함
-        donDec ? ListView(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          children: [
-            showDonationTile('assets/save_children.png', 'https://www.sc.or.kr/', 5000),
-            showDonationTile('assets/world_vision.png', 'https://www.worldvision.or.kr/', 5000),
-            showDonationTile('assets/unicef.png', 'https://www.unicef.or.kr/', 5000),
-            showDonationTile('assets/amnesty.png', 'https://www.amnesty.org/en/', 5000)
-          ],
-        )
-        :ListView(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          children: [
-            showDonationTile('assets/save_children.png', 'https://www.sc.or.kr/', 1000),
-            showDonationTile('assets/world_vision.png', 'https://www.worldvision.or.kr/', 1000),
-            showDonationTile('assets/unicef.png', 'https://www.unicef.or.kr/', 1000),
-            showDonationTile('assets/amnesty.png', 'https://www.amnesty.org/en/', 1000)
-          ],
-        )
+        donDec
+            ? ListView(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                children: [
+                  showDonationTile('assets/save_children.png',
+                      'https://www.sc.or.kr/', 5000),
+                  showDonationTile('assets/world_vision.png',
+                      'https://www.worldvision.or.kr/', 5000),
+                  showDonationTile(
+                      'assets/unicef.png', 'https://www.unicef.or.kr/', 5000),
+                  showDonationTile(
+                      'assets/amnesty.png', 'https://www.amnesty.org/en/', 5000)
+                ],
+              )
+            : ListView(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                children: [
+                  showDonationTile('assets/save_children.png',
+                      'https://www.sc.or.kr/', 1000),
+                  showDonationTile('assets/world_vision.png',
+                      'https://www.worldvision.or.kr/', 1000),
+                  showDonationTile(
+                      'assets/unicef.png', 'https://www.unicef.or.kr/', 1000),
+                  showDonationTile(
+                      'assets/amnesty.png', 'https://www.amnesty.org/en/', 1000)
+                ],
+              )
       ]),
     );
   }
@@ -146,9 +159,9 @@ class _ShopState extends State<Shop> {
                       },
                       child: Text(link, style: TextStyle(fontSize: 10)),
                       style: ElevatedButton.styleFrom(
-                        minimumSize: Size(50,25),
-                        maximumSize: Size(200,25),
-                          primary: Color.fromARGB(255, 0, 105, 49),
+                          minimumSize: Size(50, 25),
+                          maximumSize: Size(200, 25),
+                          primary: CustomColor.primary,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)))),
                   Container(
@@ -157,12 +170,14 @@ class _ShopState extends State<Shop> {
                         onPressed: () {
                           donatePoint(nessPoint);
                         },
-                        child: Text('Donate', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+                        child: Text('Donate',
+                            style: TextStyle(
+                                fontSize: 10, fontWeight: FontWeight.bold)),
                         style: ElevatedButton.styleFrom(
-                          elevation: 5,
-                          minimumSize: Size(64,20),
-                          maximumSize: Size(64,20),
-                            primary: Color.fromARGB(255, 0, 105, 49),
+                            elevation: 5,
+                            minimumSize: Size(64, 20),
+                            maximumSize: Size(64, 20),
+                            primary: CustomColor.primary,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)))),
                   )
@@ -177,16 +192,14 @@ class _ShopState extends State<Shop> {
 
   //기부 버튼을 누르면 동작하는 함수
   //해당 포인트보다 많이 갖고 있으면 포인트만큼 차감. 아니면 메세지 출력
-  donatePoint(int point){
-    _info.get().then((DocumentSnapshot value){
-    if(value['point'] < point)
-      Fluttertoast.showToast(msg: 'need more points');
-    else{
-      _info.update({'point' : FieldValue.increment(0 - point)});
-      Fluttertoast.showToast(msg: 'donated successfully');
-    }
+  donatePoint(int point) {
+    _info.get().then((DocumentSnapshot value) {
+      if (value['point'] < point)
+        Fluttertoast.showToast(msg: 'need more points');
+      else {
+        _info.update({'point': FieldValue.increment(0 - point)});
+        Fluttertoast.showToast(msg: 'donated successfully');
+      }
     });
-    
-    
   }
 }
