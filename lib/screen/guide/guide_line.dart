@@ -6,7 +6,7 @@ import 'guide_item.dart';
 import '../../theme/custom_color.dart';
 
 //앱 처음 실행 시 가이드라인 페이지
-//최초 1회만 뜸
+//최초 1회만 뜨도록 수정 예정
 class GuideLine extends StatefulWidget {
   const GuideLine({Key? key}) : super(key: key);
 
@@ -89,6 +89,7 @@ class _GuideLineState extends State<GuideLine> {
         ));
   }
 
+  //슬라이드 순서에 따라 밑에 뜨는 강조 점 위치 달라짐
   sliderDot(int page) {
     setState(() {
       if (page == 0) {
@@ -107,6 +108,7 @@ class _GuideLineState extends State<GuideLine> {
     });
   }
 
+  //강조되는 점들에 대한 함수
   showDot() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
