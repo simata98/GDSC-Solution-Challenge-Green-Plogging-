@@ -50,42 +50,44 @@ class _GuideLineState extends State<GuideLine> {
           title: Image.asset('assets/logo.png', width: 60),
           centerTitle: true,
         ),
-        body: Column(
-          children: [
-            Container(
-              height: 450,
-              child: PageView.builder(
-                controller: _pageController,
-                scrollDirection: Axis.horizontal,
-                itemCount: slideList.length,
-                itemBuilder: (ctx, i) => slideList[i],
-                onPageChanged: (value) {
-                  sliderDot(value);
-                },
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                height: 450,
+                child: PageView.builder(
+                  controller: _pageController,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: slideList.length,
+                  itemBuilder: (ctx, i) => slideList[i],
+                  onPageChanged: (value) {
+                    sliderDot(value);
+                  },
+                ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 10),
-              child: Column(children: [
-                showDot(),
-                Container(
-                  width: 150,
-                  height: 50,
-                  margin: EdgeInsets.only(top: 50),
-                  child: ElevatedButton(
-                    onPressed: () => Get.off(SignIn()),
-                    child: Text('START',
-                        style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.bold)),
-                    style: ElevatedButton.styleFrom(
-                        elevation: 5,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40))),
-                  ),
-                )
-              ]),
-            ),
-          ],
+              Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Column(children: [
+                  showDot(),
+                  Container(
+                    width: 150,
+                    height: 50,
+                    margin: EdgeInsets.only(top: 50),
+                    child: ElevatedButton(
+                      onPressed: () => Get.off(SignIn()),
+                      child: Text('START',
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold)),
+                      style: ElevatedButton.styleFrom(
+                          elevation: 5,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40))),
+                    ),
+                  )
+                ]),
+              ),
+            ],
+          ),
         ));
   }
 
