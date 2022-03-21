@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gdsc_solution/components/mainMapDrawer.dart';
 import 'package:gdsc_solution/screen/news/news.dart';
 import 'package:gdsc_solution/screen/social/social_post.dart';
 import 'package:gdsc_solution/screen/social/social_rank.dart';
@@ -40,7 +41,7 @@ class _SocialPageState extends State<SocialPage> {
             }, child: Text('News', style: TextStyle(color: selected == 2 ? Colors.black : Colors.grey, fontSize: 18)))),
         ],
       ),
-      drawer: Drawer(),
+      drawer: Drawer(child: mainMapDrawer()),
       body: showPage(selected),
     );
   }

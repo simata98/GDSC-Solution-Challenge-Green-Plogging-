@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:gdsc_solution/components/mainMapDrawer.dart';
+import 'package:gdsc_solution/theme/custom_color.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
@@ -140,96 +142,126 @@ class _mapMainState extends State<mapMain> {
     //Check IOS Platform
     final bool isIOS = !kIsWeb && defaultTargetPlatform == TargetPlatform.iOS;
 
+    final double _screenWidth = MediaQuery.of(context).size.width;
+    final double _scrrenHeight = MediaQuery.of(context).size.height;
+
+    //앱바 높이
+    final double _appBarHeight = _scrrenHeight * 0.065;
+
     return Scaffold(
+        drawer: Container(
+            width: _screenWidth * 0.7,
+            child: Drawer(child: new mainMapDrawer())),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(_appBarHeight),
+          child: AppBar(
+            iconTheme: IconThemeData(color: Colors.black),
+            backgroundColor: Colors.white,
+            elevation: 0,
+            title: Image.asset('assets/logo.png', width: _appBarHeight),
+            centerTitle: true,
+            actions: [
+              IconButton(
+                onPressed: () => {print('tets')},
+                icon: const Icon(Icons.help),
+                color: CustomColor.primary,
+              )
+            ],
+          ),
+        ),
         body: Stack(children: [
-      Container(
-          child: GoogleMap(
-        polylines: polyline,
-        zoomControlsEnabled: false,
-        onMapCreated: _onMapCreated,
-        myLocationEnabled: true,
-        initialCameraPosition: CameraPosition(target: _center, zoom: 11),
-      )),
-      Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            width: double.infinity,
-            margin: EdgeInsets.fromLTRB(10, 0, 10, 40),
-            height: 140,
-            padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(10)),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Container(
+              child: GoogleMap(
+            polylines: polyline,
+            zoomControlsEnabled: false,
+            onMapCreated: _onMapCreated,
+            myLocationEnabled: true,
+            initialCameraPosition: CameraPosition(target: _center, zoom: 11),
+          )),
+          Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                width: double.infinity,
+                margin: EdgeInsets.fromLTRB(10, 0, 10, 40),
+                height: 140,
+                padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Column(
                   children: [
-                    Column(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("SPEED (KM/H)",
-                            style: GoogleFonts.montserrat(
-                                fontSize: 10, fontWeight: FontWeight.w300)),
-                        Text(_speed.toStringAsFixed(2),
-                            style: GoogleFonts.montserrat(
-                                fontSize: 30, fontWeight: FontWeight.w300))
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Text("TIME",
-                            style: GoogleFonts.montserrat(
-                                fontSize: 10, fontWeight: FontWeight.w300)),
-                        StreamBuilder<int>(
-                          stream: _stopWatchTimer.rawTime,
-                          initialData: 0,
-                          builder: (context, snap) {
-                            _time = snap.data!;
-                            _displayTime =
-                                StopWatchTimer.getDisplayTimeHours(_time) +
+                        Column(
+                          children: [
+                            Text("SPEED (KM/H)",
+                                style: GoogleFonts.montserrat(
+                                    fontSize: 10, fontWeight: FontWeight.w300)),
+                            Text(_speed.toStringAsFixed(2),
+                                style: GoogleFonts.montserrat(
+                                    fontSize: 30, fontWeight: FontWeight.w300))
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text("TIME",
+                                style: GoogleFonts.montserrat(
+                                    fontSize: 10, fontWeight: FontWeight.w300)),
+                            StreamBuilder<int>(
+                              stream: _stopWatchTimer.rawTime,
+                              initialData: 0,
+                              builder: (context, snap) {
+                                _time = snap.data!;
+                                _displayTime = StopWatchTimer
+                                        .getDisplayTimeHours(_time) +
                                     ":" +
                                     StopWatchTimer.getDisplayTimeMinute(_time) +
                                     ":" +
                                     StopWatchTimer.getDisplayTimeSecond(_time);
-                            return Text(_displayTime,
+                                return Text(_displayTime,
+                                    style: GoogleFonts.montserrat(
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.w300));
+                              },
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text("DISTANCE (KM)",
                                 style: GoogleFonts.montserrat(
-                                    fontSize: 30, fontWeight: FontWeight.w300));
-                          },
+                                    fontSize: 10, fontWeight: FontWeight.w300)),
+                            Text((_dist / 1000).toStringAsFixed(2),
+                                style: GoogleFonts.montserrat(
+                                    fontSize: 30, fontWeight: FontWeight.w300))
+                          ],
                         )
                       ],
                     ),
-                    Column(
-                      children: [
-                        Text("DISTANCE (KM)",
-                            style: GoogleFonts.montserrat(
-                                fontSize: 10, fontWeight: FontWeight.w300)),
-                        Text((_dist / 1000).toStringAsFixed(2),
-                            style: GoogleFonts.montserrat(
-                                fontSize: 30, fontWeight: FontWeight.w300))
-                      ],
+                    Divider(),
+                    IconButton(
+                      icon: Icon(
+                        Icons.stop_circle_outlined,
+                        size: 50,
+                        color: Colors.redAccent,
+                      ),
+                      padding: EdgeInsets.all(0),
+                      onPressed: () async {
+                        Entry en = Entry(
+                            date: DateFormat.yMMMMd('en_US')
+                                .format(DateTime.now()),
+                            duration: _displayTime,
+                            speed: _speedCounter == 0
+                                ? 0
+                                : _avgSpeed / _speedCounter,
+                            distance: _dist);
+                        Navigator.pop(context, en);
+                      },
                     )
                   ],
                 ),
-                Divider(),
-                IconButton(
-                  icon: Icon(
-                    Icons.stop_circle_outlined,
-                    size: 50,
-                    color: Colors.redAccent,
-                  ),
-                  padding: EdgeInsets.all(0),
-                  onPressed: () async {
-                    Entry en = Entry(
-                        date: DateFormat.yMMMMd('en_US').format(DateTime.now()),
-                        duration: _displayTime,
-                        speed:
-                            _speedCounter == 0 ? 0 : _avgSpeed / _speedCounter,
-                        distance: _dist);
-                    Navigator.pop(context, en);
-                  },
-                )
-              ],
-            ),
-          ))
-    ]));
+              ))
+        ]));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gdsc_solution/components/mainMapDrawer.dart';
 import 'my_profile.dart';
 import 'my_record.dart';
 import 'shop.dart';
@@ -39,7 +40,7 @@ class _MyPageState extends State<MyPage> {
             }, child: Text('Shop', style: TextStyle(color: selected == 2 ? Colors.black : Colors.grey, fontSize: 18, fontWeight: FontWeight.bold)))),
         ],
       ),
-      drawer: Drawer(),
+      drawer: Drawer(child: mainMapDrawer()),
       body: showPage(selected),
     );
   }
