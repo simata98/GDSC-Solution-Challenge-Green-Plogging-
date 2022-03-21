@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gdsc_solution/components/mainMapDrawer.dart';
+import 'package:gdsc_solution/components/semiCircleWidget.dart';
 import 'package:gdsc_solution/screen/main/main_dialog.dart';
 import 'package:gdsc_solution/theme/custom_color.dart';
 import 'package:get/get.dart';
@@ -182,86 +183,39 @@ class _mapMainState extends State<mapMain> {
           )),
           Align(
               alignment: Alignment.bottomCenter,
-              child: Container(
-                width: double.infinity,
-                margin: EdgeInsets.fromLTRB(10, 0, 10, 40),
-                height: 140,
-                padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10)),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            Text("SPEED (KM/H)",
-                                style: GoogleFonts.montserrat(
-                                    fontSize: 10, fontWeight: FontWeight.w300)),
-                            Text(_speed.toStringAsFixed(2),
-                                style: GoogleFonts.montserrat(
-                                    fontSize: 30, fontWeight: FontWeight.w300))
-                          ],
+              child: Material(
+                //이것을 안하면 클릭할때 효과(ripple)이 네모로 나옴!! 필수!!
+                clipBehavior: Clip.hardEdge,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(100),
+                  topRight: Radius.circular(100),
+                ),
+                color: CustomColor.primary,
+                child: InkWell(
+                  onTap: () {
+                    Get.bottomSheet(
+                      Container(
+                        height: _scrrenHeight * 0.4,
+                        color: Colors.white,
+                        child: Center(
+                          child: Text('BottomSheet'),
                         ),
-                        Column(
-                          children: [
-                            Text("TIME",
-                                style: GoogleFonts.montserrat(
-                                    fontSize: 10, fontWeight: FontWeight.w300)),
-                            StreamBuilder<int>(
-                              stream: _stopWatchTimer.rawTime,
-                              initialData: 0,
-                              builder: (context, snap) {
-                                _time = snap.data!;
-                                _displayTime = StopWatchTimer
-                                        .getDisplayTimeHours(_time) +
-                                    ":" +
-                                    StopWatchTimer.getDisplayTimeMinute(_time) +
-                                    ":" +
-                                    StopWatchTimer.getDisplayTimeSecond(_time);
-                                return Text(_displayTime,
-                                    style: GoogleFonts.montserrat(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.w300));
-                              },
-                            )
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Text("DISTANCE (KM)",
-                                style: GoogleFonts.montserrat(
-                                    fontSize: 10, fontWeight: FontWeight.w300)),
-                            Text((_dist / 1000).toStringAsFixed(2),
-                                style: GoogleFonts.montserrat(
-                                    fontSize: 30, fontWeight: FontWeight.w300))
-                          ],
-                        )
-                      ],
-                    ),
-                    Divider(),
-                    IconButton(
-                      icon: Icon(
-                        Icons.stop_circle_outlined,
-                        size: 50,
-                        color: Colors.redAccent,
                       ),
-                      padding: EdgeInsets.all(0),
-                      onPressed: () async {
-                        Entry en = Entry(
-                            date: DateFormat.yMMMMd('en_US')
-                                .format(DateTime.now()),
-                            duration: _displayTime,
-                            speed: _speedCounter == 0
-                                ? 0
-                                : _avgSpeed / _speedCounter,
-                            distance: _dist);
-                        Navigator.pop(context, en);
-                      },
-                    )
-                  ],
+                    );
+                  },
+                  child: Container(
+                    width: 176,
+                    height: 86,
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    child: Center(
+                        child: Text(
+                      "START",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold),
+                    )),
+                  ),
                 ),
               ))
         ]));
