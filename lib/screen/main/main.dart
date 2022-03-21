@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gdsc_solution/components/mainMapDrawer.dart';
+import 'package:gdsc_solution/screen/main/main_dialog.dart';
 import 'package:gdsc_solution/theme/custom_color.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
@@ -162,7 +164,7 @@ class _mapMainState extends State<mapMain> {
             centerTitle: true,
             actions: [
               IconButton(
-                onPressed: () => {print('tets')},
+                onPressed: () => {Get.dialog(new mainDialog())},
                 icon: const Icon(Icons.help),
                 color: CustomColor.primary,
               )
