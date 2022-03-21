@@ -19,6 +19,7 @@ class _MyProfileState extends State<MyProfile> {
       .doc(FirebaseAuth.instance.currentUser!.uid);
   final postData = FirebaseFirestore.instance
       .collection('posts')
+      .where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid.toString())
       .orderBy('time', descending: true);
   @override
   Widget build(BuildContext context) {

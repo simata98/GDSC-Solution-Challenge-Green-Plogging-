@@ -23,14 +23,14 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
   final nickController = TextEditingController();
 
   var format = NumberFormat('###,###,###,###');
-  int user_count = 2131415;
+  int user_count = 0;
   Animation? animation, transformationAnim;
   late AnimationController animationController;
 
   final _countryList = ['South Korea', 'United States'];
   final _cityList = [
-    ['Seoul', 'Incheon', 'Suwon', 'Asan'],
-    ['Washington DC', 'New York', 'Los Angeles', 'California']
+    ['Seoul', 'Suwon', 'Asan'],
+    ['Washington DC', 'New York', 'California']
   ];
   var _selectedCountry = 'South Korea';
   var _selectedCity = 'Seoul';
@@ -370,6 +370,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
     userData.nickname = nickController.text;
     userData.country = _selectedCountry;
     userData.city = _selectedCity;
+    userData.uid = FirebaseAuth.instance.currentUser!.uid;
 
     final firebaseFirestore = FirebaseFirestore.instance;
     await firebaseFirestore
