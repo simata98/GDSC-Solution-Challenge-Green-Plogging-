@@ -24,19 +24,19 @@ class _MyPageState extends State<MyPage> {
           Container(
             child: TextButton(onPressed: (){setState(() {
               selected = 0;
-            });}, child: Text('My profile', style: TextStyle(color: Colors.black, fontSize: 18)))),
+            });}, child: Text('My profile', style: TextStyle(color: selected == 0 ? Colors.black : Colors.grey, fontSize: 18, fontWeight: FontWeight.bold)))),
           Container(
             child: TextButton(onPressed: (){
               setState(() {
                 selected = 1;
               });
-            }, child: Text('My record', style: TextStyle(color: Colors.black, fontSize: 18)))),
+            }, child: Text('My record', style: TextStyle(color: selected == 1 ? Colors.black : Colors.grey, fontSize: 18, fontWeight: FontWeight.bold)))),
           Container(
             child: TextButton(onPressed: (){
               setState(() {
                 selected = 2;
               });
-            }, child: Text('Shop', style: TextStyle(color: Colors.black, fontSize: 18)))),
+            }, child: Text('Shop', style: TextStyle(color: selected == 2 ? Colors.black : Colors.grey, fontSize: 18, fontWeight: FontWeight.bold)))),
         ],
       ),
       drawer: Drawer(),

@@ -25,19 +25,19 @@ class _SocialPageState extends State<SocialPage> {
           Container(
             child: TextButton(onPressed: (){setState(() {
               selected = 0;
-            });}, child: Text('Community', style: TextStyle(color: Colors.black, fontSize: 18)))),
+            });}, child: Text('Community', style: TextStyle(color: selected == 0 ? Colors.black : Colors.grey, fontSize: 18, fontWeight: FontWeight.bold)))),
           Container(
             child: TextButton(onPressed: (){
               setState(() {
                 selected = 1;
               });
-            }, child: Text('Rankings', style: TextStyle(color: Colors.black, fontSize: 18)))),
+            }, child: Text('Rankings', style: TextStyle(color: selected == 1 ? Colors.black : Colors.grey, fontSize: 18, fontWeight: FontWeight.bold)))),
           Container(
             child: TextButton(onPressed: (){
               setState(() {
                 selected = 2;
               });
-            }, child: Text('News', style: TextStyle(color: Colors.black, fontSize: 18)))),
+            }, child: Text('News', style: TextStyle(color: selected == 2 ? Colors.black : Colors.grey, fontSize: 18)))),
         ],
       ),
       drawer: Drawer(),

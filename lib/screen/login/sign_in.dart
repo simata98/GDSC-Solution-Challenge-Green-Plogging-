@@ -213,7 +213,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
       try {
         await _auth.signInWithEmailAndPassword(
             email: email, password: password);
-        Get.to(SocialPage()); //이부분을 홈으로 바꾸면 됨
+        Get.to(MyPage()); //이부분을 홈으로 바꾸면 됨
       } catch (e) {
         Fluttertoast.showToast(msg: e.toString());
       }

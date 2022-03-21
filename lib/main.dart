@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gdsc_solution/splash.dart';
 import 'package:get/route_manager.dart';
 import 'package:firebase_core/firebase_core.dart';
-
+import 'package:flutter/services.dart';
 import 'theme/custom_theme.dart';
 
 Future<void> main() async {
@@ -16,6 +16,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: CustomTheme.lightTheme,
