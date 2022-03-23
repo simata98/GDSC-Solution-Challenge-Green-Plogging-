@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:gdsc_solution/components/mainMapDrawer.dart';
-import 'my_profile.dart';
-import 'my_record.dart';
-import 'shop.dart';
+import 'package:gdsc_solution/screen/news/news.dart';
+import 'package:gdsc_solution/screen/social/social_post.dart';
+import 'package:gdsc_solution/screen/social/social_rank.dart';
 
-class MyPage extends StatefulWidget {
-  const MyPage({ Key? key }) : super(key: key);
+class SocialPage extends StatefulWidget {
+  const SocialPage({ Key? key }) : super(key: key);
 
   @override
-  State<MyPage> createState() => _MyPageState();
+  State<SocialPage> createState() => _SocialPageState();
 }
 
-class _MyPageState extends State<MyPage> {
+class _SocialPageState extends State<SocialPage> {
   int selected = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,19 +26,19 @@ class _MyPageState extends State<MyPage> {
           Container(
             child: TextButton(onPressed: (){setState(() {
               selected = 0;
-            });}, child: Text('My profile', style: TextStyle(color: selected == 0 ? Colors.black : Colors.grey, fontSize: 18, fontWeight: FontWeight.bold)))),
+            });}, child: Text('Community', style: TextStyle(color: selected == 0 ? Colors.black : Colors.grey, fontSize: 18, fontWeight: FontWeight.bold)))),
           Container(
             child: TextButton(onPressed: (){
               setState(() {
                 selected = 1;
               });
-            }, child: Text('My record', style: TextStyle(color: selected == 1 ? Colors.black : Colors.grey, fontSize: 18, fontWeight: FontWeight.bold)))),
+            }, child: Text('Rankings', style: TextStyle(color: selected == 1 ? Colors.black : Colors.grey, fontSize: 18, fontWeight: FontWeight.bold)))),
           Container(
             child: TextButton(onPressed: (){
               setState(() {
                 selected = 2;
               });
-            }, child: Text('Shop', style: TextStyle(color: selected == 2 ? Colors.black : Colors.grey, fontSize: 18, fontWeight: FontWeight.bold)))),
+            }, child: Text('News', style: TextStyle(color: selected == 2 ? Colors.black : Colors.grey, fontSize: 18)))),
         ],
       ),
       drawer: Drawer(child: mainMapDrawer()),
@@ -45,8 +46,8 @@ class _MyPageState extends State<MyPage> {
     );
   }
   showPage(int n){
-    if(n == 0) return MyProfile();
-    else if(n == 1) return MyRecord();
-    else if(n == 2) return Shop();
+    if(n == 0) return SocialPost();
+    else if(n == 1) return SocialRank();
+    else if(n == 2) return News();
   }
 }

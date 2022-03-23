@@ -1,5 +1,6 @@
 //회원가입 시 입력한 정보들에 대한 틀
 class UserData {
+  String? uid;
   String? email;
   String? name;
   String? nickname;
@@ -10,10 +11,11 @@ class UserData {
   int totalRun = 0;
   int totalPlog = 0;
 
-  UserData({this.email, this.name, this.nickname, this.country, this.city});
+  UserData({this.uid, this.email, this.name, this.nickname, this.country, this.city});
 
   Map<String, dynamic> toMap(){
     return{
+      'uid' : uid,
       'email' : email,
       'name' : name,
       'nickname' : nickname,

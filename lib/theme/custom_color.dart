@@ -10,6 +10,7 @@ class CustomColor {
   static const Color primary38 = Color(0x61006931);
   static const Color primary26 = Color(0x42006931);
   static const Color primary12 = Color(0x1F006931);
+  static const Color primaryPastel = Color(0xffD3DBD6);
 
   static MaterialColor MaterialPrimary = _createMaterialColor(primary);
 

@@ -5,6 +5,7 @@ import 'package:gdsc_solution/screen/myPage/my_page.dart';
 import 'package:gdsc_solution/screen/main/main.dart';
 import 'package:gdsc_solution/screen/myPage/my_profile.dart';
 import 'package:gdsc_solution/screen/news/news.dart';
+import 'package:gdsc_solution/screen/social/social_page.dart';
 import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -59,7 +60,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                   child: Column(
                     children: [
                       Image(
-                          width: width * 2 / 3,
+                          width: width * 3 / 5,
                           image: AssetImage(
                             'assets/logo.png',
                           )),

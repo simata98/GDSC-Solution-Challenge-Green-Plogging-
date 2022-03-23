@@ -1,5 +1,5 @@
-//게시글에 대한 틀
-class Community {
+//내 기록에 대한 틀
+class Record {
   String? city;
   String? map;
   String? view;
@@ -8,11 +8,8 @@ class Community {
   int? runTime;
   int? plogPoint;
   double? speed;
-  int like_count = 0;
-  String? comment;
-  String? uid;
 
-  Community({
+  Record({
     this.city,
     this.map,
     this.view,
@@ -20,9 +17,7 @@ class Community {
     this.distance,
     this.runTime,
     this.plogPoint,
-    this.speed,
-    this.comment,
-    this.uid
+    this.speed
   });
 
   Map<String, dynamic> toMap(){
@@ -34,10 +29,7 @@ class Community {
       'distance' : distance,
       'runTime' : runTime,
       'plogPoint' : plogPoint,
-      'speed' : speed,
-      'like_count' : like_count,
-      'comment' : comment,
-      'uid' : uid
+      'speed' : speed
     };
   }
 }

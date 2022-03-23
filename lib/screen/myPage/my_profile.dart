@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
-
 import '../../theme/custom_color.dart';
 
 class MyProfile extends StatefulWidget {
@@ -20,6 +19,7 @@ class _MyProfileState extends State<MyProfile> {
       .doc(FirebaseAuth.instance.currentUser!.uid);
   final postData = FirebaseFirestore.instance
       .collection('posts')
+      .where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid.toString())
       .orderBy('time', descending: true);
   @override
   Widget build(BuildContext context) {
@@ -160,7 +160,7 @@ class _MyProfileState extends State<MyProfile> {
                             height: 250,
                             width: MediaQuery.of(context).size.width,
                             child:
-                                Image.network(data['image'], fit: BoxFit.fill)),
+                                Image.network(data['map'], fit: BoxFit.fill)),
                       ],
                     ),
                   );

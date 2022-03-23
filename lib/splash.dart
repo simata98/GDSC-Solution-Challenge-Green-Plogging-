@@ -13,7 +13,6 @@ class Splash extends StatefulWidget {
 }
 
 class splash extends State<Splash> {
-  // 3초 후 로그인 화면으로 전환
   @override
   void initState() {
     super.initState();
