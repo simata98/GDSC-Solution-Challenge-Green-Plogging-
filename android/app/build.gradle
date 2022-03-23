@@ -34,6 +34,11 @@ android {
     //geolocator의 설정에 따른 것
     //안될 시에 위에 것을 다시 살릴 것
     compileSdkVersion 31
+    
+    aaptOptions {
+        noCompress 'tflite'
+        noCompress 'lite'
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -56,7 +61,8 @@ android {
         versionName flutterVersionName
 
         //for Flutter GoogleMap API
-        minSdkVersion 20
+        //for tflite
+        minSdkVersion 21
         //for firebase connect
         multiDexEnabled true
     }
