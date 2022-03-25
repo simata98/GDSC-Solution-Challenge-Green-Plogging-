@@ -19,6 +19,8 @@ class _SocialRankState extends State<SocialRank> {
   //donDec이 true일때는 friends 랭킹을
   //false일때는 region 랭킹을 보여주도록 함
   bool donDec = true;
+  int runCount = 0;
+  int plogCount = 0;
 
   final _cityList = [
     [
@@ -51,10 +53,11 @@ class _SocialRankState extends State<SocialRank> {
                     children: [
                       TextButton(
                           onPressed: () {
-                            setState(() {
-                              if(!donDec)
+                            if(!donDec){
+                              setState(() {
                                 donDec = !donDec;
-                            });
+                              });
+                            }
                           },
                           child: Text(
                             'friends',
@@ -65,10 +68,13 @@ class _SocialRankState extends State<SocialRank> {
                           )),
                       TextButton(
                           onPressed: () {
-                            setState(() {
-                              if(donDec)
+                            if(donDec){
+                              setState(() {
                                 donDec = !donDec;
-                            });
+                                runCount = 0;
+                                plogCount = 0;
+                              });
+                            }
                           },
                           child: Text(
                             'region',
@@ -94,22 +100,27 @@ class _SocialRankState extends State<SocialRank> {
                 ]),
           ),
           //지역 세부 선택
-          donDec ? Container()
-          : Container(
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton(
-                  value: _selectedCity,
-                  items: _cityList[_selectedIndex].map((value) {
-                    return DropdownMenuItem(value: value, child: Text(value));
-                  }).toList(),
-                  onChanged: (String? value) {
-                    setState(() {
-                      _selectedCity = value!;
-                    });
-                  },
-                  style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)),
-            ),
-          ),
+          donDec
+              ? Container()
+              : Container(
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton(
+                        value: _selectedCity,
+                        items: _cityList[_selectedIndex].map((value) {
+                          return DropdownMenuItem(
+                              value: value, child: Text(value));
+                        }).toList(),
+                        onChanged: (String? value) {
+                          setState(() {
+                            _selectedCity = value!;
+                          });
+                        },
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold)),
+                  ),
+                ),
           Container(
             margin: EdgeInsets.only(top: 10),
             width: width * 2 / 5,
@@ -134,7 +145,9 @@ class _SocialRankState extends State<SocialRank> {
               ),
             ),
           ),
-          donDec ? Container() : showRank(_selectedCity, 'totalRun'),
+          donDec
+              ? showFriendsRank('totalRun', runCount)
+              : showRegRank(_selectedCity, 'totalRun'),
           Container(
             margin: EdgeInsets.only(top: 10),
             width: width * 2 / 5,
@@ -159,7 +172,9 @@ class _SocialRankState extends State<SocialRank> {
               ),
             ),
           ),
-          donDec ? Container() : showRank(_selectedCity, 'totalPlog')
+          donDec
+              ? showFriendsRank('totalPlog', plogCount)
+              : showRegRank(_selectedCity, 'totalPlog')
         ]),
       ),
     );
@@ -181,7 +196,8 @@ class _SocialRankState extends State<SocialRank> {
     return rank;
   }
 
-  showRank(String city, String desc) {
+  //지역랭킹
+  showRegRank(String city, String desc) {
     return Container(
       margin: EdgeInsets.only(top: 10),
       child: StreamBuilder<QuerySnapshot>(
@@ -278,6 +294,131 @@ class _SocialRankState extends State<SocialRank> {
         },
       ),
     );
+  }
+
+  //친구랭킹
+  showFriendsRank(String desc, int d) {
+    int count = 0;
+    return Container(
+      margin: EdgeInsets.only(top: 10),
+      child: StreamBuilder<QuerySnapshot>(
+        stream: regRank('Total', desc).snapshots(),
+        builder: (context1, snapshot1) {
+          if (!snapshot1.hasData) return CircularProgressIndicator();
+          return ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: snapshot1.data!.docs.length,
+              itemBuilder: (context2, index2) {
+                final data = snapshot1.data!.docs[index2];
+                //1,2,3등일때와 아닐 때 디자인의 차이를 두었으며
+                //현재 사용자가 순위권 밖이라면 ...후에 자신의 등수가 나오도록 함
+                return StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                          .collection('friends')
+                          .doc(FirebaseAuth.instance.currentUser!.uid)
+                          .collection('following')
+                          .snapshots(),
+                  builder: (context3, snapshot3) {
+                    if(!snapshot3.hasData)
+                      return Container();
+                    var friendData = snapshot3.data;
+                    print('friendLength = ${friendData!.docs.length}');
+                    for(int i = 0; i<friendData.docs.length; i++){
+                      if(friendData.docs[i]['fuid'] == data['uid']){
+                        ++count;
+                        print('uid = ${data['uid']}, count = $count');
+                        return Container(
+                        margin: EdgeInsets.only(top: 5),
+                        child: count == 1
+                            ? Row(
+                                children: [
+                                  Image.asset('assets/rank1.png',
+                                      width: rankNumSize),
+                                  rankAvatar('${data['image']}'),
+                                  desc == 'totalPlog'
+                                      ? rankTile('${data['nickname']}', desc,
+                                          data['totalPlog'])
+                                      : rankTile('${data['nickname']}', desc,
+                                          data['totalRun'])
+                                ],
+                              )
+                            : count == 2
+                                ? Row(
+                                    children: [
+                                      Image.asset('assets/rank2.png',
+                                          width: rankNumSize),
+                                      rankAvatar('${data['image']}'),
+                                      desc == 'totalPlog'
+                                          ? rankTile('${data['nickname']}', desc,
+                                              data['totalPlog'])
+                                          : rankTile('${data['nickname']}', desc,
+                                              data['totalRun'])
+                                    ],
+                                  )
+                                : count == 3
+                                    ? Row(
+                                        children: [
+                                          Image.asset('assets/rank3.png',
+                                              width: rankNumSize),
+                                          rankAvatar('${data['image']}'),
+                                          desc == 'totalPlog'
+                                              ? rankTile('${data['nickname']}',
+                                                  desc, data['totalPlog'])
+                                              : rankTile('${data['nickname']}',
+                                                  desc, data['totalRun'])
+                                        ],
+                                      )
+                                    : data['uid'] ==
+                                            FirebaseAuth.instance.currentUser!.uid
+                                        ? Column(
+                                            children: [
+                                              rankDot(),
+                                              rankDot(),
+                                              rankDot(),
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    width: rankNumSize,
+                                                    height: rankNumSize,
+                                                    child: Center(
+                                                      child: Text(
+                                                        '${index2 + 1}',
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight.bold),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  rankAvatar('${data['image']}'),
+                                                  desc == 'totalPlog'
+                                                      ? rankTile(
+                                                          '${data['nickname']}',
+                                                          desc,
+                                                          data['totalPlog'])
+                                                      : rankTile(
+                                                          '${data['nickname']}',
+                                                          desc,
+                                                          data['totalRun'])
+                                                ],
+                                              ),
+                                            ],
+                                          )
+                                        : Container());
+                      }
+                    }
+                    return Container();
+                    
+                  }
+                );
+              });
+        },
+      ),
+    );
+  }
+
+  getFriendsList(){
   }
 
   //랭킹 표시 시 나오는 사용자 프로필 사진

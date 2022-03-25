@@ -110,12 +110,12 @@ class _SocialPostState extends State<SocialPost> {
                 ),
               ),
 
-        donDec ? Container() : showPostData()
+        donDec ? showFriendsPost() : showPostData()
       ]),
     ));
   }
 
-  //내가 올린 포스트들
+  //지역 포스트들
   showPostData() {
     return StreamBuilder<QuerySnapshot>(
         stream: regPost(_selectedCity).snapshots(),
@@ -249,9 +249,9 @@ class _SocialPostState extends State<SocialPost> {
                               ),
                               Row(
                                 children: [
-                                  Icon(Icons.heart_broken),
+                                  Icon(Icons.favorite_border_outlined),
                                   Text(
-                                    '${data['like_count']} likes',
+                                    ' ${data['like_count']} likes',
                                     style: TextStyle(fontSize: 12),
                                   )
                                 ],
@@ -267,6 +267,183 @@ class _SocialPostState extends State<SocialPost> {
           return CircularProgressIndicator();
         });
   }
+
+  //팔로잉 하는 사람들 포스트
+  showFriendsPost() {
+    return StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance
+                .collection('posts')
+                .orderBy('time', descending: true)
+                .snapshots(),
+        builder: (context1, snapshot1) {
+          if (snapshot1.hasData) {
+            return ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: snapshot1.data!.docs.length,
+                itemBuilder: (context2, index) {
+                  final data = snapshot1.data!.docs[index];
+                  final st = FirebaseFirestore.instance
+                      .collection('users')
+                      .doc('${data['uid']}')
+                      .snapshots();
+                  return StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                            .collection('friends')
+                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                            .collection('following')
+                            .snapshots(),
+                    builder: (context3, snapshot3) {
+                      if(!snapshot3.hasData)
+                        return Container();
+                      var friendData = snapshot3.data;
+                      for(int i = 0; i<friendData!.docs.length; i++){
+                        if(friendData.docs[i]['fuid'] == data['uid']){
+                          return GestureDetector(
+                        onDoubleTap: () {},
+                        child: Column(
+                          children: [
+                            Container(
+                                height: 10,
+                                color: Color.fromARGB(255, 171, 197, 183)),
+                            Container(
+                                padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                                height: 50,
+                                //포스트의 상단 글쓴이 정보에 대한 출력
+                                child: StreamBuilder<DocumentSnapshot>(
+                                  stream: st,
+                                  builder: ((context4, snapshot4) {
+                                    if (!snapshot4.hasData)
+                                      return CircularProgressIndicator();
+                                    var man = snapshot4.data;
+                                    return Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                  margin:
+                                                      EdgeInsets.only(right: 10),
+                                                  child: CircleAvatar(
+                                                      backgroundImage: NetworkImage(
+                                                          '${man!['image']}'),
+                                                      radius: 15)),
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(man['nickname'],
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                        margin: EdgeInsets.only(
+                                                            right: 5),
+                                                        child: Text(
+                                                            DateFormat('yy.MM.dd')
+                                                                .format(data['time']
+                                                                    .toDate()),
+                                                            style: TextStyle(
+                                                                fontSize: 8,
+                                                                color: Colors.black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                      ),
+                                                      Text(data['city'],
+                                                          style: TextStyle(
+                                                              fontSize: 8,
+                                                              color: Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight.bold)),
+                                                    ],
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                          //view버튼
+                                          ElevatedButton(
+                                            child: Text('View',
+                                                style: TextStyle(fontSize: 10)),
+                                            style: ElevatedButton.styleFrom(
+                                                minimumSize: Size(55, 25),
+                                                maximumSize: Size(55, 25),
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(25))),
+                                            onPressed: () {
+                                              Get.to(PostDetail(), arguments: {
+                                                'nickname': man['nickname'],
+                                                'image': man['image'],
+                                                'city': data['city'],
+                                                'view': data['view'],
+                                                'map' : data['map'],
+                                                'time': data['time'].toDate(),
+                                                'distance': data['distance'] as int,
+                                                'plogPoint': data['plogPoint'],
+                                                'runTime': data['runTime'],
+                                                'speed': data['speed'],
+                                              });
+                                            },
+                                          )
+                                        ]);
+                                  }),
+                                )),
+                            //포스트 이미지 사진
+                            Container(
+                                width: MediaQuery.of(context).size.width,
+                                child:
+                                    Image.network(data['map'], fit: BoxFit.fill)),
+                            Container(
+                              margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    child: Text(
+                                      '${data['comment']}',
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Icon(Icons.favorite_border_outlined),
+                                      Text(
+                                        ' ${data['like_count']} likes',
+                                        style: TextStyle(fontSize: 12),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                        }
+                        else
+                          continue;
+                      }
+                      return Container();
+                    }
+                  );
+                });
+          }
+          return CircularProgressIndicator();
+        });
+  }
+
+  
 
   regPost(String city) {
     var rank;

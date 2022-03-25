@@ -38,7 +38,7 @@ class _SocialPageState extends State<SocialPage> {
               setState(() {
                 selected = 2;
               });
-            }, child: Text('News', style: TextStyle(color: selected == 2 ? Colors.black : Colors.grey, fontSize: 18)))),
+            }, child: Text('News', style: TextStyle(color: selected == 2 ? Colors.black : Colors.grey, fontSize: 18, fontWeight: FontWeight.bold)))),
         ],
       ),
       drawer: Drawer(child: mainMapDrawer()),

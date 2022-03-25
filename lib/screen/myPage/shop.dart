@@ -33,7 +33,8 @@ class _ShopState extends State<Shop> {
                 TextButton(
                     onPressed: () {
                       setState(() {
-                        donDec = !donDec;
+                        if(!donDec)
+                          donDec = !donDec;
                       });
                     },
                     child: Text(
@@ -46,7 +47,8 @@ class _ShopState extends State<Shop> {
                 TextButton(
                     onPressed: () {
                       setState(() {
-                        donDec = !donDec;
+                        if(donDec)
+                          donDec = !donDec;
                       });
                     },
                     child: Text(
