@@ -2,10 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gdsc_solution/components/mainMapDrawer.dart';
-<<<<<<< Updated upstream
 import 'package:gdsc_solution/components/semiCircleWidget.dart';
-=======
->>>>>>> Stashed changes
 import 'package:gdsc_solution/screen/main/main_dialog.dart';
 import 'package:gdsc_solution/theme/custom_color.dart';
 import 'package:get/get.dart';
