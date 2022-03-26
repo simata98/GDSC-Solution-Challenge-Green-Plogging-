@@ -24,40 +24,48 @@ class _PostDetailState extends State<PostDetail> {
               color: Colors.white,
               //상단 개인정보
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                      margin: EdgeInsets.only(right: 10),
-                      child: CircleAvatar(
-                          backgroundImage: NetworkImage(Get.arguments['image']),
-                          radius: 15)),
-                  Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(Get.arguments['nickname'],
-                            style: TextStyle(
-                                fontSize: 17,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold)),
-                        Row(
+                  IconButton(onPressed: (){Get.back();}, icon: Icon(Icons.arrow_back_ios)),
+                  Row(
+                    children: [
+                      Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 5),
-                              child: Text(
-                                  DateFormat('yy.MM.dd').format(Get.arguments['time']),
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold)),
-                            ),
-                            Text(Get.arguments['city'],
+                            Text(Get.arguments['nickname'],
                                 style: TextStyle(
-                                    fontSize: 12,
+                                    fontSize: 17,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold)),
-                          ],
-                        )
-                      ])
+                            Row(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: 5),
+                                  child: Text(
+                                      DateFormat('yy.MM.dd').format(Get.arguments['time']),
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                                Text(Get.arguments['city'],
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold)),
+                                        
+                              ]
+                            )
+                            
+                          ]),
+                          Container(
+                          margin: EdgeInsets.only(left: 10),
+                          child: CircleAvatar(
+                              backgroundImage: NetworkImage(Get.arguments['image']),
+                              radius: 15)),
+                    ],
+                  ),
                 ],
               )),
               //사진들
@@ -90,25 +98,6 @@ class _PostDetailState extends State<PostDetail> {
                     )
                   ],
                 ),
-              ),
-              //닫기 버튼
-              Container(
-                width: 130,
-                height: 50,
-                margin: EdgeInsets.only(bottom: 40),
-                child: ElevatedButton(onPressed: (){Get.back();},
-                child: Text('close', style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white
-                ),),
-                style: ElevatedButton.styleFrom(
-                  elevation: 10,
-                  primary: CustomColor.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)
-                  )
-                ),),
               )
         ])));
   }

@@ -35,6 +35,7 @@ class _SocialRankState extends State<SocialRank> {
   ];
   var _selectedCity = 'Total';
   var _selectedIndex = 0;
+  List<DocumentSnapshot> _friendsList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -296,6 +297,9 @@ class _SocialRankState extends State<SocialRank> {
     );
   }
 
+  _buildFriendsBody(){
+
+  }
   //친구랭킹
   showFriendsRank(String desc, int d) {
     int count = 0;

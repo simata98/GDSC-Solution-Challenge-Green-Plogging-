@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gdsc_solution/screen/social/find_user.dart';
 import 'package:gdsc_solution/screen/social/post_detail.dart';
 import 'package:gdsc_solution/theme/custom_color.dart';
 import 'package:intl/intl.dart';
@@ -74,16 +75,25 @@ class _SocialPostState extends State<SocialPost> {
               ],
             ),
             //사용자 포인트과 프로필 사진 불러오기
-            StreamBuilder<DocumentSnapshot>(
-                stream: _info.snapshots(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) return CircularProgressIndicator();
+            Row(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(right: 10),
+                  child: IconButton(
+                    onPressed: (){Get.to(FindUser());},
+                    icon: Icon(Icons.search, size: 25))),
+                StreamBuilder<DocumentSnapshot>(
+                    stream: _info.snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) return CircularProgressIndicator();
 
-                  var data = snapshot.data;
-                  return CircleAvatar(
-                      backgroundImage: NetworkImage('${data!['image']}'),
-                      radius: 15);
-                })
+                      var data = snapshot.data;
+                      return CircleAvatar(
+                          backgroundImage: NetworkImage('${data!['image']}'),
+                          radius: 15);
+                    }),
+              ],
+            )
           ]),
         ),
         //지역 세부 선택
