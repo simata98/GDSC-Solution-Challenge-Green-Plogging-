@@ -30,7 +30,7 @@ Widget customListTile(Article article, BuildContext context) {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CachedNetworkImage(
-          imageUrl: article.urlToImage,
+          imageUrl: article.urlToImage!,
           imageBuilder: (context, imageProvider) => Container(
             height: 200.0,
             width: double.infinity,
@@ -57,7 +57,7 @@ Widget customListTile(Article article, BuildContext context) {
               borderRadius: BorderRadius.circular(30.0),
             ),
             child: Text(
-              article.source.name,
+              article.source!.name,
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -67,7 +67,7 @@ Widget customListTile(Article article, BuildContext context) {
             height: 8.0,
           ),
           Text(
-            article.title,
+            article.title!,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16.0,
