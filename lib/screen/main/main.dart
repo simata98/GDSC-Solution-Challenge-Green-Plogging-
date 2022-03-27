@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gdsc_solution/components/mainMapDrawer.dart';
 import 'package:gdsc_solution/components/semiCircleWidget.dart';
 import 'package:gdsc_solution/screen/main/main_dialog.dart';
+import 'package:gdsc_solution/screen/main/sliding_panel.dart';
 import 'package:gdsc_solution/theme/custom_color.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -12,7 +13,9 @@ import 'package:location/location.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import 'package:gdsc_solution/model/geo_entry.dart';
 import 'package:gdsc_solution/model/geo_entry.dart';
 
 class mapMain extends StatefulWidget {
@@ -25,13 +28,17 @@ class mapMain extends StatefulWidget {
 class _mapMainState extends State<mapMain> {
   _mapMainState();
 
-  Completer<GoogleMapController> _controller = Completer();
+  //슬라이드 패널 컨트롤러
+  final panelController = PanelController();
+
+  //구글지도에 필요한 것들
+  GoogleMapController? _mapController;
   Map<PolylineId, Polyline> polylines = <PolylineId, Polyline>{};
   PolylineId? selectedPolyline;
 
   final Set<Polyline> polyline = {};
   Location _location = Location();
-  GoogleMapController? _mapController;
+
   LatLng _center = const LatLng(0, 0);
   List<LatLng> route = [];
 
@@ -146,10 +153,14 @@ class _mapMainState extends State<mapMain> {
     final bool isIOS = !kIsWeb && defaultTargetPlatform == TargetPlatform.iOS;
 
     final double _screenWidth = MediaQuery.of(context).size.width;
-    final double _scrrenHeight = MediaQuery.of(context).size.height;
+    final double _screenHeight = MediaQuery.of(context).size.height;
 
     //앱바 높이
-    final double _appBarHeight = _scrrenHeight * 0.065;
+    final double _appBarHeight = _screenHeight * 0.065;
+
+    //test
+    final getController = Get.put(Entry());
+    getController.appbarHeight = _appBarHeight;
 
     return Scaffold(
         drawer: Container(
@@ -173,51 +184,138 @@ class _mapMainState extends State<mapMain> {
           ),
         ),
         body: Stack(children: [
-          Container(
-              child: GoogleMap(
-            polylines: polyline,
-            zoomControlsEnabled: false,
-            onMapCreated: _onMapCreated,
-            myLocationEnabled: true,
-            initialCameraPosition: CameraPosition(target: _center, zoom: 11),
-          )),
-          Align(
-              alignment: Alignment.bottomCenter,
-              child: Material(
-                //이것을 안하면 클릭할때 효과(ripple)이 네모로 나옴!! 필수!!
-                clipBehavior: Clip.hardEdge,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(100),
-                  topRight: Radius.circular(100),
-                ),
-                color: CustomColor.primary,
-                child: InkWell(
-                  onTap: () {
-                    Get.bottomSheet(
-                      Container(
-                        height: _scrrenHeight * 0.4,
-                        color: Colors.white,
-                        child: Center(
-                          child: Text('BottomSheet'),
+          SlidingUpPanel(
+            maxHeight: _screenHeight * 0.4,
+            minHeight: 0,
+            controller: panelController,
+            parallaxEnabled: true,
+            parallaxOffset: .6,
+            panelBuilder: (controller) => PanelWidget(
+              scrollController: controller,
+              panelController: panelController,
+            ),
+            body: Stack(
+              children: [
+                Container(
+                    child: GoogleMap(
+                  polylines: polyline,
+                  zoomControlsEnabled: false,
+                  onMapCreated: _onMapCreated,
+                  myLocationEnabled: true,
+                  initialCameraPosition:
+                      CameraPosition(target: _center, zoom: 11),
+                )),
+                Align(
+                    alignment: Alignment.bottomCenter,
+                    heightFactor: 10,
+                    child: Material(
+                      //이것을 안하면 클릭할때 효과(ripple)이 네모로 나옴!! 필수!!
+                      clipBehavior: Clip.hardEdge,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(100),
+                        topRight: Radius.circular(100),
+                      ),
+                      color: CustomColor.primary,
+                      child: InkWell(
+                        onTap: () {
+                          panelController.open();
+                        },
+                        child: Container(
+                          // 이것을 하는 이유는
+                          // stack안에 stack이 들어가서 Appbar의 높이를 계산못
+                          //하고 있다.
+                          margin: EdgeInsets.only(bottom: _appBarHeight),
+                          width: 176,
+                          height: 86,
+                          child: Center(
+                              child: Text(
+                            "START",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold),
+                          )),
                         ),
                       ),
-                    );
-                  },
-                  child: Container(
-                    width: 176,
-                    height: 86,
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    child: Center(
-                        child: Text(
-                      "START",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
                     )),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(20, 0, 0, 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(3, 4),
+                            spreadRadius: 1.0,
+                            blurRadius: 5.0,
+                            color: Colors.grey),
+                      ]),
+                  child: Material(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: CustomColor.primary,
+                    child: InkWell(
+                      onTap: () {
+                        _mapController?.animateCamera(
+                          CameraUpdate.zoomIn(),
+                        );
+                      },
+                      child: Container(
+                        width: _screenWidth * 0.13,
+                        height: _screenHeight * 0.06,
+                        child: Icon(
+                          Icons.add,
+                          size: _screenWidth * 0.08,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ))
+                SizedBox(
+                  height: _screenHeight * 0.01,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(3, 4),
+                            spreadRadius: 1.0,
+                            blurRadius: 5.0,
+                            color: Colors.grey),
+                      ]),
+                  child: Material(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: CustomColor.primary,
+                    child: InkWell(
+                      onTap: () {
+                        _mapController?.animateCamera(
+                          CameraUpdate.zoomOut(),
+                        );
+                      },
+                      child: Container(
+                        width: _screenWidth * 0.13,
+                        height: _screenHeight * 0.06,
+                        child: Icon(
+                          Icons.remove,
+                          size: _screenWidth * 0.08,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ]));
   }
 }

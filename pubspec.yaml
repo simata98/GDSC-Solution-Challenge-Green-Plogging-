@@ -60,6 +60,8 @@ dependencies:
   image_picker: ^0.8.4+11
   camera: ^0.9.4+16
 
+  sliding_up_panel: ^2.0.0+1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

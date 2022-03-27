@@ -1,5 +1,10 @@
-class Entry {
+import 'package:get/get.dart';
+
+class Entry extends GetxController {
+  static Entry get to => Get.find<Entry>();
   static String table = "entries";
+
+  double appbarHeight = 0;
 
   int? id;
   String? date;
