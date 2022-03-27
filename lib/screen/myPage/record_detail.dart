@@ -32,6 +32,10 @@ class _RecordDetailState extends State<RecordDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+          onPressed: (){Get.back();},
+        ),
         actions: [
           Container(
             margin: EdgeInsets.only(right: 10),

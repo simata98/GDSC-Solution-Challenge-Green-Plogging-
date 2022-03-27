@@ -3,8 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gdsc_solution/theme/custom_color.dart';
 
-int testSet = 0;
-
 //랭킹 페이지
 class SocialRank extends StatefulWidget {
   const SocialRank({Key? key}) : super(key: key);
@@ -37,6 +35,7 @@ class _SocialRankState extends State<SocialRank> {
   ];
   var _selectedCity = 'Total';
   var _selectedIndex = 0;
+  List<DocumentSnapshot> _friendsList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +54,7 @@ class _SocialRankState extends State<SocialRank> {
                     children: [
                       TextButton(
                           onPressed: () {
-                            if (!donDec) {
+                            if(!donDec){
                               setState(() {
                                 donDec = !donDec;
                               });
@@ -70,11 +69,9 @@ class _SocialRankState extends State<SocialRank> {
                           )),
                       TextButton(
                           onPressed: () {
-                            if (donDec) {
+                            if(donDec){
                               setState(() {
                                 donDec = !donDec;
-                                runCount = 0;
-                                plogCount = 0;
                               });
                             }
                           },
@@ -148,7 +145,7 @@ class _SocialRankState extends State<SocialRank> {
             ),
           ),
           donDec
-              ? showFriendsRank('totalRun', runCount)
+              ? showFriendsRank('totalRun')
               : showRegRank(_selectedCity, 'totalRun'),
           Container(
             margin: EdgeInsets.only(top: 10),
@@ -175,7 +172,7 @@ class _SocialRankState extends State<SocialRank> {
             ),
           ),
           donDec
-              ? showFriendsRank('totalPlog', plogCount)
+              ? showFriendsRank('totalPlog')
               : showRegRank(_selectedCity, 'totalPlog')
         ]),
       ),
@@ -298,16 +295,20 @@ class _SocialRankState extends State<SocialRank> {
     );
   }
 
+  _buildFriendsBody(){
+
+  }
   //친구랭킹
-  showFriendsRank(String desc, int d) {
-    testSet = 0;
+  showFriendsRank(String desc) {
     int count = 0;
     return Container(
       margin: EdgeInsets.only(top: 10),
       child: StreamBuilder<QuerySnapshot>(
         stream: regRank('Total', desc).snapshots(),
         builder: (context1, snapshot1) {
-          if (!snapshot1.hasData) return CircularProgressIndicator();
+          if(snapshot1.connectionState != ConnectionState.active)
+            return Container();
+          if (!snapshot1.hasData) return Container();
           return ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -317,126 +318,114 @@ class _SocialRankState extends State<SocialRank> {
                 //1,2,3등일때와 아닐 때 디자인의 차이를 두었으며
                 //현재 사용자가 순위권 밖이라면 ...후에 자신의 등수가 나오도록 함
                 return StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance
-                        .collection('friends')
-                        .doc(FirebaseAuth.instance.currentUser!.uid)
-                        .collection('following')
-                        .snapshots(),
-                    builder: (context3, snapshot3) {
-                      if (snapshot3.connectionState != ConnectionState.active)
-                        return Container();
-                      if (!snapshot3.hasData) return Container();
-
-                      testSet++;
-                      print('testSet : $testSet context : ${snapshot3.data}');
-                      var friendData = snapshot3.data;
-
-                      for (int i = 0; i < friendData!.docs.length; i++) {
-                        if (friendData.docs[i]['fuid'] == data['uid']) {
-                          ++count;
-                          print('uid = ${data['nickname']}, count = $count');
-                          return Container(
-                              margin: EdgeInsets.only(top: 5),
-                              child: count == 1
-                                  ? Row(
-                                      children: [
-                                        Image.asset('assets/rank1.png',
-                                            width: rankNumSize),
-                                        rankAvatar('${data['image']}'),
-                                        desc == 'totalPlog'
-                                            ? rankTile('${data['nickname']}',
-                                                desc, data['totalPlog'])
-                                            : rankTile('${data['nickname']}',
-                                                desc, data['totalRun'])
-                                      ],
-                                    )
-                                  : count == 2
-                                      ? Row(
-                                          children: [
-                                            Image.asset('assets/rank2.png',
-                                                width: rankNumSize),
-                                            rankAvatar('${data['image']}'),
-                                            desc == 'totalPlog'
-                                                ? rankTile(
-                                                    '${data['nickname']}',
-                                                    desc,
-                                                    data['totalPlog'])
-                                                : rankTile(
-                                                    '${data['nickname']}',
-                                                    desc,
-                                                    data['totalRun'])
-                                          ],
-                                        )
-                                      : count == 3
-                                          ? Row(
-                                              children: [
-                                                Image.asset('assets/rank3.png',
-                                                    width: rankNumSize),
-                                                rankAvatar('${data['image']}'),
-                                                desc == 'totalPlog'
-                                                    ? rankTile(
-                                                        '${data['nickname']}',
-                                                        desc,
-                                                        data['totalPlog'])
-                                                    : rankTile(
-                                                        '${data['nickname']}',
-                                                        desc,
-                                                        data['totalRun'])
-                                              ],
-                                            )
-                                          : data['uid'] ==
-                                                  FirebaseAuth
-                                                      .instance.currentUser!.uid
-                                              ? Column(
-                                                  children: [
-                                                    rankDot(),
-                                                    rankDot(),
-                                                    rankDot(),
-                                                    Row(
-                                                      children: [
-                                                        Container(
-                                                          width: rankNumSize,
-                                                          height: rankNumSize,
-                                                          child: Center(
-                                                            child: Text(
-                                                              '${index2 + 1}',
-                                                              style: TextStyle(
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        rankAvatar(
-                                                            '${data['image']}'),
-                                                        desc == 'totalPlog'
-                                                            ? rankTile(
-                                                                '${data['nickname']}',
-                                                                desc,
-                                                                data[
-                                                                    'totalPlog'])
-                                                            : rankTile(
-                                                                '${data['nickname']}',
-                                                                desc,
-                                                                data[
-                                                                    'totalRun'])
-                                                      ],
-                                                    ),
-                                                  ],
-                                                )
-                                              : Container());
-                        }
-                      }
+                  stream: FirebaseFirestore.instance
+                          .collection('friends')
+                          .doc(FirebaseAuth.instance.currentUser!.uid)
+                          .collection('following')
+                          .snapshots(),
+                  builder: (context3, snapshot3) {
+                    if(snapshot3.connectionState != ConnectionState.active)
                       return Container();
-                    });
+                    if(!snapshot3.hasData)
+                      return Container();
+                    var friendData = snapshot3.data;
+                    print('friendLength = ${friendData!.docs.length}');
+                    for(int i = 0; i<friendData.docs.length; i++){
+                      if(friendData.docs[i]['fuid'] == data['uid']){
+                        ++count;
+                        print('uid = ${data['uid']}, count = $count');
+                        return Container(
+                        margin: EdgeInsets.only(top: 5),
+                        child: count == 1
+                            ? Row(
+                                children: [
+                                  Image.asset('assets/rank1.png',
+                                      width: rankNumSize),
+                                  rankAvatar('${data['image']}'),
+                                  desc == 'totalPlog'
+                                      ? rankTile('${data['nickname']}', desc,
+                                          data['totalPlog'])
+                                      : rankTile('${data['nickname']}', desc,
+                                          data['totalRun'])
+                                ],
+                              )
+                            : count == 2
+                                ? Row(
+                                    children: [
+                                      Image.asset('assets/rank2.png',
+                                          width: rankNumSize),
+                                      rankAvatar('${data['image']}'),
+                                      desc == 'totalPlog'
+                                          ? rankTile('${data['nickname']}', desc,
+                                              data['totalPlog'])
+                                          : rankTile('${data['nickname']}', desc,
+                                              data['totalRun'])
+                                    ],
+                                  )
+                                : count == 3
+                                    ? Row(
+                                        children: [
+                                          Image.asset('assets/rank3.png',
+                                              width: rankNumSize),
+                                          rankAvatar('${data['image']}'),
+                                          desc == 'totalPlog'
+                                              ? rankTile('${data['nickname']}',
+                                                  desc, data['totalPlog'])
+                                              : rankTile('${data['nickname']}',
+                                                  desc, data['totalRun'])
+                                        ],
+                                      )
+                                    : data['uid'] ==
+                                            FirebaseAuth.instance.currentUser!.uid
+                                        ? Column(
+                                            children: [
+                                              rankDot(),
+                                              rankDot(),
+                                              rankDot(),
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    width: rankNumSize,
+                                                    height: rankNumSize,
+                                                    child: Center(
+                                                      child: Text(
+                                                        '${count}',
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight.bold),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  rankAvatar('${data['image']}'),
+                                                  desc == 'totalPlog'
+                                                      ? rankTile(
+                                                          '${data['nickname']}',
+                                                          desc,
+                                                          data['totalPlog'])
+                                                      : rankTile(
+                                                          '${data['nickname']}',
+                                                          desc,
+                                                          data['totalRun'])
+                                                ],
+                                              ),
+                                            ],
+                                          )
+                                        : Container());
+                      }
+                    }
+                    return Container();
+                    
+                  }
+                );
               });
         },
       ),
     );
   }
 
-  getFriendsList() {}
+  getFriendsList(){
+  }
 
   //랭킹 표시 시 나오는 사용자 프로필 사진
   rankAvatar(String image) {

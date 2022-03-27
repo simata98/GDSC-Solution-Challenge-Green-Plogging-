@@ -6,6 +6,7 @@ import 'package:gdsc_solution/splash.dart';
 import 'package:get/route_manager.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
+import 'screen/challenge/challenge_page.dart';
 import 'theme/custom_theme.dart';
 
 Future<void> main() async {
@@ -34,7 +35,8 @@ class MainApp extends StatelessWidget {
         GetPage(name: '/', page: () => SignIn()),
         GetPage(name: '/main/social_page', page: () => SocialPage()),
         GetPage(name: '/main/my_page', page: () => MyPage()),
-        GetPage(name: '/main/social', page: () => SocialPage())
+        GetPage(name: '/main/social', page: () => SocialPage()),
+        GetPage(name: '/main/challenge', page: () => ChallengePage())
       ],
     );
   }
