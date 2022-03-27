@@ -114,7 +114,7 @@ class _mainMapDrawerState extends State<mainMapDrawer> {
         SizedBox(
           height: 20,
         ),
-        makeColMenu('Challenge', '/main/social'),
+        makeColMenu('Challenge', '/main/challenge'),
         SizedBox(
           height: 20,
         ),

@@ -41,7 +41,9 @@ class _SocialPageState extends State<SocialPage> {
             }, child: Text('News', style: TextStyle(color: selected == 2 ? Colors.black : Colors.grey, fontSize: 18, fontWeight: FontWeight.bold)))),
         ],
       ),
-      drawer: Drawer(child: mainMapDrawer()),
+      drawer: Container(
+        width: MediaQuery.of(context).size.width * 0.7,
+        child: Drawer(child: mainMapDrawer())),
       body: showPage(selected),
     );
   }

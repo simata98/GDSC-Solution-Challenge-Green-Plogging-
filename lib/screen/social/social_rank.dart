@@ -72,8 +72,6 @@ class _SocialRankState extends State<SocialRank> {
                             if(donDec){
                               setState(() {
                                 donDec = !donDec;
-                                runCount = 0;
-                                plogCount = 0;
                               });
                             }
                           },
@@ -147,7 +145,7 @@ class _SocialRankState extends State<SocialRank> {
             ),
           ),
           donDec
-              ? showFriendsRank('totalRun', runCount)
+              ? showFriendsRank('totalRun')
               : showRegRank(_selectedCity, 'totalRun'),
           Container(
             margin: EdgeInsets.only(top: 10),
@@ -174,7 +172,7 @@ class _SocialRankState extends State<SocialRank> {
             ),
           ),
           donDec
-              ? showFriendsRank('totalPlog', plogCount)
+              ? showFriendsRank('totalPlog')
               : showRegRank(_selectedCity, 'totalPlog')
         ]),
       ),
@@ -301,14 +299,16 @@ class _SocialRankState extends State<SocialRank> {
 
   }
   //친구랭킹
-  showFriendsRank(String desc, int d) {
+  showFriendsRank(String desc) {
     int count = 0;
     return Container(
       margin: EdgeInsets.only(top: 10),
       child: StreamBuilder<QuerySnapshot>(
         stream: regRank('Total', desc).snapshots(),
         builder: (context1, snapshot1) {
-          if (!snapshot1.hasData) return CircularProgressIndicator();
+          if(snapshot1.connectionState != ConnectionState.active)
+            return Container();
+          if (!snapshot1.hasData) return Container();
           return ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -324,6 +324,8 @@ class _SocialRankState extends State<SocialRank> {
                           .collection('following')
                           .snapshots(),
                   builder: (context3, snapshot3) {
+                    if(snapshot3.connectionState != ConnectionState.active)
+                      return Container();
                     if(!snapshot3.hasData)
                       return Container();
                     var friendData = snapshot3.data;
@@ -387,7 +389,7 @@ class _SocialRankState extends State<SocialRank> {
                                                     height: rankNumSize,
                                                     child: Center(
                                                       child: Text(
-                                                        '${index2 + 1}',
+                                                        '${count}',
                                                         style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
