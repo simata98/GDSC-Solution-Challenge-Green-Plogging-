@@ -68,12 +68,12 @@ When a user starts plogging, app automatically mark the section of the path user
 Then, when user enter a resting state or press the start plogging button, it switch to a trash pick-up state. **Run as you long as you can!**
 
 
-### Trash Object Detection
+### Trash Classification
 <p align="center">
   <img src="https://user-images.githubusercontent.com/33146152/160343807-98ec65c3-ac39-4a5c-abef-d4644e7e94c4.png" alt="text" width="400" height="500" />
 </p>
 During trash pick-up state, you can take a picture of the trash you picked up.
-Models learned with tensorflow automatically recognize garbage objects and qutomatically calssify which garbage user picked up. 
+Models learned with tensorflow automatically recognize garbage and qutomatically calssify which garbage user picked up. 
 
 
 ```
