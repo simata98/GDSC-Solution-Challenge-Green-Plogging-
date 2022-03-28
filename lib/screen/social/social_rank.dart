@@ -3,8 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gdsc_solution/theme/custom_color.dart';
 
-int testSet = 0;
-
 //랭킹 페이지
 class SocialRank extends StatefulWidget {
   const SocialRank({Key? key}) : super(key: key);
@@ -327,15 +325,12 @@ class _SocialRankState extends State<SocialRank> {
                       if (snapshot3.connectionState != ConnectionState.active)
                         return Container();
                       if (!snapshot3.hasData) return Container();
-
-                      testSet++;
-                      print('testSet : $testSet context : ${snapshot3.data}');
                       var friendData = snapshot3.data;
-
-                      for (int i = 0; i < friendData!.docs.length; i++) {
+                      print('friendLength = ${friendData!.docs.length}');
+                      for (int i = 0; i < friendData.docs.length; i++) {
                         if (friendData.docs[i]['fuid'] == data['uid']) {
                           ++count;
-                          print('uid = ${data['nickname']}, count = $count');
+                          print('uid = ${data['uid']}, count = $count');
                           return Container(
                               margin: EdgeInsets.only(top: 5),
                               child: count == 1
@@ -400,7 +395,7 @@ class _SocialRankState extends State<SocialRank> {
                                                           height: rankNumSize,
                                                           child: Center(
                                                             child: Text(
-                                                              '${index2 + 1}',
+                                                              '${count}',
                                                               style: TextStyle(
                                                                   fontSize: 15,
                                                                   fontWeight:
