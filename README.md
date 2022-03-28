@@ -7,6 +7,7 @@
 
 2022-GDSC-Solution-Challenge flutter project 
 
+
 ## Table of Contents
 - [Getting_Started](#getting_started)
 - [Components](#components)
@@ -21,23 +22,28 @@
 ### What is Plogging?
 Plogging is a combination of Jogging with picking up litter merging the Swedish verbs ***plocka*** upp (pick up) and ***jogga***(jog) gives the new Swedish verb ***plogga***, from which the workd plogging derives).
 
+
 ## What is Sustainable Development Goals?
 ![image](https://user-images.githubusercontent.com/33146152/160327143-e36bb1b9-ccea-4f96-b3b2-d92338dd56c5.png)
 
 The Sustainable Development Goals (SGDs) or Global Goals are a collection of 17 interlinked global goals designed to be a "blueprint to achieve a better and more sustainable future for all.
 As can be seen in the figure above, there are 17 goals.
 
+
 ### Our goal
 
 We selected several of the UN's 17 sustainable development goals to create an flutter application. And we found activities that can take care of my health and help the environment. After that, we found the actrivity "plogging", and we thought it would be nice if we could add additional features to draw interest from users.
+
 
 #### Good Health and Well-Being
 <img width="143" alt="image" src="https://user-images.githubusercontent.com/33146152/160327288-21a43bdc-3de2-4d36-a26e-9953dc86bc4f.png">
 Plogging is an activity to pick up trash while running. App users can improve their health while using this application. Also they can do "well-being" by sharing their progress with people around the world and friends.
 
+
 #### Responsible consumption and production
 <img width="146" alt="image" src="https://user-images.githubusercontent.com/33146152/160338918-1069a764-d3ce-43cb-ae23-2f597ae0d161.png">
 As mentioned above, the positive aspects of the environment and sustainable consumption can ve derived through the action of picking up recycled waste.
+
 
 
 ### The reason why we named "Isak"
@@ -47,8 +53,10 @@ During the flogging process, you naturally bend your back. So we thought this po
 In Korean, "the Gleaners" sounds like "Isak". Therefore, our team decided the logo and application name in this way.
 
 
+
 ## Components
 <img src="https://user-images.githubusercontent.com/33146152/160340776-616bc1a4-dd52-40a5-8e9f-dea06cd16952.png" width="200" height="100">  <img src="https://user-images.githubusercontent.com/33146152/160340848-f25eb360-157c-4988-a2c4-7e9e9034b0f4.png" width="200" height="100">  <img src="https://user-images.githubusercontent.com/33146152/160341014-57c3e47f-b268-40bb-bac0-b01bd03ca8c3.png" width="100" height="100">  <img src="https://user-images.githubusercontent.com/33146152/160341802-7eceab71-16af-46c9-a74f-840c030c3abc.png" width="150" height="100">
+
 
 
 ## Main_Function
@@ -58,6 +66,7 @@ In Korean, "the Gleaners" sounds like "Isak". Therefore, our team decided the lo
 </p>
 When a user starts plogging, app automatically mark the section of the path user has passed.
 Then, when user enter a resting state or press the start plogging button, it switch to a trash pick-up state. **Run as you long as you can!**
+
 
 ### Trash Object Detection
 <p align="center">
@@ -71,6 +80,7 @@ Models learned with tensorflow automatically recognize garbage objects and qutom
 the application will take care of what you picked up
 ```
 
+
 ### Community
 <p align="center">
   <img src="https://user-images.githubusercontent.com/33146152/160344724-f75219bf-25fb-4289-be94-df51b1654e97.png" alt="text" width="400" height="500" />
@@ -82,11 +92,13 @@ After the plogging activity, you can share photos of you running activities, sur
 Lets share and brag!
 ```
 
+### Ranking
 <p align="center">
   <img src="https://user-images.githubusercontent.com/33146152/160345879-a2063052-d7a2-4d9a-9a45-9546ac76b399.png" alt="text" width="400" height="500" />
 </p>
 
 You can also share your plogging activities by region or friends.
+
 
 ### Donation
 <p align="center">
@@ -94,6 +106,7 @@ You can also share your plogging activities by region or friends.
 </p>
 
 You can donate with points collected through plogging activities. 
+
 
 
 ## Sub_Function
@@ -104,6 +117,7 @@ You can donate with points collected through plogging activities.
 
 You can view the latest environmental news on the News tab through the News API.
 
+
 ### Cumulation of plogging activities
 <p align="center">
   <img src="https://user-images.githubusercontent.com/33146152/160413298-f21fbc75-9402-40d0-bc76-60c45e5d9352.png" alt="text" width="250" height="500" />
@@ -112,10 +126,14 @@ You can view the latest environmental news on the News tab through the News API.
 You can see the progress of the accumulated plogging activity as a percentage
 
 
+
+
 ## API
 ![image](https://user-images.githubusercontent.com/33146152/160411457-588efe7b-833b-48d8-9b19-cb614ba32b3b.png)
 
 we used News API to continuously update new environmental news.
+
+
 
 ## Contributors
 <table>
