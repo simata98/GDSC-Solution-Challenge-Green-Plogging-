@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gdsc_solution/components/mainMapDrawer.dart';
 import 'package:gdsc_solution/components/semiCircleWidget.dart';
 import 'package:gdsc_solution/screen/main/main_dialog.dart';
@@ -19,6 +20,8 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:gdsc_solution/model/geo_entry.dart';
 import 'package:gdsc_solution/model/geo_entry.dart';
 
+import '../../model/map_model.dart';
+
 class mapMain extends StatefulWidget {
   mapMain({Key? key}) : super(key: key);
 
@@ -32,10 +35,16 @@ class _mapMainState extends State<mapMain> {
   //슬라이드 패널 컨트롤러
   final panelController = PanelController();
 
+  double _fabHeight = 15.0;
+  double _fabHeightClosed = 15.0;
+
   @override
   Widget build(BuildContext context) {
     //Check IOS Platform
     final bool isIOS = !kIsWeb && defaultTargetPlatform == TargetPlatform.iOS;
+
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.bottom]);
 
     final double _screenWidth = MediaQuery.of(context).size.width;
     final double _screenHeight = MediaQuery.of(context).size.height;
@@ -43,9 +52,13 @@ class _mapMainState extends State<mapMain> {
     //앱바 높이
     final double _appBarHeight = _screenHeight * 0.065;
 
-    //test
+    //GetX 상태관리
+    Get.put(MapModel());
     final getController = Get.put(Entry());
     getController.appbarHeight = _appBarHeight;
+
+    MapModel.to.panelHeight.value = _screenHeight * 0.4;
+    MapModel.to.panelWidth.value = _screenWidth;
 
     return Scaffold(
         drawer: Container(
@@ -70,83 +83,96 @@ class _mapMainState extends State<mapMain> {
         ),
         body: Stack(children: [
           SlidingUpPanel(
-              maxHeight: _screenHeight * 0.4,
-              minHeight: 0,
-              controller: panelController,
-              parallaxEnabled: true,
-              parallaxOffset: .6,
-              panelBuilder: (controller) => PanelWidget(
-                    scrollController: controller,
-                    panelController: panelController,
-                  ),
-              body: SlidingBody(
-                panelController: panelController,
-              )),
-          Container(
-            margin: EdgeInsets.fromLTRB(20, 0, 0, 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
+            maxHeight: _screenHeight * 0.4,
+            minHeight: 0,
+            controller: panelController,
+            parallaxEnabled: true,
+            parallaxOffset: .6,
+            panelBuilder: (controller) => PanelWidget(
+              scrollController: controller,
+              panelController: panelController,
+            ),
+            body: SlidingBody(
+              panelController: panelController,
+            ),
+            onPanelSlide: (position) => setState(() {
+              _fabHeight =
+                  position * MapModel.to.panelHeight.value + _fabHeightClosed;
+            }),
+          ),
+          Positioned(
+            left: 15,
+            bottom: _fabHeight,
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(3, 4),
+                              spreadRadius: 1.0,
+                              blurRadius: 5.0,
+                              color: Colors.grey),
+                        ]),
+                    child: Material(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(3, 4),
-                            spreadRadius: 1.0,
-                            blurRadius: 5.0,
-                            color: Colors.grey),
-                      ]),
-                  child: Material(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    color: CustomColor.primary,
-                    child: InkWell(
-                      onTap: () {},
-                      child: Container(
-                        width: _screenWidth * 0.13,
-                        height: _screenHeight * 0.06,
-                        child: Icon(
-                          Icons.add,
-                          size: _screenWidth * 0.08,
-                          color: Colors.white,
+                      color: CustomColor.primary,
+                      child: InkWell(
+                        onTap: () {
+                          MapModel.to.mapController?.animateCamera(
+                              CameraUpdate.zoomTo(
+                                  ++MapModel.to.cameraZoom.value));
+                        },
+                        child: Container(
+                          width: _screenWidth * 0.13,
+                          height: _screenHeight * 0.06,
+                          child: Icon(
+                            Icons.add,
+                            size: _screenWidth * 0.08,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: _screenHeight * 0.01,
-                ),
-                Container(
-                  decoration: BoxDecoration(
+                  SizedBox(
+                    height: _screenHeight * 0.01,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(3, 4),
+                              spreadRadius: 1.0,
+                              blurRadius: 5.0,
+                              color: Colors.grey),
+                        ]),
+                    child: Material(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(3, 4),
-                            spreadRadius: 1.0,
-                            blurRadius: 5.0,
-                            color: Colors.grey),
-                      ]),
-                  child: Material(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    color: CustomColor.primary,
-                    child: InkWell(
-                      onTap: () {},
-                      child: Container(
-                        width: _screenWidth * 0.13,
-                        height: _screenHeight * 0.06,
-                        child: Icon(
-                          Icons.remove,
-                          size: _screenWidth * 0.08,
-                          color: Colors.white,
+                      color: CustomColor.primary,
+                      child: InkWell(
+                        onTap: () {
+                          MapModel.to.mapController?.animateCamera(
+                              CameraUpdate.zoomTo(
+                                  --MapModel.to.cameraZoom.value));
+                        },
+                        child: Container(
+                          width: _screenWidth * 0.13,
+                          height: _screenHeight * 0.06,
+                          child: Icon(
+                            Icons.remove,
+                            size: _screenWidth * 0.08,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ]));
