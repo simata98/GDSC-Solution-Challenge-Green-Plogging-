@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gdsc_solution/theme/custom_color.dart';
 
 class Weekly extends StatefulWidget {
@@ -122,6 +123,7 @@ class _WeeklyState extends State<Weekly> {
                       child: ElevatedButton(onPressed: (){
                             FirebaseFirestore.instance.collection('challenge').doc(_user).collection('weekly').doc('running').collection('week').doc(data[index].id).update({'success' : false});
                             FirebaseFirestore.instance.collection('users').doc(_user).update({'point': FieldValue.increment(data[index]['point'])});
+                            Fluttertoast.showToast(msg: 'received ${data[index]['point']} points successfully');
                       },
                       child: Text('Receive', style: TextStyle(fontSize: 12, color: Colors.black)),
                       style: ElevatedButton.styleFrom(
@@ -209,6 +211,8 @@ class _WeeklyState extends State<Weekly> {
                       child: ElevatedButton(onPressed: (){
                             FirebaseFirestore.instance.collection('challenge').doc(_user).collection('weekly').doc('plogging').collection('week').doc(data[index].id).update({'success' : false});
                             FirebaseFirestore.instance.collection('users').doc(_user).update({'point': FieldValue.increment(data[index]['point'])});
+                            Fluttertoast.showToast(msg: 'received ${data[index]['point']} points successfully');
+
                       },
                       child: Text('Receive', style: TextStyle(fontSize: 12, color: Colors.black)),
                       style: ElevatedButton.styleFrom(

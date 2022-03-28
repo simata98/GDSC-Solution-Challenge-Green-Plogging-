@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gdsc_solution/theme/custom_color.dart';
 
 class Cumulation extends StatefulWidget {
@@ -120,6 +121,8 @@ class _CumulationState extends State<Cumulation> {
                       onPressed: (){
                         FirebaseFirestore.instance.collection('challenge').doc(_user).collection('cumul').doc('running').collection('cumu').doc(item.id).update({'success' : false});
                         FirebaseFirestore.instance.collection('users').doc(_user).update({'point': FieldValue.increment(item['point'])});
+                        Fluttertoast.showToast(msg: 'received ${item['point']} points successfully');
+
                       },
                     ),
                   )
@@ -213,6 +216,8 @@ class _CumulationState extends State<Cumulation> {
                       onPressed: (){
                         FirebaseFirestore.instance.collection('challenge').doc(_user).collection('cumul').doc('plogging').collection('cumu').doc(item.id).update({'success' : false});
                         FirebaseFirestore.instance.collection('users').doc(_user).update({'point': FieldValue.increment(item['point'])});
+                         Fluttertoast.showToast(msg: 'received ${item['point']} points successfully');
+
                       },
                     ),
                   )
