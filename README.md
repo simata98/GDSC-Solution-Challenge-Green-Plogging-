@@ -22,14 +22,12 @@
 Plogging is a combination of Jogging with picking up litter merging the Swedish verbs ***plocka*** upp (pick up) and ***jogga***(jog) gives the new Swedish verb ***plogga***, from which the workd plogging derives).
 
 ## What is Sustainable Development Goals?
-
-![image](https://user-images.githubusercontent.com/33146152/160325415-8deaab92-23fd-44fe-aa66-74c3d70f5181.png)
+![image](https://user-images.githubusercontent.com/33146152/160327143-e36bb1b9-ccea-4f96-b3b2-d92338dd56c5.png)
 
 The Sustainable Development Goals (SGDs) or Global Goals are a collection of 17 interlinked global goals designed to be a "blueprint to achieve a better and more sustainable future for all.
 As can be seen in the figure above, there are 17 goals.
 
 ### Our goal
-![image](https://user-images.githubusercontent.com/33146152/160327143-e36bb1b9-ccea-4f96-b3b2-d92338dd56c5.png)
 
 We selected several of the UN's 17 sustainable development goals to create an flutter application. And we found activities that can take care of my health and help the environment. After that, we found the actrivity "plogging", and we thought it would be nice if we could add additional features to draw interest from users.
 
@@ -43,6 +41,7 @@ As mentioned above, the positive aspects of the environment and sustainable cons
 
 
 ### The reason why we named "Isak"
+![image](https://user-images.githubusercontent.com/33146152/160325415-8deaab92-23fd-44fe-aa66-74c3d70f5181.png)
 
 During the flogging process, you naturally bend your back. So we thought this posture was very similar to the prople from one of the famous paintings, "The Gleaners".
 In Korean, "the Gleaners" sounds like "Isak". Therefore, our team decided the logo and application name in this way.
@@ -100,15 +99,23 @@ You can donate with points collected through plogging activities.
 ## Sub_Function
 ### Environment News
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/33146152/160348464-6de091d6-b45a-4ab8-9119-6ef7928e9bf2.png" alt="text" width="400" height="500" />
+  <img src="https://user-images.githubusercontent.com/33146152/160410373-f6915ffa-9702-4abb-aa44-3300a33a61d4.png" alt="text" width="250" height="500" />
 </p>
 
 You can view the latest environmental news on the News tab through the News API.
 
+### Cumulation of plogging activities
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/33146152/160413298-f21fbc75-9402-40d0-bc76-60c45e5d9352.png" alt="text" width="250" height="500" />
+</p>
+
+You can see the progress of the accumulated plogging activity as a percentage
 
 
+## API
+![image](https://user-images.githubusercontent.com/33146152/160411457-588efe7b-833b-48d8-9b19-cb614ba32b3b.png)
 
-
+we used News API to continuously update new environmental news.
 
 ## Contributors
 <table>
