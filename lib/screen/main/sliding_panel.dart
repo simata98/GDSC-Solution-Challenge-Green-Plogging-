@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:gdsc_solution/model/map_model.dart';
 import 'package:gdsc_solution/screen/main/sliding_panel_bottom_second.dart';
 import 'package:gdsc_solution/screen/main/sliding_panel_bottom_first.dart';
+import 'package:gdsc_solution/screen/main/sliding_panel_bottom_third.dart';
 import 'package:gdsc_solution/screen/main/sliding_panel_box.dart';
+import 'package:get/get.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../../model/map_model.dart';
 import '../../theme/custom_color.dart';
 
 class PanelWidget extends StatefulWidget {
@@ -47,6 +50,20 @@ class _PanelWidgetState extends State<PanelWidget> {
     MapModel.to.centerConHeight.value = centerConHeight;
     MapModel.to.centerConWidth.value = centerConWidth;
     MapModel.to.panelController = panelController;
+
+    Widget bottomSetting() {
+      switch (MapModel.to.slidingPanelType.value) {
+        case 0:
+          return SlidingPanelBottomFirst();
+        case 1:
+          return SlidingPanelBottomSecond();
+        case 2:
+          return SlidingPanelBottomThird();
+        default:
+      }
+
+      return SlidingPanelBottomFirst();
+    }
 
     return Container(
       color: CustomColor.primaryPastel,
@@ -93,7 +110,7 @@ class _PanelWidgetState extends State<PanelWidget> {
               ),
             ),
           ),
-          Flexible(flex: 100 - flexVal, child: SlidingPanelBottomFirst()),
+          Flexible(flex: 100 - flexVal, child: Obx(() => bottomSetting())),
         ],
       ),
     );

@@ -49,6 +49,9 @@ class MapModel extends GetxController {
 
   PanelController? panelController;
 
+  //
+  final slidingPanelType = 0.obs;
+
   //여기 수정해야함
   @override
   void onInit() {
@@ -64,7 +67,6 @@ class MapModel extends GetxController {
 
   void startRun() {
     if (start.value) {
-      print('haha');
       stopWatchTimer.rawTime.listen((value) => {time.value = value});
       stopWatchTimer.onExecute.add(StopWatchExecute.start);
     }
@@ -72,6 +74,24 @@ class MapModel extends GetxController {
 
   void stopRun() {
     init();
+  }
+
+  void pauseRun() {
+    stopWatchTimer.onExecute.add(StopWatchExecute.stop);
+  }
+
+  void reRun() {
+    stopWatchTimer.onExecute.add(StopWatchExecute.start);
+  }
+
+  void startPlo() {
+    startPlogging.toggle();
+  }
+
+  void stopPlo() {
+    if (start.value) {
+      stopWatchTimer.onExecute.add(StopWatchExecute.start);
+    }
   }
 
   void onMapCreated(GoogleMapController controller) {
@@ -103,14 +123,26 @@ class MapModel extends GetxController {
         lastTime.value = time.value;
         route.add(loc);
 
-        polyline.add(Polyline(
-            polylineId: PolylineId(event.toString()),
-            visible: true,
-            points: route,
-            width: 5,
-            startCap: Cap.roundCap,
-            endCap: Cap.roundCap,
-            color: Colors.deepOrange));
+        if (startPlogging.value) {
+          polyline.add(Polyline(
+              polylineId: PolylineId(event.toString()),
+              visible: true,
+              points: route,
+              width: 5,
+              startCap: Cap.roundCap,
+              endCap: Cap.roundCap,
+              color: Colors.green));
+        } else {
+          polyline.add(Polyline(
+              polylineId: PolylineId(event.toString()),
+              visible: true,
+              points: route,
+              width: 5,
+              startCap: Cap.roundCap,
+              endCap: Cap.roundCap,
+              color: Colors.deepOrange));
+        }
+
         update();
       }
     });

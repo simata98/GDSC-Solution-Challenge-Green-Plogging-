@@ -1,12 +1,32 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stop_watch_timer/stop_watch_timer.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../model/map_model.dart';
 import '../../theme/custom_color.dart';
 
-class SlidingPanelBottomFirst extends StatelessWidget {
-  const SlidingPanelBottomFirst({Key? key}) : super(key: key);
+class SlidingPanelBottomThird extends StatefulWidget {
+  SlidingPanelBottomThird({Key? key}) : super(key: key);
+
+  @override
+  State<SlidingPanelBottomThird> createState() =>
+      _SlidingPanelBottomThirdState();
+}
+
+class _SlidingPanelBottomThirdState extends State<SlidingPanelBottomThird> {
+  File? _pickedImage;
+  ImagePicker picker = ImagePicker();
+
+  void _pickImage(ImageSource imageSource) async {
+    final pickedImageFile = await picker.getImage(
+      source: imageSource,
+    );
+
+    //이제 여기서 ML 파트랑 붙이는 작업이 필요함
+    MapModel.to.plogging.value++;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +40,7 @@ class SlidingPanelBottomFirst extends StatelessWidget {
             ),
           ),
           Flexible(
-            flex: 4,
+            flex: 1,
             child: Container(
               child: Center(
                 child: Material(
@@ -29,15 +49,14 @@ class SlidingPanelBottomFirst extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(100)),
                   child: InkWell(
                     onTap: () {
-                      MapModel.to.pauseRun();
-                      MapModel.to.slidingPanelType.value = 1;
+                      _pickImage(ImageSource.camera);
                     },
                     child: Container(
                       width: MapModel.to.panelHeight.value * 0.35,
                       height: MapModel.to.panelHeight.value * 0.35,
                       child: Icon(
-                        Icons.pause_rounded,
-                        size: 70,
+                        Icons.camera_alt,
+                        size: MapModel.to.panelHeight.value * 0.20,
                         color: Colors.white,
                       ),
                     ),
@@ -48,22 +67,16 @@ class SlidingPanelBottomFirst extends StatelessWidget {
           ),
           Flexible(
             flex: 1,
-            child: SizedBox(
-              width: double.infinity,
-            ),
-          ),
-          Flexible(
-            flex: 4,
             child: Container(
               child: Center(
                 child: Material(
                   clipBehavior: Clip.hardEdge,
-                  color: CustomColor.primaryBold,
+                  color: CustomColor.primary54,
                   borderRadius: const BorderRadius.all(Radius.circular(100)),
                   child: InkWell(
                     onTap: () {
                       if (!Get.isSnackbarOpen) {
-                        Get.snackbar('러닝중지', '정지버튼을 길게 누르면 종료됩니다.',
+                        Get.snackbar('플로깅중지', '정지버튼을 길게 누르면 종료됩니다.',
                             margin: EdgeInsets.only(top: 20),
                             maxWidth: MediaQuery.of(context).size.width * 0.8,
                             backgroundColor: CustomColor.primary,
@@ -78,14 +91,14 @@ class SlidingPanelBottomFirst extends StatelessWidget {
                       }
                     },
                     onLongPress: () {
-                      MapModel.to.stopRun();
+                      MapModel.to.slidingPanelType.value = 1;
                     },
                     child: Container(
-                      width: MapModel.to.panelHeight.value * 0.35,
-                      height: MapModel.to.panelHeight.value * 0.35,
+                      width: MapModel.to.panelHeight.value * 0.20,
+                      height: MapModel.to.panelHeight.value * 0.20,
                       child: Icon(
                         Icons.stop,
-                        size: 70,
+                        size: MapModel.to.panelHeight.value * 0.15,
                         color: Colors.white,
                       ),
                     ),
@@ -94,14 +107,9 @@ class SlidingPanelBottomFirst extends StatelessWidget {
               ),
             ),
           ),
-          Flexible(
-            flex: 1,
-            child: SizedBox(
-              width: double.infinity,
-            ),
-          ),
         ],
       ),
     );
+    ;
   }
 }
