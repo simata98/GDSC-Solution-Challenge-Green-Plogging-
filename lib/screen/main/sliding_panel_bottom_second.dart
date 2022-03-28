@@ -25,7 +25,10 @@ class _SlidingPanelBottomSecondState extends State<SlidingPanelBottomSecond> {
               borderRadius:
                   const BorderRadius.only(topRight: Radius.circular(150)),
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  MapModel.to.slidingPanelType.value = 2;
+                  MapModel.to.startPlo();
+                },
                 child: Container(
                   width: double.infinity,
                   height: double.infinity,
@@ -76,7 +79,10 @@ class _SlidingPanelBottomSecondState extends State<SlidingPanelBottomSecond> {
               borderRadius:
                   const BorderRadius.only(topLeft: Radius.circular(150)),
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  MapModel.to.reRun();
+                  MapModel.to.slidingPanelType.value = 0;
+                },
                 child: Container(
                   width: double.infinity,
                   height: double.infinity,
