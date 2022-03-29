@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gdsc_solution/screen/login/sign_in.dart';
+import 'package:gdsc_solution/screen/main/main.dart';
 import 'package:gdsc_solution/screen/myPage/my_page.dart';
 import 'package:gdsc_solution/screen/social/social_page.dart';
 import 'package:gdsc_solution/splash.dart';
@@ -33,6 +34,7 @@ class MainApp extends StatelessWidget {
       //이동하고자 한다면 중복된 코드가 생기기 때문!
       getPages: [
         GetPage(name: '/', page: () => SignIn()),
+        GetPage(name: '/main', page: () => mapMain()),
         GetPage(name: '/main/social_page', page: () => SocialPage()),
         GetPage(name: '/main/my_page', page: () => MyPage()),
         GetPage(name: '/main/social', page: () => SocialPage()),

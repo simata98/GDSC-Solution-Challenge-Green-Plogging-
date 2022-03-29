@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tflite/tflite.dart';
 
 import '../../model/map_model.dart';
 import '../../theme/custom_color.dart';
+import '../../model/ml_part.dart';
 
 class SlidingPanelBottomThird extends StatefulWidget {
   SlidingPanelBottomThird({Key? key}) : super(key: key);
@@ -16,20 +18,9 @@ class SlidingPanelBottomThird extends StatefulWidget {
 }
 
 class _SlidingPanelBottomThirdState extends State<SlidingPanelBottomThird> {
-  File? _pickedImage;
-  ImagePicker picker = ImagePicker();
-
-  void _pickImage(ImageSource imageSource) async {
-    final pickedImageFile = await picker.getImage(
-      source: imageSource,
-    );
-
-    //이제 여기서 ML 파트랑 붙이는 작업이 필요함
-    MapModel.to.plogging.value++;
-  }
-
   @override
   Widget build(BuildContext context) {
+    Get.put(MlPart());
     return Container(
       child: Row(
         children: <Widget>[
@@ -48,8 +39,8 @@ class _SlidingPanelBottomThirdState extends State<SlidingPanelBottomThird> {
                   color: CustomColor.primary,
                   borderRadius: const BorderRadius.all(Radius.circular(100)),
                   child: InkWell(
-                    onTap: () {
-                      _pickImage(ImageSource.camera);
+                    onTap: () async {
+                      MlPart.to.getImage(ImageSource.gallery);
                     },
                     child: Container(
                       width: MapModel.to.panelHeight.value * 0.35,
@@ -91,6 +82,7 @@ class _SlidingPanelBottomThirdState extends State<SlidingPanelBottomThird> {
                       }
                     },
                     onLongPress: () {
+                      MapModel.to.stopPlo();
                       MapModel.to.slidingPanelType.value = 1;
                     },
                     child: Container(

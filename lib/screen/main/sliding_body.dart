@@ -30,6 +30,7 @@ class _SlidingBodyState extends State<SlidingBody> {
           Container(
               child: Obx(
             () => GoogleMap(
+              markers: MapModel.to.markers,
               polylines: Set<Polyline>.of(MapModel.to.polyline),
               zoomControlsEnabled: false,
               onMapCreated: MapModel.to.onMapCreated,
