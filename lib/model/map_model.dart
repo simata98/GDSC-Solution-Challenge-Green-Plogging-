@@ -22,6 +22,7 @@ class MapModel extends GetxController {
   GoogleMapController? mapController;
   CameraPosition? cameraPosition;
   Location _location = Location();
+  StreamSubscription<LocationData>? locationSubscription;
 
   final polyline = Set<Polyline>().obs;
 
@@ -66,7 +67,7 @@ class MapModel extends GetxController {
   final slidingPanelMinH = 0.0.obs;
   final slidingDraggable = true.obs;
 
-  final image = File('').obs;
+  File? image;
 
   //여기 수정해야함
   @override
@@ -83,17 +84,21 @@ class MapModel extends GetxController {
 
   void startRun() {
     if (start.value) {
+      locationSubscription?.resume();
       stopWatchTimer.rawTime.listen((value) => {time.value = value});
       stopWatchTimer.onExecute.add(StopWatchExecute.start);
     }
   }
 
-  void stopRun() {
+  void resetRun() {
     init();
   }
 
   void pauseRun() {
     stopWatchTimer.onExecute.add(StopWatchExecute.stop);
+    if (MapModel.to.slidingPanelType == 3) {
+      locationSubscription?.cancel();
+    }
   }
 
   void reRun() {
@@ -112,7 +117,7 @@ class MapModel extends GetxController {
     mapController = controller;
 
     final appendDist = 0.0.obs;
-    _location.onLocationChanged.listen((event) {
+    locationSubscription = _location.onLocationChanged.listen((event) {
       LatLng loc = LatLng(event.latitude!, event.longitude!);
 
       mapController!.animateCamera(CameraUpdate.newCameraPosition(
@@ -183,9 +188,8 @@ class MapModel extends GetxController {
     avgSpeed.value = 0.0;
     speedCounter.value = 0;
     plogging.value = 0;
-    //panelController?.close();
+    panelController?.close();
     start.toggle();
-    image.value = File('');
   }
 
   //canvas로 그려서 가져오기
@@ -216,18 +220,6 @@ class MapModel extends GetxController {
         onTap: () {},
         position: LatLng(loc.latitude!, loc.longitude!)));
     update();
-  }
-
-  void pickImage() async {
-    try {
-      final picker = ImagePicker();
-      final image = await picker.pickImage(source: ImageSource.camera);
-      final imageTmp = File(image!.path);
-
-      this.image.value = imageTmp;
-    } on PlatformException catch (e) {
-      print('Failed to camera!: $e');
-    }
   }
 
   void toggleScrollable() {

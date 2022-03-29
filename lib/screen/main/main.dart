@@ -85,23 +85,28 @@ class _mapMainState extends State<mapMain> {
           ),
         ),
         body: Stack(children: [
-          SlidingUpPanel(
-            isDraggable: MapModel.to.slidingDraggable.value,
-            maxHeight: _screenHeight * 0.4,
-            minHeight: 0.0,
-            controller: panelController,
-            parallaxEnabled: true,
-            parallaxOffset: .6,
-            panelBuilder: (controller) => PanelWidget(
-              scrollController: controller,
-              panelController: panelController,
+          Obx(
+            () => SlidingUpPanel(
+              isDraggable: MapModel.to.slidingDraggable.value,
+              maxHeight: _screenHeight * 0.4,
+              minHeight: MapModel.to.slidingPanelMinH.value,
+              controller: panelController,
+              parallaxEnabled: true,
+              parallaxOffset: .6,
+              panelBuilder: (controller) => PanelWidget(
+                scrollController: controller,
+                panelController: panelController,
+              ),
+              body: SlidingBody(
+                panelController: panelController,
+              ),
+              onPanelSlide: (position) => setState(() {
+                double tmp = MapModel.to.panelHeight.value -
+                    MapModel.to.slidingPanelMinH.value;
+                _fabHeight =
+                    position * tmp + MapModel.to.slidingPanelMinH.value;
+              }),
             ),
-            body: SlidingBody(
-              panelController: panelController,
-            ),
-            onPanelSlide: (position) => setState(() {
-              _fabHeight = position * MapModel.to.panelHeight.value;
-            }),
           ),
           Positioned(
             left: 15,
@@ -183,9 +188,9 @@ class _mapMainState extends State<mapMain> {
             () => Positioned(
               bottom: _fabHeight,
               //지금 여기 때문에 무한 루프돌고있음
-              child: MapModel.to.slidingDraggable.isFalse
+              child: MapModel.to.slidingPanelMinH != 0.0
                   ? Image.file(
-                      MapModel.to.image.value,
+                      MapModel.to.image!,
                       width: _screenWidth,
                       height: _screenHeight * 0.25,
                       fit: BoxFit.fitWidth,
