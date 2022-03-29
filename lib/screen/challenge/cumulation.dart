@@ -77,6 +77,7 @@ class _CumulationState extends State<Cumulation> {
                 .collection('cumul')
                 .doc('running')
                 .collection('cumu')
+                .orderBy('goal')
                 .snapshots(),
             builder: (context, snap) {
               if (snap.connectionState != ConnectionState.active)
@@ -96,7 +97,7 @@ class _CumulationState extends State<Cumulation> {
       itemBuilder: (context, index){
         var item = data[index];
         return Container(
-          margin: EdgeInsets.only(top: 5),
+          margin: EdgeInsets.only(top: 8),
           padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
           color: item['success'] ? Color(0x66ABC5B7) : Colors.grey[300],
           child: Row(
@@ -144,7 +145,7 @@ class _CumulationState extends State<Cumulation> {
                 width: 60,
                 height: 60,
                 child: totalRun >= item['goal'] ? Center(child: Text('100%',style: TextStyle(color: Colors.white, fontSize: 18)))
-                        : Center(child: Text('${(item['goal']*1.0/totalRun).round()}%',
+                        : Center(child: Text('${(totalRun * 100.0 / item['goal']).round()}%',
                         style: TextStyle(color: Colors.white, fontSize: 18),)),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
@@ -172,6 +173,7 @@ class _CumulationState extends State<Cumulation> {
                 .collection('cumul')
                 .doc('plogging')
                 .collection('cumu')
+                .orderBy('goal')
                 .snapshots(),
             builder: (context, snap) {
               if (snap.connectionState != ConnectionState.active)
@@ -239,7 +241,7 @@ class _CumulationState extends State<Cumulation> {
                 width: 60,
                 height: 60,
                 child: totalPlog >= item['goal'] ? Center(child: Text('100%',style: TextStyle(color: Colors.white, fontSize: 18)))
-                        : Center(child: Text('${(item['goal']*1.0/totalPlog).round()}%',
+                        : Center(child: Text('${(totalPlog * 100.0 / item['goal']).round()}%',
                         style: TextStyle(color: Colors.white, fontSize: 18),)),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,

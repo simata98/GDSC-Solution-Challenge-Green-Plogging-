@@ -151,18 +151,18 @@ class _RecordDetailState extends State<RecordDetail> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       runningInfo(
-                          Icons.map, community.distance, 'km', 'Distance'),
+                          Icons.route_outlined, community.distance, 'km', 'Distance'),
                       runningInfo(
-                          Icons.watch, community.runTime, 'min', 'Measure Time')
+                          Icons.timer_outlined, community.runTime, 'min', 'Measure Time')
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      runningInfo(Icons.recycling, community.plogPoint, 'times',
+                      runningInfo(Icons.recycling_rounded, community.plogPoint, 'times',
                           'Plogging'),
                       runningInfo(
-                          Icons.man, community.speed, '', 'Average Speed')
+                          Icons.directions_run, community.speed, '', 'Average Speed')
                     ],
                   )
                 ],
