@@ -10,6 +10,8 @@ import 'package:flutter/services.dart';
 import 'screen/challenge/challenge_page.dart';
 import 'theme/custom_theme.dart';
 
+import 'theme/custom_theme.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -41,5 +43,6 @@ class MainApp extends StatelessWidget {
         GetPage(name: '/main/challenge', page: () => ChallengePage())
       ],
     );
+
   }
 }

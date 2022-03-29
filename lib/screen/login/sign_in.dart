@@ -106,6 +106,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                           borderSide: BorderSide(
                                               width: 2,
                                               color: CustomColor.primary),
+
                                           borderRadius:
                                               BorderRadius.circular(0)),
                                       contentPadding:
@@ -140,6 +141,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                         borderSide: BorderSide(
                                             width: 2,
                                             color: CustomColor.primary),
+
                                         borderRadius: BorderRadius.circular(0)),
                                     border: OutlineInputBorder(
                                         borderRadius:
