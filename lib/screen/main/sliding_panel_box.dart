@@ -46,9 +46,9 @@ class _SlidingPanelBoxState extends State<SlidingPanelBox> {
         icon = Icons.recycling_rounded;
         unit = "times";
         break;
-      case 'Speed':
+      case 'Pace':
         icon = Icons.directions_run;
-        unit = "KM/H";
+        unit = "";
         break;
     }
 
@@ -71,8 +71,10 @@ class _SlidingPanelBoxState extends State<SlidingPanelBox> {
 
         case 'Plogging':
           return '${MapModel.to.plogging}';
-        case 'Speed':
-          return '${MapModel.to.speed.toStringAsFixed(2)}';
+        case 'Pace':
+          return !MapModel.to.pace.isInfinite
+              ? '${(MapModel.to.pace / 60).toInt()}\'${(MapModel.to.pace % 60).toInt()}\"'
+              : "--\'--\"";
       }
       return '${(MapModel.to.dist / 1000).toStringAsFixed(2)}';
     }

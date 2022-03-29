@@ -48,39 +48,6 @@ class _SlidingPanelBottomFirstState extends State<SlidingPanelBottomFirst> {
               child: Center(
                 child: Material(
                   clipBehavior: Clip.hardEdge,
-                  color: CustomColor.primary,
-                  borderRadius: const BorderRadius.all(Radius.circular(100)),
-                  child: InkWell(
-                    onTap: () {
-                      MapModel.to.pauseRun();
-                      MapModel.to.slidingPanelType.value = 1;
-                    },
-                    child: Container(
-                      width: MapModel.to.panelHeight.value * 0.35,
-                      height: MapModel.to.panelHeight.value * 0.35,
-                      child: Icon(
-                        Icons.pause_rounded,
-                        size: 70,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Flexible(
-            flex: 1,
-            child: SizedBox(
-              width: double.infinity,
-            ),
-          ),
-          Flexible(
-            flex: 4,
-            child: Container(
-              child: Center(
-                child: Material(
-                  clipBehavior: Clip.hardEdge,
                   color: CustomColor.primaryBold,
                   borderRadius: const BorderRadius.all(Radius.circular(100)),
                   child: InkWell(
@@ -112,6 +79,39 @@ class _SlidingPanelBottomFirstState extends State<SlidingPanelBottomFirst> {
                       height: MapModel.to.panelHeight.value * 0.35,
                       child: Icon(
                         Icons.stop,
+                        size: 70,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 1,
+            child: SizedBox(
+              width: double.infinity,
+            ),
+          ),
+          Flexible(
+            flex: 4,
+            child: Container(
+              child: Center(
+                child: Material(
+                  clipBehavior: Clip.hardEdge,
+                  color: CustomColor.primary,
+                  borderRadius: const BorderRadius.all(Radius.circular(100)),
+                  child: InkWell(
+                    onTap: () {
+                      MapModel.to.pauseRun();
+                      MapModel.to.slidingPanelType.value = 1;
+                    },
+                    child: Container(
+                      width: MapModel.to.panelHeight.value * 0.35,
+                      height: MapModel.to.panelHeight.value * 0.35,
+                      child: Icon(
+                        Icons.pause_rounded,
                         size: 70,
                         color: Colors.white,
                       ),

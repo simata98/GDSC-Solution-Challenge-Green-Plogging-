@@ -38,6 +38,7 @@ class MapModel extends GetxController {
   final avgSpeed = 0.0.obs;
   final speedCounter = 0.obs;
   final plogging = 0.obs;
+  final pace = 0.0.obs;
 
   LatLng center = const LatLng(0, 0);
 
@@ -47,6 +48,7 @@ class MapModel extends GetxController {
   final start = false.obs;
 
   final startPlogging = false.obs;
+  bool checkEndPlogging = false;
 
   //구글지도 줌 수치
   final cameraZoom = 15.0.obs;
@@ -84,7 +86,6 @@ class MapModel extends GetxController {
 
   void startRun() {
     if (start.value) {
-      locationSubscription?.resume();
       stopWatchTimer.rawTime.listen((value) => {time.value = value});
       stopWatchTimer.onExecute.add(StopWatchExecute.start);
     }
@@ -96,9 +97,7 @@ class MapModel extends GetxController {
 
   void pauseRun() {
     stopWatchTimer.onExecute.add(StopWatchExecute.stop);
-    if (MapModel.to.slidingPanelType == 3) {
-      locationSubscription?.cancel();
-    }
+    if (MapModel.to.slidingPanelType == 3) {}
   }
 
   void reRun() {
@@ -126,20 +125,30 @@ class MapModel extends GetxController {
       if (start.value) {
         //여기에다가는 플로깅 상태일때를 수정해야함
         if (runRoute.length > 0) {
-          appendDist.value = Geolocator.distanceBetween(runRoute.last.latitude,
-              runRoute.last.longitude, loc.latitude, loc.longitude);
-          dist.value = dist.value + appendDist.value;
-          int timeDuration = (time.value - lastTime.value);
+          if (!startPlogging.value) {
+            if (checkEndPlogging) {
+              appendDist.value = 0.0;
+              checkEndPlogging == false;
+            } else {
+              appendDist.value = Geolocator.distanceBetween(
+                  runRoute.last.latitude,
+                  runRoute.last.longitude,
+                  loc.latitude,
+                  loc.longitude);
+            }
 
-          if (lastTime != null && timeDuration != 0) {
-            speed.value = (appendDist / (timeDuration / 100)) * 3.6;
-            if (speed != 0) {
-              avgSpeed.value = avgSpeed.value + speed.value;
-              speedCounter.value++;
+            dist.value = dist.value + appendDist.value;
+            if (dist != 0) {
+              pace.value = time / dist.value;
+            }
+          } else {
+            if (checkEndPlogging != true) {
+              checkEndPlogging == true;
             }
           }
         }
         lastTime.value = time.value;
+        print('test');
 
         runRoute.add(loc);
 
@@ -150,7 +159,7 @@ class MapModel extends GetxController {
         }
 
         if (startPlogging.value) {
-          polyline.add(Polyline(
+          MapModel.to.polyline.add(Polyline(
               polylineId: PolylineId(event.toString()),
               visible: true,
               points: tmp,
@@ -159,7 +168,7 @@ class MapModel extends GetxController {
               endCap: Cap.roundCap,
               color: Colors.green));
         } else {
-          polyline.add(Polyline(
+          MapModel.to.polyline.add(Polyline(
               polylineId: PolylineId(event.toString()),
               visible: true,
               points: tmp,
