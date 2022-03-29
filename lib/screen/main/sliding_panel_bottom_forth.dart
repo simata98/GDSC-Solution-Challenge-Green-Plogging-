@@ -51,7 +51,9 @@ class _SlidingPanelBottomForthState extends State<SlidingPanelBottomForth> {
                     color: CustomColor.primary,
                     borderRadius: const BorderRadius.all(Radius.circular(30)),
                     child: InkWell(
-                      onTap: () async {},
+                      onTap: () {
+                        MapModel.to.resetRun();
+                      },
                       child: Container(
                         width: double.infinity,
                         height: MapModel.to.panelHeight.value * 0.2,

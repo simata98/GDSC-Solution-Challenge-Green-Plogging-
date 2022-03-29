@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 import '../../model/map_model.dart';
@@ -14,6 +18,19 @@ class SlidingPanelBottomFirst extends StatefulWidget {
 }
 
 class _SlidingPanelBottomFirstState extends State<SlidingPanelBottomFirst> {
+  File? _image;
+
+  Future pickImage() async {
+    try {
+      final picker = ImagePicker();
+      final image = await picker.pickImage(source: ImageSource.camera);
+
+      return image;
+    } on PlatformException catch (e) {
+      print('Failed to camera!: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -83,9 +100,12 @@ class _SlidingPanelBottomFirstState extends State<SlidingPanelBottomFirst> {
                             snackPosition: SnackPosition.TOP);
                       }
                     },
-                    onLongPress: () {
-                      MapModel.to.stopRun();
+                    onLongPress: () async {
+                      final tmp = await pickImage();
+                      MapModel.to.slidingPanelMinH.value = Get.height * 0.1;
+                      MapModel.to.image = File(tmp.path);
                       MapModel.to.slidingPanelType.value = 3;
+                      MapModel.to.pauseRun();
                     },
                     child: Container(
                       width: MapModel.to.panelHeight.value * 0.35,
