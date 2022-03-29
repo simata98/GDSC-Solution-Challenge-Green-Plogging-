@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gdsc_solution/screen/social/find_user.dart';
 import 'package:gdsc_solution/screen/social/post_detail.dart';
-import 'package:gdsc_solution/theme/custom_color.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 
