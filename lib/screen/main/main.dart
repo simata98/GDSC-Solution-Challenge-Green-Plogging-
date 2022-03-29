@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -10,6 +12,7 @@ import 'package:gdsc_solution/screen/main/sliding_panel.dart';
 import 'package:gdsc_solution/theme/custom_color.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
@@ -82,27 +85,32 @@ class _mapMainState extends State<mapMain> {
           ),
         ),
         body: Stack(children: [
-          SlidingUpPanel(
-            maxHeight: _screenHeight * 0.4,
-            minHeight: 0,
-            controller: panelController,
-            parallaxEnabled: true,
-            parallaxOffset: .6,
-            panelBuilder: (controller) => PanelWidget(
-              scrollController: controller,
-              panelController: panelController,
+          Obx(
+            () => SlidingUpPanel(
+              isDraggable: MapModel.to.slidingDraggable.value,
+              maxHeight: _screenHeight * 0.4,
+              minHeight: MapModel.to.slidingPanelMinH.value,
+              controller: panelController,
+              parallaxEnabled: true,
+              parallaxOffset: .6,
+              panelBuilder: (controller) => PanelWidget(
+                scrollController: controller,
+                panelController: panelController,
+              ),
+              body: SlidingBody(
+                panelController: panelController,
+              ),
+              onPanelSlide: (position) => setState(() {
+                double tmp = MapModel.to.panelHeight.value -
+                    MapModel.to.slidingPanelMinH.value;
+                _fabHeight =
+                    position * tmp + MapModel.to.slidingPanelMinH.value;
+              }),
             ),
-            body: SlidingBody(
-              panelController: panelController,
-            ),
-            onPanelSlide: (position) => setState(() {
-              _fabHeight =
-                  position * MapModel.to.panelHeight.value + _fabHeightClosed;
-            }),
           ),
           Positioned(
             left: 15,
-            bottom: _fabHeight,
+            bottom: _fabHeight + _fabHeightClosed,
             child: Container(
               child: Column(
                 children: <Widget>[
@@ -175,6 +183,21 @@ class _mapMainState extends State<mapMain> {
               ),
             ),
           ),
+          Obx(
+            //여기를 수정해야함
+            () => Positioned(
+              bottom: _fabHeight,
+              //지금 여기 때문에 무한 루프돌고있음
+              child: MapModel.to.slidingPanelMinH != 0.0
+                  ? Image.file(
+                      MapModel.to.image!,
+                      width: _screenWidth,
+                      height: _screenHeight * 0.25,
+                      fit: BoxFit.fitWidth,
+                    )
+                  : Container(),
+            ),
+          )
         ]));
   }
 }

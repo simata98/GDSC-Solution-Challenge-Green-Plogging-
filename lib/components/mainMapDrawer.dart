@@ -62,41 +62,40 @@ class _mainMapDrawerState extends State<mainMapDrawer> {
             padding: EdgeInsets.fromLTRB(0, 5, 10, 0),
             child: Container(width: 50, child: Image.asset('assets/logo.png'))),
         StreamBuilder<DocumentSnapshot>(
-          stream: FirebaseFirestore.instance
-                  .collection('users')
-                  .doc(FirebaseAuth.instance.currentUser!.uid)
-                  .snapshots(),
-          builder: (context, snapshot) {
-            if(!snapshot.hasData)
-              return CircularProgressIndicator();
+            stream: FirebaseFirestore.instance
+                .collection('users')
+                .doc(FirebaseAuth.instance.currentUser!.uid)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) return CircularProgressIndicator();
 
-            var data = snapshot.data;
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  children: <Widget>[
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(data!['image']),
-                      radius: _drawerWidth * 0.13,
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      children: <Widget>[
-                        Text(data['nickname'],
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 28)),
-                        Text('${data['country']}, ${data['city']}', style: TextStyle(fontSize: 10)),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            );
-          }
-        ),
+              var data = snapshot.data;
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    children: <Widget>[
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(data!['image']),
+                        radius: _drawerWidth * 0.13,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Text(data['nickname'],
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 28)),
+                          Text('${data['country']}, ${data['city']}',
+                              style: TextStyle(fontSize: 10)),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            }),
         SizedBox(
           height: 10,
         ),
@@ -106,7 +105,7 @@ class _mainMapDrawerState extends State<mainMapDrawer> {
         SizedBox(
           height: 10,
         ),
-        makeColMenu('Running and Plogging', '/main/social'),
+        makeColMenu('Running and Plogging', '/main'),
         SizedBox(
           height: 20,
         ),

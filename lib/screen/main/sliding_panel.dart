@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gdsc_solution/model/map_model.dart';
+import 'package:gdsc_solution/screen/main/sliding_panel_bottom_forth.dart';
 import 'package:gdsc_solution/screen/main/sliding_panel_bottom_second.dart';
 import 'package:gdsc_solution/screen/main/sliding_panel_bottom_first.dart';
 import 'package:gdsc_solution/screen/main/sliding_panel_bottom_third.dart';
@@ -59,6 +60,8 @@ class _PanelWidgetState extends State<PanelWidget> {
           return SlidingPanelBottomSecond();
         case 2:
           return SlidingPanelBottomThird();
+        case 3:
+          return SlidingPanelBottomForth();
         default:
       }
 
