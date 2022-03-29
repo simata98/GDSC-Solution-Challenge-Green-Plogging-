@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gdsc_solution/screen/main/main_finish_posting.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../model/map_model.dart';
@@ -52,7 +54,11 @@ class _SlidingPanelBottomForthState extends State<SlidingPanelBottomForth> {
                     borderRadius: const BorderRadius.all(Radius.circular(30)),
                     child: InkWell(
                       onTap: () {
+                        MapModel.to.locationSubscription?.resume();
+                        MapModel.to.update();
+                        MapModel.to.slidingPanelMinH.value = 0.0;
                         MapModel.to.resetRun();
+                        MapModel.to.slidingPanelType.value = 0;
                       },
                       child: Container(
                         width: double.infinity,
@@ -84,23 +90,33 @@ class _SlidingPanelBottomForthState extends State<SlidingPanelBottomForth> {
             child: Container(
               child: Center(
                   child: Container(
-                      width: MapModel.to.panelWidth.value * 0.11,
-                      height: MapModel.to.panelWidth.value * 0.11,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(100)),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.black38,
-                                offset: Offset(3.0, 3.0),
-                                blurRadius: 6,
-                                spreadRadius: 1)
-                          ]),
-                      child: Icon(
-                        Icons.share,
-                        color: CustomColor.primary,
-                      ))),
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(100)),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black38,
+                          offset: Offset(3.0, 3.0),
+                          blurRadius: 6,
+                          spreadRadius: 1),
+                    ]),
+                child: Material(
+                  clipBehavior: Clip.hardEdge,
+                  color: Colors.white,
+                  borderRadius: const BorderRadius.all(Radius.circular(100)),
+                  child: InkWell(
+                    onTap: () {
+                      Get.to(MainFinishPosting());
+                    },
+                    child: Container(
+                        width: MapModel.to.panelWidth.value * 0.11,
+                        height: MapModel.to.panelWidth.value * 0.11,
+                        child: Icon(
+                          Icons.share,
+                          color: CustomColor.primary,
+                        )),
+                  ),
+                ),
+              )),
             ),
           ),
         ],
