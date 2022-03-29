@@ -371,7 +371,8 @@ class _SocialPostState extends State<SocialPost> {
               )
             ],
           ),
-        )
+        ),
+        Divider(color: Colors.grey)
       ],
     );
   }
