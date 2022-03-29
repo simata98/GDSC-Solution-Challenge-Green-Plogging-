@@ -1,12 +1,20 @@
 import 'dart:async';
+import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
+
+import 'dart:ui' as ui;
+
+import '../theme/custom_color.dart';
 
 class MapModel extends GetxController {
   static MapModel get to => Get.find<MapModel>();
@@ -16,7 +24,11 @@ class MapModel extends GetxController {
   Location _location = Location();
 
   final polyline = Set<Polyline>().obs;
-  List<LatLng> route = [];
+
+  List<LatLng> runRoute = [];
+
+  final markers = Set<Marker>().obs;
+  final markerSize = 100.0;
   final dist = 0.0.obs;
   String displayTime = "";
   final time = 0.obs;
@@ -51,6 +63,10 @@ class MapModel extends GetxController {
 
   //
   final slidingPanelType = 0.obs;
+  final slidingPanelMinH = 0.0.obs;
+  final slidingDraggable = true.obs;
+
+  final image = File('').obs;
 
   //여기 수정해야함
   @override
@@ -89,9 +105,7 @@ class MapModel extends GetxController {
   }
 
   void stopPlo() {
-    if (start.value) {
-      stopWatchTimer.onExecute.add(StopWatchExecute.start);
-    }
+    startPlogging.toggle();
   }
 
   void onMapCreated(GoogleMapController controller) {
@@ -106,9 +120,9 @@ class MapModel extends GetxController {
 
       if (start.value) {
         //여기에다가는 플로깅 상태일때를 수정해야함
-        if (route.length > 0) {
-          appendDist.value = Geolocator.distanceBetween(route.last.latitude,
-              route.last.longitude, loc.latitude, loc.longitude);
+        if (runRoute.length > 0) {
+          appendDist.value = Geolocator.distanceBetween(runRoute.last.latitude,
+              runRoute.last.longitude, loc.latitude, loc.longitude);
           dist.value = dist.value + appendDist.value;
           int timeDuration = (time.value - lastTime.value);
 
@@ -121,13 +135,20 @@ class MapModel extends GetxController {
           }
         }
         lastTime.value = time.value;
-        route.add(loc);
+
+        runRoute.add(loc);
+
+        List<LatLng> tmp = [];
+        if (runRoute.length >= 2) {
+          tmp.add(runRoute[runRoute.length - 2]);
+          tmp.add(runRoute.last);
+        }
 
         if (startPlogging.value) {
           polyline.add(Polyline(
               polylineId: PolylineId(event.toString()),
               visible: true,
-              points: route,
+              points: tmp,
               width: 5,
               startCap: Cap.roundCap,
               endCap: Cap.roundCap,
@@ -136,7 +157,7 @@ class MapModel extends GetxController {
           polyline.add(Polyline(
               polylineId: PolylineId(event.toString()),
               visible: true,
-              points: route,
+              points: tmp,
               width: 5,
               startCap: Cap.roundCap,
               endCap: Cap.roundCap,
@@ -152,7 +173,8 @@ class MapModel extends GetxController {
     stopWatchTimer.onExecute.add(StopWatchExecute.stop);
     stopWatchTimer.onExecute.add(StopWatchExecute.reset);
     polyline.clear();
-    route.clear();
+    runRoute.clear();
+    markers.clear();
     dist.value = 0.0;
     displayTime = "";
     time.value = 0;
@@ -161,7 +183,54 @@ class MapModel extends GetxController {
     avgSpeed.value = 0.0;
     speedCounter.value = 0;
     plogging.value = 0;
-    panelController?.close();
+    //panelController?.close();
     start.toggle();
+    image.value = File('');
+  }
+
+  //canvas로 그려서 가져오기
+  Future<Uint8List> getBytesFromCanvas(double radius, Color color) async {
+    final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
+    final Canvas canvas = Canvas(pictureRecorder);
+    final Paint paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+    ;
+
+    canvas.drawCircle(Offset(radius, radius), radius, paint);
+
+    final img = await pictureRecorder
+        .endRecording()
+        .toImage((radius * 2).toInt(), (radius * 2).toInt());
+    final data = await img.toByteData(format: ui.ImageByteFormat.png);
+
+    return data!.buffer.asUint8List();
+  }
+
+  void makeMarker(double radius, Color color) async {
+    LocationData loc = await _location.getLocation();
+    markers.add(new Marker(
+        markerId: MarkerId(markers.length.toString()),
+        icon:
+            BitmapDescriptor.fromBytes(await getBytesFromCanvas(radius, color)),
+        onTap: () {},
+        position: LatLng(loc.latitude!, loc.longitude!)));
+    update();
+  }
+
+  void pickImage() async {
+    try {
+      final picker = ImagePicker();
+      final image = await picker.pickImage(source: ImageSource.camera);
+      final imageTmp = File(image!.path);
+
+      this.image.value = imageTmp;
+    } on PlatformException catch (e) {
+      print('Failed to camera!: $e');
+    }
+  }
+
+  void toggleScrollable() {
+    this.slidingDraggable.toggle();
   }
 }

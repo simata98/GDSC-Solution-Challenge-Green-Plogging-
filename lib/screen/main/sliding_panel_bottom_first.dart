@@ -5,9 +5,15 @@ import 'package:stop_watch_timer/stop_watch_timer.dart';
 import '../../model/map_model.dart';
 import '../../theme/custom_color.dart';
 
-class SlidingPanelBottomFirst extends StatelessWidget {
-  const SlidingPanelBottomFirst({Key? key}) : super(key: key);
+class SlidingPanelBottomFirst extends StatefulWidget {
+  SlidingPanelBottomFirst({Key? key}) : super(key: key);
 
+  @override
+  State<SlidingPanelBottomFirst> createState() =>
+      _SlidingPanelBottomFirstState();
+}
+
+class _SlidingPanelBottomFirstState extends State<SlidingPanelBottomFirst> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -79,6 +85,7 @@ class SlidingPanelBottomFirst extends StatelessWidget {
                     },
                     onLongPress: () {
                       MapModel.to.stopRun();
+                      MapModel.to.slidingPanelType.value = 3;
                     },
                     child: Container(
                       width: MapModel.to.panelHeight.value * 0.35,
