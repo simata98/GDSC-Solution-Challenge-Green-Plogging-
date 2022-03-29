@@ -64,8 +64,13 @@ In Korean, "the Gleaners" sounds like "Isak". Therefore, our team decided the lo
 <p align="center">
   <img src="https://user-images.githubusercontent.com/33146152/160342822-41b249ae-4e6d-4fcd-b72e-72cbb69a350c.png" alt="text" width="400" height="500" />
 </p>
-When a user starts plogging, app automatically mark the section of the path user has passed.
-Then, when user enter a resting state or press the start plogging button, it switch to a trash pick-up state. **Run as you long as you can!**
+When a user starts plogging, app automatically marks the path you have walked. You can start plogging activity with just press the start button.
+Then, when user enter a resting state or press the start plogging button, it switch to a trash pick-up state. 
+
+
+```
+Run as you long as you can!
+```
 
 
 ### Trash Classification
@@ -97,7 +102,7 @@ Lets share and brag!
   <img src="https://user-images.githubusercontent.com/33146152/160345879-a2063052-d7a2-4d9a-9a45-9546ac76b399.png" alt="text" width="400" height="500" />
 </p>
 
-You can also share your plogging activities by region or friends.
+You can also share your plogging activities by region or friends. 
 
 
 ### Donation
@@ -125,6 +130,14 @@ You can view the latest environmental news on the News tab through the News API.
 
 You can see the progress of the accumulated plogging activity as a percentage
 
+
+### Subscription ranking
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/33146152/160526942-b9fb20b9-f266-496e-a523-f2a51e657523.png" alt="text" width="250" height="500" />
+</p>
+
+You can view the cumulative subscription order for this application. 
+As the number of subscribers increases, you can see how many subscribers you are on the membership screen and how many subscribers you already have on the login screen.
 
 
 
