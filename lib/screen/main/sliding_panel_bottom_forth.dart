@@ -1,12 +1,19 @@
 import 'dart:io';
+import 'dart:typed_data';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gdsc_solution/screen/main/main_finish_posting.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'package:path_provider/path_provider.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path_provider/path_provider.dart';
+
 import '../../model/map_model.dart';
+import '../../model/upload_images.dart';
 import '../../theme/custom_color.dart';
 
 class SlidingPanelBottomForth extends StatefulWidget {
@@ -53,9 +60,12 @@ class _SlidingPanelBottomForthState extends State<SlidingPanelBottomForth> {
                     color: CustomColor.primary,
                     borderRadius: const BorderRadius.all(Radius.circular(30)),
                     child: InkWell(
-                      onTap: () {
-                        MapModel.to.locationSubscription?.resume();
-                        MapModel.to.update();
+                      onTap: () async {
+                        MapModel.to.finishState.toggle();
+                        //await MapModel.to.uploadRecord();
+                        MapModel.to.uploadRecord();
+
+                        //초기화
                         MapModel.to.slidingPanelMinH.value = 0.0;
                         MapModel.to.resetRun();
                         MapModel.to.slidingPanelType.value = 0;

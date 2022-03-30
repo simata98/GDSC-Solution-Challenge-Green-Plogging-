@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class RecordDetail extends StatefulWidget {
   const RecordDetail({Key? key}) : super(key: key);
@@ -34,7 +35,9 @@ class _RecordDetailState extends State<RecordDetail> {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: (){Get.back();},
+          onPressed: () {
+            Get.back();
+          },
         ),
         actions: [
           Container(
@@ -72,8 +75,7 @@ class _RecordDetailState extends State<RecordDetail> {
                     .doc(FirebaseAuth.instance.currentUser!.uid)
                     .snapshots(),
                 builder: (context, snapshot) {
-                  if(!snapshot.hasData)
-                    return CircularProgressIndicator();
+                  if (!snapshot.hasData) return CircularProgressIndicator();
                   var data = snapshot.data;
                   return Column(
                     children: [
@@ -93,7 +95,8 @@ class _RecordDetailState extends State<RecordDetail> {
                             Container(
                               margin: EdgeInsets.only(right: 10),
                               child: CircleAvatar(
-                                backgroundImage: NetworkImage('${data!['image']}'),
+                                backgroundImage:
+                                    NetworkImage('${data!['image']}'),
                               ),
                             ),
                             Flexible(
@@ -151,18 +154,16 @@ class _RecordDetailState extends State<RecordDetail> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       runningInfo(
-                          Icons.route_outlined, community.distance, 'km', 'Distance'),
-                      runningInfo(
-                          Icons.timer_outlined, community.runTime, 'min', 'Measure Time')
+                          Icons.map, community.distance, 'km', 'Distance'),
+                      runningInfo(Icons.watch, community.runTime, '', 'Time')
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      runningInfo(Icons.recycling_rounded, community.plogPoint, 'times',
-                          'Plogging'),
-                      runningInfo(
-                          Icons.directions_run, community.speed, '', 'Average Speed')
+                      runningInfo(Icons.recycling,
+                          community.plogPoint.toString(), 'times', 'Plogging'),
+                      runningInfo(Icons.man, community.speed, '', 'Pace')
                     ],
                   )
                 ],
@@ -172,6 +173,48 @@ class _RecordDetailState extends State<RecordDetail> {
         ),
       ),
     );
+  }
+
+  String getFormattedString(dynamic data, String info) {
+    switch (info) {
+      case 'Distance':
+        double tmp = (data as int).toDouble();
+        if (tmp == 0.0) {
+          return '0.0';
+        } else {
+          return (tmp / 1000000).toStringAsFixed(2);
+        }
+
+      case 'Pace':
+        double tmp = data as double;
+        if (tmp.isInfinite) {
+          return "--\'--\"";
+        } else {
+          return "${tmp ~/ 60}\'${(tmp % 60).toInt()}\"";
+        }
+
+      case 'Time':
+        int tmp = data as int;
+        print(tmp);
+        if (tmp != 0) {
+          if (StopWatchTimer.getRawMinute(tmp) >= 60) {
+            return '${StopWatchTimer.getDisplayTimeHours(tmp)}' +
+                ':' +
+                '${StopWatchTimer.getDisplayTimeMinute(tmp)}' +
+                ':' +
+                '${StopWatchTimer.getDisplayTimeSecond(tmp)}';
+          } else {
+            return '${StopWatchTimer.getRawMinute(tmp)}' +
+                ':' +
+                '${StopWatchTimer.getDisplayTimeSecond(tmp)}';
+          }
+        } else {
+          return "--:--";
+        }
+      default:
+        return data;
+    }
+    return "";
   }
 
   runningInfo(IconData ic, dynamic data, String type, String info) {
@@ -197,7 +240,7 @@ class _RecordDetailState extends State<RecordDetail> {
               RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                      text: info != 'Distance' ? '$data' : '${data / 1000}',
+                      text: getFormattedString(data, info),
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,

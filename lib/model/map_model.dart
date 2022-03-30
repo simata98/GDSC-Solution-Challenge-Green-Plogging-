@@ -2,13 +2,22 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:gdsc_solution/model/community.dart';
+import 'package:gdsc_solution/model/record.dart';
+import 'package:geocoding/geocoding.dart' as geo;
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
@@ -51,7 +60,7 @@ class MapModel extends GetxController {
   bool checkEndPlogging = false;
 
   //구글지도 줌 수치
-  final cameraZoom = 15.0.obs;
+  final cameraZoom = 17.0.obs;
 
   //패널의 크기
   final panelHeight = 0.0.obs;
@@ -69,7 +78,21 @@ class MapModel extends GetxController {
   final slidingPanelMinH = 0.0.obs;
   final slidingDraggable = true.obs;
 
-  File? image;
+  final globalKey = GlobalKey().obs;
+
+  File? viewImage;
+  File? mapImage;
+
+  int? tmpDistance;
+  int? tmpRunTime;
+  int? tmpPlogPoint;
+  double? tmpSpeed;
+  String? tmpCity;
+
+  //for community
+  DateTime? postTime;
+
+  final finishState = false.obs;
 
   //여기 수정해야함
   @override
@@ -119,8 +142,10 @@ class MapModel extends GetxController {
     locationSubscription = _location.onLocationChanged.listen((event) {
       LatLng loc = LatLng(event.latitude!, event.longitude!);
 
-      mapController!.animateCamera(CameraUpdate.newCameraPosition(
-          CameraPosition(target: loc, zoom: cameraZoom.value)));
+      if (!finishState.value) {
+        mapController!.animateCamera(CameraUpdate.newCameraPosition(
+            CameraPosition(target: loc, zoom: cameraZoom.value)));
+      }
 
       if (start.value) {
         //여기에다가는 플로깅 상태일때를 수정해야함
@@ -152,15 +177,19 @@ class MapModel extends GetxController {
 
         runRoute.add(loc);
 
+        String polylineId = "";
         List<LatLng> tmp = [];
         if (runRoute.length >= 2) {
-          tmp.add(runRoute[runRoute.length - 2]);
-          tmp.add(runRoute.last);
+          LatLng locTmp1 = runRoute[runRoute.length - 2];
+          LatLng locTmp2 = runRoute.last;
+          tmp.add(locTmp1);
+          tmp.add(locTmp2);
+          polylineId = "$locTmp1 to $locTmp2";
         }
 
         if (startPlogging.value) {
           MapModel.to.polyline.add(Polyline(
-              polylineId: PolylineId(event.toString()),
+              polylineId: PolylineId(polylineId),
               visible: true,
               points: tmp,
               width: 5,
@@ -169,7 +198,7 @@ class MapModel extends GetxController {
               color: Colors.green));
         } else {
           MapModel.to.polyline.add(Polyline(
-              polylineId: PolylineId(event.toString()),
+              polylineId: PolylineId(polylineId),
               visible: true,
               points: tmp,
               width: 5,
@@ -198,6 +227,7 @@ class MapModel extends GetxController {
     speedCounter.value = 0;
     plogging.value = 0;
     panelController?.close();
+    pace.value = 0.0;
     start.toggle();
   }
 
@@ -233,5 +263,101 @@ class MapModel extends GetxController {
 
   void toggleScrollable() {
     this.slidingDraggable.toggle();
+  }
+
+  Future<File> mapCapture() async {
+    Future<File> imageFile;
+    var fileName;
+    var tempDir;
+
+    //final directory = (await getApplicationDocumentsDirectory()).path;
+
+    Uint8List? pngBytes = await mapController?.takeSnapshot();
+    fileName = "${DateTime.now()}.jpg";
+    tempDir = (await getTemporaryDirectory()).path;
+
+    imageFile = File('$tempDir/$fileName').writeAsBytes(pngBytes!);
+    return imageFile;
+  }
+
+  Future<String> uploadView() async {
+    FirebaseStorage storage = FirebaseStorage.instance;
+    Reference ref = storage.ref().child('post_images').child(
+        FirebaseAuth.instance.currentUser!.uid.toString() +
+            '_view_' +
+            DateTime.now().toString());
+    UploadTask ut1 = ref.putFile(MapModel.to.viewImage!);
+    TaskSnapshot snapshot1 = await ut1;
+
+    return await snapshot1.ref.getDownloadURL();
+  }
+
+  Future<String> uploadMap() async {
+    FirebaseStorage storage = FirebaseStorage.instance;
+    File tmp = mapImage!;
+    Reference ref1 = storage.ref().child('post_images').child(
+        FirebaseAuth.instance.currentUser!.uid.toString() +
+            '_map_' +
+            DateTime.now().toString());
+    UploadTask ut2 = ref1.putFile(tmp);
+    TaskSnapshot snapshot2 = await ut2;
+
+    return await snapshot2.ref.getDownloadURL();
+  }
+
+  Future<String?> getCity() async {
+    LatLng tmp = runRoute.last;
+    List<geo.Placemark> placemarks = await geo.placemarkFromCoordinates(
+      tmp.latitude,
+      tmp.longitude,
+    );
+
+    return await placemarks[0].locality;
+  }
+
+  Future<void> uploadRecord() async {
+    String viewUrl = await uploadView();
+    String mapUrl = await uploadMap();
+
+    Record record = Record();
+    record.map = mapUrl;
+    record.view = viewUrl;
+    record.distance = tmpDistance;
+    record.runTime = tmpRunTime;
+    record.plogPoint = tmpPlogPoint;
+    record.speed = tmpSpeed;
+    record.city = tmpCity;
+    record.time = DateTime.now();
+
+    FirebaseFirestore.instance
+        .collection('records')
+        .doc(FirebaseAuth.instance.currentUser!.uid.toString())
+        .collection('saved')
+        .add(record.toMap());
+    print("####################end to recording##############");
+  }
+
+  Future<void> uploadCommunity(String comment) async {
+    String viewUrl = await MapModel.to.uploadView();
+    String mapUrl = await MapModel.to.uploadMap();
+
+    String uid = FirebaseAuth.instance.currentUser!.uid.toString();
+    Community community = Community(
+        city: tmpCity,
+        distance: tmpDistance,
+        map: mapUrl,
+        view: viewUrl,
+        plogPoint: tmpPlogPoint,
+        runTime: tmpRunTime,
+        speed: tmpSpeed,
+        uid: uid,
+        time: postTime,
+        comment: comment);
+
+    DocumentReference documentReference = await FirebaseFirestore.instance
+        .collection('posts')
+        .add(community.toMap());
+
+    print("####################end to posting##############");
   }
 }

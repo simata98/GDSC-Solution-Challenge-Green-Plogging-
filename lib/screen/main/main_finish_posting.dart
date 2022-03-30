@@ -1,14 +1,21 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:gdsc_solution/model/community.dart';
-import 'package:gdsc_solution/model/map_model.dart';
 import 'package:gdsc_solution/theme/custom_color.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:firebase_core/firebase_core.dart' as firebase_core;
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path_provider/path_provider.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
+
+import '../../model/map_model.dart';
 
 class MainFinishPosting extends StatefulWidget {
   const MainFinishPosting({Key? key}) : super(key: key);
@@ -18,18 +25,15 @@ class MainFinishPosting extends StatefulWidget {
 }
 
 class _MainFinishPostingState extends State<MainFinishPosting> {
-  Community community = Community(
-    uid: FirebaseAuth.instance.currentUser!.uid.toString(),
-    city: Get.arguments['city'],
-    map: Get.arguments['map'],
-    view: Get.arguments['view'],
-    time: Get.arguments['time'],
-    distance: Get.arguments['distance'] as int,
-    plogPoint: Get.arguments['plogPoint'] as int,
-    runTime: Get.arguments['runTime'] as int,
-    speed: Get.arguments['speed'] as double,
-  );
+  Community? community;
   final commentController = new TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    MapModel.to.postTime = DateTime.now();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +60,10 @@ class _MainFinishPostingState extends State<MainFinishPosting> {
           Container(
             margin: EdgeInsets.only(right: 10),
             child: IconButton(
-                onPressed: uploadPost,
+                onPressed: () {
+                  MapModel.to.uploadCommunity(commentController.text);
+                  Get.back();
+                },
                 icon: Icon(
                   Icons.check,
                   color: Colors.black,
@@ -129,10 +136,12 @@ class _MainFinishPostingState extends State<MainFinishPosting> {
                             Text('${data['nickname']}',
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold)),
-                            Text(DateFormat('yy.MM.dd').format(community.time!),
+                            Text(
+                                DateFormat('yy.MM.dd')
+                                    .format(MapModel.to.postTime!),
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold)),
-                            Text('${community.city}',
+                            Text('${MapModel.to.tmpCity}',
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold)),
                           ],
@@ -142,21 +151,11 @@ class _MainFinishPostingState extends State<MainFinishPosting> {
                   );
                 }),
             Container(
-              width: MediaQuery.of(context).size.width,
-              child: FutureBuilder(
-                future: MapModel.to.mapController?.takeSnapshot(),
-                initialData: CircularProgressIndicator,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (!snapshot.hasData)
-                    return Center(child: CircularProgressIndicator());
-                  Uint8List bytes = snapshot.data;
-                  return Image.memory(bytes, fit: BoxFit.fill);
-                },
-              ),
-            ),
+                width: MediaQuery.of(context).size.width,
+                child: Image.file(MapModel.to.mapImage!)),
             Container(
                 width: MediaQuery.of(context).size.width,
-                child: Image.file(MapModel.to.image!)),
+                child: Image.file(MapModel.to.viewImage!)),
             Container(
               margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Column(
@@ -166,18 +165,20 @@ class _MainFinishPostingState extends State<MainFinishPosting> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       runningInfo(
-                          Icons.map, community.distance, 'km', 'Distance'),
+                          Icons.map, MapModel.to.tmpDistance, 'km', 'Distance'),
                       runningInfo(
-                          Icons.watch, community.runTime, 'min', 'Measure Time')
+                          Icons.watch, MapModel.to.tmpRunTime, '', 'Time')
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      runningInfo(Icons.recycling, community.plogPoint, 'times',
-                          'Plogging'),
                       runningInfo(
-                          Icons.man, community.speed, '', 'Average Speed')
+                          Icons.recycling,
+                          MapModel.to.tmpPlogPoint.toString(),
+                          'times',
+                          'Plogging'),
+                      runningInfo(Icons.man, MapModel.to.tmpSpeed, '', 'Pace')
                     ],
                   )
                 ],
@@ -187,6 +188,48 @@ class _MainFinishPostingState extends State<MainFinishPosting> {
         ),
       ),
     );
+  }
+
+  String getFormattedString(dynamic data, String info) {
+    switch (info) {
+      case 'Distance':
+        double tmp = (data as int).toDouble();
+        if (tmp == 0.0) {
+          return '0.0';
+        } else {
+          return (tmp / 1000000).toStringAsFixed(2);
+        }
+
+      case 'Pace':
+        double tmp = data as double;
+        if (tmp.isInfinite) {
+          return "--\'--\"";
+        } else {
+          return "${tmp ~/ 60}\'${(tmp % 60).toInt()}\"";
+        }
+
+      case 'Time':
+        int tmp = data as int;
+        print(tmp);
+        if (tmp != 0) {
+          if (StopWatchTimer.getRawMinute(tmp) >= 60) {
+            return '${StopWatchTimer.getDisplayTimeHours(tmp)}' +
+                ':' +
+                '${StopWatchTimer.getDisplayTimeMinute(tmp)}' +
+                ':' +
+                '${StopWatchTimer.getDisplayTimeSecond(tmp)}';
+          } else {
+            return '${StopWatchTimer.getRawMinute(tmp)}' +
+                ':' +
+                '${StopWatchTimer.getDisplayTimeSecond(tmp)}';
+          }
+        } else {
+          return "--:--";
+        }
+      default:
+        return data;
+    }
+    return "";
   }
 
   runningInfo(IconData ic, dynamic data, String type, String info) {
@@ -212,7 +255,7 @@ class _MainFinishPostingState extends State<MainFinishPosting> {
               RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                      text: info != 'Distance' ? '$data' : '${data / 1000}',
+                      text: getFormattedString(data, info),
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -231,11 +274,5 @@ class _MainFinishPostingState extends State<MainFinishPosting> {
         ],
       ),
     );
-  }
-
-  uploadPost() {
-    community.comment = commentController.text;
-    FirebaseFirestore.instance.collection('posts').add(community.toMap());
-    Get.back();
   }
 }
