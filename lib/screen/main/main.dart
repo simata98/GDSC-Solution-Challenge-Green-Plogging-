@@ -5,24 +5,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gdsc_solution/components/mainMapDrawer.dart';
-import 'package:gdsc_solution/components/semiCircleWidget.dart';
 import 'package:gdsc_solution/screen/main/main_dialog.dart';
 import 'package:gdsc_solution/screen/main/sliding_body.dart';
 import 'package:gdsc_solution/screen/main/sliding_panel.dart';
 import 'package:gdsc_solution/theme/custom_color.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
-import 'package:location/location.dart';
-import 'package:screenshot/screenshot.dart';
-import 'package:stop_watch_timer/stop_watch_timer.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
 import 'package:gdsc_solution/model/geo_entry.dart';
-import 'package:gdsc_solution/model/geo_entry.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../model/map_model.dart';
 
@@ -41,6 +32,22 @@ class _mapMainState extends State<mapMain> {
 
   double _fabHeight = 15.0;
   double _fabHeightClosed = 15.0;
+
+  _loadCounter() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+
+    int _counter = (_prefs.getInt('counter') ?? 0);
+    if (_counter == 0) {
+      _prefs.setInt('counter', 1);
+      Get.dialog(new mainDialog());
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCounter();
+  }
 
   @override
   Widget build(BuildContext context) {
