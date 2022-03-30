@@ -15,6 +15,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -190,7 +191,7 @@ class _mapMainState extends State<mapMain> {
               //지금 여기 때문에 무한 루프돌고있음
               child: MapModel.to.slidingPanelMinH != 0.0
                   ? Image.file(
-                      MapModel.to.image!,
+                      MapModel.to.viewImage!,
                       width: _screenWidth,
                       height: _screenHeight * 0.25,
                       fit: BoxFit.fitWidth,

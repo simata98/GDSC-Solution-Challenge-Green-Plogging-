@@ -40,7 +40,7 @@ class _SlidingPanelBottomThirdState extends State<SlidingPanelBottomThird> {
                   borderRadius: const BorderRadius.all(Radius.circular(100)),
                   child: InkWell(
                     onTap: () async {
-                      MlPart.to.getImage(ImageSource.gallery);
+                      MlPart.to.getImage(ImageSource.camera);
                     },
                     child: Container(
                       width: MapModel.to.panelHeight.value * 0.35,
@@ -67,7 +67,8 @@ class _SlidingPanelBottomThirdState extends State<SlidingPanelBottomThird> {
                   child: InkWell(
                     onTap: () {
                       if (!Get.isSnackbarOpen) {
-                        Get.snackbar('플로깅중지', '정지버튼을 길게 누르면 종료됩니다.',
+                        Get.snackbar(
+                            'Stop Plogging', 'Long press button to exit',
                             margin: EdgeInsets.only(top: 20),
                             maxWidth: MediaQuery.of(context).size.width * 0.8,
                             backgroundColor: CustomColor.primary,

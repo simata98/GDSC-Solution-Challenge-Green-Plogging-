@@ -49,7 +49,8 @@ class MlPart extends GetxController {
       MapModel.to.plogging.value++;
       MapModel.to.makeMarker(20.0, Colors.purple);
 
-      Get.snackbar('인식되었습니다!', '${MapModel.to.plogging} 회 플로깅 중...',
+      Get.snackbar('Success to Plogging!',
+          '${MapModel.to.plogging} time(s) plogging now...',
           margin: EdgeInsets.only(top: 20),
           maxWidth: Get.width * 0.8,
           backgroundColor: CustomColor.primary,
@@ -62,7 +63,7 @@ class MlPart extends GetxController {
           ),
           snackPosition: SnackPosition.TOP);
     } else {
-      Get.snackbar('인식실패!', '다시 인식시켜주세요',
+      Get.snackbar('Failed to Plogging!', 'Please make it recognized agina',
           margin: EdgeInsets.only(top: 20),
           maxWidth: Get.width * 0.8,
           backgroundColor: CustomColor.primary,
