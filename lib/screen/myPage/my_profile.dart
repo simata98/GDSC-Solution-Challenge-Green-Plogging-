@@ -30,10 +30,11 @@ class _MyProfileState extends State<MyProfile> {
         child: StreamBuilder<DocumentSnapshot>(
           stream: _info.snapshots(),
           builder: (context, snapshot) {
+            if(snapshot.connectionState != ConnectionState.active)  return Container();
             if (!snapshot.hasData) {
               return Row(children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage('assets/no_profile_image.jpg'),
+                  backgroundImage: NetworkImage('assets/no_profile_image.jpg'),
                   radius: 60,
                 ),
                 Container(
@@ -53,7 +54,7 @@ class _MyProfileState extends State<MyProfile> {
                   children: [
                     CircleAvatar(
                       backgroundImage:
-                          AssetImage('assets/no_profile_image.jpg'),
+                          NetworkImage('${snapshot.data!['image']}'),
                       radius: 60,
                     ),
                     Container(
