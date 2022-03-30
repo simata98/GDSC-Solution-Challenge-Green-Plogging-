@@ -85,15 +85,15 @@ class _PostDetailState extends State<PostDetail> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        runningInfo(Icons.map_outlined, Get.arguments['distance'], 'km', 'Distance'),
-                        runningInfo(Icons.schedule, Get.arguments['runTime'], 'min', 'Measure Time')
+                        runningInfo(Icons.route_outlined, Get.arguments['distance'], 'km', 'Distance'),
+                        runningInfo(Icons.timer_outlined, Get.arguments['runTime'], 'min', 'Measure Time')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        runningInfo(Icons.recycling, Get.arguments['plogPoint'], 'times', 'Plogging'),
-                        runningInfo(Icons.run_circle_outlined, Get.arguments['speed'], '', 'Average Speed')
+                        runningInfo(Icons.recycling_rounded, Get.arguments['plogPoint'], 'times', 'Plogging'),
+                        runningInfo(Icons.directions_run, Get.arguments['speed'], '', 'Average Speed')
                       ],
                     )
                   ],
