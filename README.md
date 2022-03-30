@@ -94,9 +94,10 @@ the application will take care of what you picked up
 <p align="center">
   <img width="250" alt="post_total" src="https://user-images.githubusercontent.com/78309388/160839959-bdb0348e-6e84-437c-a475-5c59508fb72e.png">
   &nbsp;&nbsp;
-<img width="250" alt="post_detail" src="https://user-images.githubusercontent.com/78309388/160840152-24846305-b631-4985-be87-dd786c687810.png">
+<img width="250" alt="post_detail" src="https://user-images.githubusercontent.com/78309388/160840152-24846305-b631-4985-be87-dd786c687810.png"> 
+  &nbsp;&nbsp;
+<img width="250" alt="post_detail" src="https://user-images.githubusercontent.com/78309388/160849574-0a104303-69c7-4b59-b6ea-b389b5c2a3b7.gif">
 </p>
-![Hnet com-image](https://user-images.githubusercontent.com/78309388/160849574-0a104303-69c7-4b59-b6ea-b389b5c2a3b7.gif)
 
 
 
@@ -150,17 +151,17 @@ You can view the latest environmental news on the News tab through the News API.
 &nbsp;&nbsp;&nbsp;&nbsp;
   <img width="250" alt="running_cumu" src="https://user-images.githubusercontent.com/78309388/160847969-ad74591b-6cc6-4ed3-a94b-c400ae392f62.png">
   &nbsp;&nbsp;&nbsp;&nbsp;
+  <img width="250" alt="running_cumu" src="https://user-images.githubusercontent.com/78309388/160854223-dbb3b0bd-12da-4f98-9964-c5fc5a3a805e.gif">
 </p>
-![Hnet-image (1)](https://user-images.githubusercontent.com/78309388/160854223-dbb3b0bd-12da-4f98-9964-c5fc5a3a805e.gif)
-
 
 You can see the progress of the accumulated plogging activity as a percentage
 
 
 
 ### Subscription ranking
-![Hnet-image](https://user-images.githubusercontent.com/78309388/160849446-46dc4f0d-db61-45f5-9a9e-839e29e0333b.gif)
-
+<p align="center">
+  <img width="250" alt="ranking" src="https://user-images.githubusercontent.com/78309388/160849446-46dc4f0d-db61-45f5-9a9e-839e29e0333b.gif">
+</p>
 
 You can view the cumulative subscription order for this application. 
 As the number of subscribers increases, you can see how many subscribers you are on the membership screen and how many subscribers you already have on the login screen.
