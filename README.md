@@ -102,7 +102,7 @@ the application will take care of what you picked up
 
 
 
-After the plogging activity, you can share photos of you running activities, surrounding landscapes, or your trash to the community. Check out the records of your friends or people in the same area and leave feedback!
+After the plogging activity, you can share photos of you running activities, surrounding landscapes, or your trash to the community. Check out the records of your friends or people in the same area and leave feedback! If you click the view button on the post, you can check various information such as exercise distance, time, and number of plogging.
 
 
 ```
@@ -119,7 +119,7 @@ Lets share and brag!
 
 </p>
 
-You can also share your plogging activities by region or friends. 
+Check the rankings for your running and plogging records on the rankings page. Why not try competing while checking the overall, regional, and friend rankings respectively? Try running and plogging activities diligently to raise your ranking.
 
 
 ### Donation
