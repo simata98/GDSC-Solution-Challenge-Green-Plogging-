@@ -139,7 +139,9 @@ Check the rankings for your running and plogging records on the rankings page. W
 <p align="center">
   <img width="250" alt="donate" src="https://user-images.githubusercontent.com/78309388/160847056-6378ee13-279c-4af8-8330-0713cdb43939.png">
   &nbsp;&nbsp;&nbsp;&nbsp;
-<img width="250" alt="스크린샷 2022-03-30 오후 10 35 09" src="https://user-images.githubusercontent.com/78309388/160847209-bea54409-f45a-4d55-b197-44c90c2c2088.png">
+<img width="250" alt="donate" src="https://user-images.githubusercontent.com/78309388/160847209-bea54409-f45a-4d55-b197-44c90c2c2088.png">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img width="250" alt="donate" src="https://user-images.githubusercontent.com/78309388/161123669-a711747f-8b31-4084-8749-dc9666db10b6.gif">
 
 </p>
 
@@ -155,6 +157,9 @@ You can donate with points collected through plogging activities. If this app is
   <img width="250" alt="news" src="https://user-images.githubusercontent.com/78309388/160847780-d48380ef-90d0-47fa-80e6-b3e743a0661c.png">
 &nbsp;&nbsp;&nbsp;&nbsp;
   <img width="250" alt="news_detail" src="https://user-images.githubusercontent.com/78309388/160847810-333afafa-f667-44a5-90c1-770b1d23f5c5.png">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img width="250" alt="news_detail" src="https://user-images.githubusercontent.com/78309388/161123224-a3a74e48-7543-4bd4-b2b6-375545248e97.gif">
+
 </p>
 
 You can view the latest environmental news on the News tab through the News API. Check out our environmental articles to get interested and join us in protecting our planet. Protecting the environment starts with a small concern for each and every one of us.
