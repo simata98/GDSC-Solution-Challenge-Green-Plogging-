@@ -1,33 +1,39 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:gdsc_solution/model/community.dart';
 import 'package:gdsc_solution/theme/custom_color.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:firebase_core/firebase_core.dart' as firebase_core;
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path_provider/path_provider.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
-class RecordDetail extends StatefulWidget {
-  const RecordDetail({Key? key}) : super(key: key);
+import '../../model/map_model.dart';
+
+class MainFinishPosting extends StatefulWidget {
+  const MainFinishPosting({Key? key}) : super(key: key);
 
   @override
-  State<RecordDetail> createState() => _RecordDetailState();
+  State<MainFinishPosting> createState() => _MainFinishPostingState();
 }
 
-class _RecordDetailState extends State<RecordDetail> {
-  Community community = Community(
-    uid: FirebaseAuth.instance.currentUser!.uid.toString(),
-    city: Get.arguments['city'],
-    map: Get.arguments['map'],
-    view: Get.arguments['view'],
-    time: Get.arguments['time'],
-    distance: Get.arguments['distance'] as int,
-    plogPoint: Get.arguments['plogPoint'] as int,
-    runTime: Get.arguments['runTime'] as int,
-    speed: Get.arguments['speed'] as double,
-  );
+class _MainFinishPostingState extends State<MainFinishPosting> {
+  Community? community;
   final commentController = new TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    MapModel.to.postTime = DateTime.now();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +60,10 @@ class _RecordDetailState extends State<RecordDetail> {
           Container(
             margin: EdgeInsets.only(right: 10),
             child: IconButton(
-                onPressed: uploadPost,
+                onPressed: () {
+                  MapModel.to.uploadCommunity(commentController.text);
+                  Get.back();
+                },
                 icon: Icon(
                   Icons.check,
                   color: Colors.black,
@@ -127,10 +136,12 @@ class _RecordDetailState extends State<RecordDetail> {
                             Text('${data['nickname']}',
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold)),
-                            Text(DateFormat('yy.MM.dd').format(community.time!),
+                            Text(
+                                DateFormat('yy.MM.dd')
+                                    .format(MapModel.to.postTime!),
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold)),
-                            Text('${community.city}',
+                            Text('${MapModel.to.tmpCity}',
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold)),
                           ],
@@ -141,10 +152,10 @@ class _RecordDetailState extends State<RecordDetail> {
                 }),
             Container(
                 width: MediaQuery.of(context).size.width,
-                child: Image.network('${community.map}')),
+                child: Image.file(MapModel.to.mapImage!)),
             Container(
                 width: MediaQuery.of(context).size.width,
-                child: Image.network('${community.view}')),
+                child: Image.file(MapModel.to.viewImage!)),
             Container(
               margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Column(
@@ -154,16 +165,20 @@ class _RecordDetailState extends State<RecordDetail> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       runningInfo(
-                          Icons.map, community.distance, 'km', 'Distance'),
-                      runningInfo(Icons.watch, community.runTime, '', 'Time')
+                          Icons.map, MapModel.to.tmpDistance, 'km', 'Distance'),
+                      runningInfo(
+                          Icons.watch, MapModel.to.tmpRunTime, '', 'Time')
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      runningInfo(Icons.recycling,
-                          community.plogPoint.toString(), 'times', 'Plogging'),
-                      runningInfo(Icons.man, community.speed, '', 'Pace')
+                      runningInfo(
+                          Icons.recycling,
+                          MapModel.to.tmpPlogPoint.toString(),
+                          'times',
+                          'Plogging'),
+                      runningInfo(Icons.man, MapModel.to.tmpSpeed, '', 'Pace')
                     ],
                   )
                 ],
@@ -259,11 +274,5 @@ class _RecordDetailState extends State<RecordDetail> {
         ],
       ),
     );
-  }
-
-  uploadPost() {
-    community.comment = commentController.text;
-    FirebaseFirestore.instance.collection('posts').add(community.toMap());
-    Get.back();
   }
 }

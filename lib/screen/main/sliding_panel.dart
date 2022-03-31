@@ -103,7 +103,7 @@ class _PanelWidgetState extends State<PanelWidget> {
                           ),
                           Spacer(),
                           SlidingPanelBox(
-                            type: 'Speed',
+                            type: 'Pace',
                           ),
                         ],
                       ),

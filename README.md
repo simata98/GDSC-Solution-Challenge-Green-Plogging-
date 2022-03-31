@@ -62,7 +62,11 @@ In Korean, "the Gleaners" sounds like "Isak". Therefore, our team decided the lo
 ## Main_Function
 ### Plogging
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/33146152/160342822-41b249ae-4e6d-4fcd-b72e-72cbb69a350c.png" alt="text" width="400" height="500" />
+  <img width="250" alt="스크린샷 2022-03-30 오후 10 54 04" src="https://user-images.githubusercontent.com/78309388/160851377-19092005-9590-49f8-82a9-9811b124eabd.png">
+  &nbsp;&nbsp;
+<img width="250" alt="스크린샷 2022-03-30 오후 10 52 48" src="https://user-images.githubusercontent.com/78309388/160851418-74aebe41-596e-44b2-a038-fe72552f87bd.png">
+  &nbsp;&nbsp;
+
 </p>
 When a user starts plogging, app automatically marks the path you have walked. You can start plogging activity with just press the start button.
 Then, when user enter a resting state or press the start plogging button, it switch to a trash pick-up state. 
@@ -88,9 +92,17 @@ the application will take care of what you picked up
 
 ### Community
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/33146152/160344724-f75219bf-25fb-4289-be94-df51b1654e97.png" alt="text" width="400" height="500" />
+  <img width="250" alt="post_total" src="https://user-images.githubusercontent.com/78309388/160839959-bdb0348e-6e84-437c-a475-5c59508fb72e.png">
+  &nbsp;&nbsp;
+<img width="250" alt="post_detail" src="https://user-images.githubusercontent.com/78309388/160840152-24846305-b631-4985-be87-dd786c687810.png"> 
+  &nbsp;&nbsp;
+<img width="250" alt="post_detail" src="https://user-images.githubusercontent.com/78309388/160849574-0a104303-69c7-4b59-b6ea-b389b5c2a3b7.gif">
 </p>
-After the plogging activity, you can share photos of you running activities, surrounding landscapes, or your trash to the community.
+
+
+
+
+After the plogging activity, you can share photos of you running activities, surrounding landscapes, or your trash to the community. Check out the records of your friends or people in the same area and leave feedback!
 
 
 ```
@@ -99,7 +111,12 @@ Lets share and brag!
 
 ### Ranking
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/33146152/160345879-a2063052-d7a2-4d9a-9a45-9546ac76b399.png" alt="text" width="400" height="500" />
+  <img width="250" alt="rank_friends" src="https://user-images.githubusercontent.com/78309388/160846291-9fe27542-b8c1-4b2d-a9e7-57a8083200ee.png">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+<img width="250" alt="rank_total" src="https://user-images.githubusercontent.com/78309388/160846351-9521fba7-050e-405b-9c32-e0c64b74250a.png">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+<img width="250" alt="rank_region_list" src="https://user-images.githubusercontent.com/78309388/160846409-a84b736d-0b29-4283-9647-919e1f222728.png">
+
 </p>
 
 You can also share your plogging activities by region or friends. 
@@ -107,7 +124,10 @@ You can also share your plogging activities by region or friends.
 
 ### Donation
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/33146152/160346160-1b37ba8b-6936-4c4d-9c7b-532d7531a9fb.png" alt="text" width="400" height="500" />
+  <img width="250" alt="donate" src="https://user-images.githubusercontent.com/78309388/160847056-6378ee13-279c-4af8-8330-0713cdb43939.png">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+<img width="250" alt="스크린샷 2022-03-30 오후 10 35 09" src="https://user-images.githubusercontent.com/78309388/160847209-bea54409-f45a-4d55-b197-44c90c2c2088.png">
+
 </p>
 
 You can donate with points collected through plogging activities. 
@@ -117,7 +137,9 @@ You can donate with points collected through plogging activities.
 ## Sub_Function
 ### Environment News
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/33146152/160410373-f6915ffa-9702-4abb-aa44-3300a33a61d4.png" alt="text" width="250" height="500" />
+  <img width="250" alt="news" src="https://user-images.githubusercontent.com/78309388/160847780-d48380ef-90d0-47fa-80e6-b3e743a0661c.png">
+&nbsp;&nbsp;&nbsp;&nbsp;
+  <img width="250" alt="news_detail" src="https://user-images.githubusercontent.com/78309388/160847810-333afafa-f667-44a5-90c1-770b1d23f5c5.png">
 </p>
 
 You can view the latest environmental news on the News tab through the News API.
@@ -125,15 +147,20 @@ You can view the latest environmental news on the News tab through the News API.
 
 ### Cumulation of plogging activities
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/33146152/160413298-f21fbc75-9402-40d0-bc76-60c45e5d9352.png" alt="text" width="250" height="500" />
+  <img width="250" alt="running_weekly" src="https://user-images.githubusercontent.com/78309388/160847933-caa85f8e-e800-4068-9fc9-ff8413a6aa1e.png">
+&nbsp;&nbsp;&nbsp;&nbsp;
+  <img width="250" alt="running_cumu" src="https://user-images.githubusercontent.com/78309388/160847969-ad74591b-6cc6-4ed3-a94b-c400ae392f62.png">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img width="250" alt="running_cumu" src="https://user-images.githubusercontent.com/78309388/160854223-dbb3b0bd-12da-4f98-9964-c5fc5a3a805e.gif">
 </p>
 
 You can see the progress of the accumulated plogging activity as a percentage
 
 
+
 ### Subscription ranking
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/33146152/160526942-b9fb20b9-f266-496e-a523-f2a51e657523.png" alt="text" width="250" height="500" />
+  <img width="250" alt="ranking" src="https://user-images.githubusercontent.com/78309388/160849446-46dc4f0d-db61-45f5-9a9e-839e29e0333b.gif">
 </p>
 
 You can view the cumulative subscription order for this application. 
