@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -77,8 +78,17 @@ class _SlidingPanelBottomFirstState extends State<SlidingPanelBottomFirst> {
                       MapModel.to.finishState.toggle();
                       LatLng tmploc = MapModel.to.runRoute
                           .elementAt(MapModel.to.runRoute.length ~/ 2);
+
+                      //카메라 줌 비율 게산
+
+                      double zoomLevel = log(2 *
+                              (38000 *
+                                  cos(tmploc.latitude) /
+                                  (MapModel.to.dist.value / 1000.0))) +
+                          3;
+
                       MapModel.to.mapController?.moveCamera(
-                          CameraUpdate.newLatLngZoom(tmploc, 14.0));
+                          CameraUpdate.newLatLngZoom(tmploc, zoomLevel));
 
                       //기록된 것 저장
                       MapModel.to.tmpCity = await MapModel.to.getCity();
