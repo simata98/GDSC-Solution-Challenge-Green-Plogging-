@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gdsc_solution/screen/guide/guide_line.dart';
 import 'package:gdsc_solution/screen/login/sign_up.dart';
-import 'package:gdsc_solution/screen/myPage/my_page.dart';
-import 'package:gdsc_solution/screen/main/main.dart';
-import 'package:gdsc_solution/screen/myPage/my_profile.dart';
-import 'package:gdsc_solution/screen/news/news.dart';
-import 'package:gdsc_solution/screen/social/social_page.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,6 +11,7 @@ import 'package:get/get.dart';
 import '../../model/map_model.dart';
 import '../main/main.dart';
 import '../../theme/custom_color.dart';
+import 'google_sign_up.dart';
 
 //로그인 페이지
 class SignIn extends StatefulWidget {
@@ -226,7 +223,29 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
     }
   }
 
-  void googleSignIn() {}
+  void googleSignIn() async{
+    final googleSign = GoogleSignIn();
+    final googleUser = await googleSign.signIn();  //구글 계정 로그인 다이얼로그가 뜸
+    if(googleUser == null) return;
+
+    final googleAuth = await googleUser.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken
+    );
+    
+    try{
+      
+      var s = await FirebaseAuth.instance.signInWithCredential(credential);
+      if(s.additionalUserInfo!.isNewUser){
+        Get.to(GSignUp());
+        
+      }
+      else{Get.toNamed("/main");}
+    }
+    catch(e){Fluttertoast.showToast(msg: e.toString());}
+  }
 
   //파이어스토어에 저장 되어있는 users 콜렉션의 길이를 구한다.
   Future getUserNum() async {
@@ -245,4 +264,6 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
     return Text(format.format(animation!.value),
         style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold));
   }
+
+  
 }

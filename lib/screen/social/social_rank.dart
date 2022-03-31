@@ -35,7 +35,6 @@ class _SocialRankState extends State<SocialRank> {
   ];
   var _selectedCity = 'Total';
   var _selectedIndex = 0;
-  List<DocumentSnapshot> _friendsList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -212,46 +211,54 @@ class _SocialRankState extends State<SocialRank> {
                 //1,2,3등일때와 아닐 때 디자인의 차이를 두었으며
                 //현재 사용자가 순위권 밖이라면 ...후에 자신의 등수가 나오도록 함
                 return Container(
-                    margin: EdgeInsets.only(top: 5),
                     child: index == 0
-                        ? Row(
-                            children: [
-                              Image.asset('assets/rank1.png',
-                                  width: rankNumSize),
-                              rankAvatar('${data['image']}'),
-                              desc == 'totalPlog'
-                                  ? rankTile('${data['nickname']}', desc,
-                                      data['totalPlog'])
-                                  : rankTile('${data['nickname']}', desc,
-                                      data['totalRun'])
-                            ],
-                          )
+                        ? Container(
+                          margin: EdgeInsets.only(top: 5),
+                          child: Row(
+                              children: [
+                                Image.asset('assets/rank1.png',
+                                    width: rankNumSize),
+                                rankAvatar('${data['image']}'),
+                                desc == 'totalPlog'
+                                    ? rankTile('${data['nickname']}', desc,
+                                        data['totalPlog'])
+                                    : rankTile('${data['nickname']}', desc,
+                                        data['totalRun'])
+                              ],
+                            ),
+                        )
                         : index == 1
-                            ? Row(
-                                children: [
-                                  Image.asset('assets/rank2.png',
-                                      width: rankNumSize),
-                                  rankAvatar('${data['image']}'),
-                                  desc == 'totalPlog'
-                                      ? rankTile('${data['nickname']}', desc,
-                                          data['totalPlog'])
-                                      : rankTile('${data['nickname']}', desc,
-                                          data['totalRun'])
-                                ],
-                              )
+                            ? Container(
+                              margin: EdgeInsets.only(top: 5),
+                              child: Row(
+                                  children: [
+                                    Image.asset('assets/rank2.png',
+                                        width: rankNumSize),
+                                    rankAvatar('${data['image']}'),
+                                    desc == 'totalPlog'
+                                        ? rankTile('${data['nickname']}', desc,
+                                            data['totalPlog'])
+                                        : rankTile('${data['nickname']}', desc,
+                                            data['totalRun'])
+                                  ],
+                                ),
+                            )
                             : index == 2
-                                ? Row(
-                                    children: [
-                                      Image.asset('assets/rank3.png',
-                                          width: rankNumSize),
-                                      rankAvatar('${data['image']}'),
-                                      desc == 'totalPlog'
-                                          ? rankTile('${data['nickname']}',
-                                              desc, data['totalPlog'])
-                                          : rankTile('${data['nickname']}',
-                                              desc, data['totalRun'])
-                                    ],
-                                  )
+                                ? Container(
+                                  margin: EdgeInsets.only(top: 5),
+                                  child: Row(
+                                      children: [
+                                        Image.asset('assets/rank3.png',
+                                            width: rankNumSize),
+                                        rankAvatar('${data['image']}'),
+                                        desc == 'totalPlog'
+                                            ? rankTile('${data['nickname']}',
+                                                desc, data['totalPlog'])
+                                            : rankTile('${data['nickname']}',
+                                                desc, data['totalRun'])
+                                      ],
+                                    ),
+                                )
                                 : data['uid'] ==
                                         FirebaseAuth.instance.currentUser!.uid
                                     ? Column(
@@ -295,7 +302,6 @@ class _SocialRankState extends State<SocialRank> {
     );
   }
 
-  _buildFriendsBody() {}
   //친구랭킹
   showFriendsRank(String desc) {
     int count = 0;
@@ -332,54 +338,62 @@ class _SocialRankState extends State<SocialRank> {
                           ++count;
                           print('uid = ${data['uid']}, count = $count');
                           return Container(
-                              margin: EdgeInsets.only(top: 5),
                               child: count == 1
-                                  ? Row(
-                                      children: [
-                                        Image.asset('assets/rank1.png',
-                                            width: rankNumSize),
-                                        rankAvatar('${data['image']}'),
-                                        desc == 'totalPlog'
-                                            ? rankTile('${data['nickname']}',
-                                                desc, data['totalPlog'])
-                                            : rankTile('${data['nickname']}',
-                                                desc, data['totalRun'])
-                                      ],
-                                    )
+                                  ? Container(
+                                    margin: EdgeInsets.only(top: 5),
+                                    child: Row(
+                                        children: [
+                                          Image.asset('assets/rank1.png',
+                                              width: rankNumSize),
+                                          rankAvatar('${data['image']}'),
+                                          desc == 'totalPlog'
+                                              ? rankTile('${data['nickname']}',
+                                                  desc, data['totalPlog'])
+                                              : rankTile('${data['nickname']}',
+                                                  desc, data['totalRun'])
+                                        ],
+                                      ),
+                                  )
                                   : count == 2
-                                      ? Row(
-                                          children: [
-                                            Image.asset('assets/rank2.png',
-                                                width: rankNumSize),
-                                            rankAvatar('${data['image']}'),
-                                            desc == 'totalPlog'
-                                                ? rankTile(
-                                                    '${data['nickname']}',
-                                                    desc,
-                                                    data['totalPlog'])
-                                                : rankTile(
-                                                    '${data['nickname']}',
-                                                    desc,
-                                                    data['totalRun'])
-                                          ],
-                                        )
+                                      ? Container(
+                                        margin: EdgeInsets.only(top: 5),
+                                        child: Row(
+                                            children: [
+                                              Image.asset('assets/rank2.png',
+                                                  width: rankNumSize),
+                                              rankAvatar('${data['image']}'),
+                                              desc == 'totalPlog'
+                                                  ? rankTile(
+                                                      '${data['nickname']}',
+                                                      desc,
+                                                      data['totalPlog'])
+                                                  : rankTile(
+                                                      '${data['nickname']}',
+                                                      desc,
+                                                      data['totalRun'])
+                                            ],
+                                          ),
+                                      )
                                       : count == 3
-                                          ? Row(
-                                              children: [
-                                                Image.asset('assets/rank3.png',
-                                                    width: rankNumSize),
-                                                rankAvatar('${data['image']}'),
-                                                desc == 'totalPlog'
-                                                    ? rankTile(
-                                                        '${data['nickname']}',
-                                                        desc,
-                                                        data['totalPlog'])
-                                                    : rankTile(
-                                                        '${data['nickname']}',
-                                                        desc,
-                                                        data['totalRun'])
-                                              ],
-                                            )
+                                          ? Container(
+                                            margin: EdgeInsets.only(top: 5),
+                                            child: Row(
+                                                children: [
+                                                  Image.asset('assets/rank3.png',
+                                                      width: rankNumSize),
+                                                  rankAvatar('${data['image']}'),
+                                                  desc == 'totalPlog'
+                                                      ? rankTile(
+                                                          '${data['nickname']}',
+                                                          desc,
+                                                          data['totalPlog'])
+                                                      : rankTile(
+                                                          '${data['nickname']}',
+                                                          desc,
+                                                          data['totalRun'])
+                                                ],
+                                              ),
+                                          )
                                           : data['uid'] ==
                                                   FirebaseAuth
                                                       .instance.currentUser!.uid
