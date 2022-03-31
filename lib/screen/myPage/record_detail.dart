@@ -154,16 +154,16 @@ class _RecordDetailState extends State<RecordDetail> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       runningInfo(
-                          Icons.map, community.distance, 'km', 'Distance'),
-                      runningInfo(Icons.watch, community.runTime, '', 'Time')
+                          Icons.route_outlined, community.distance, 'km', 'Distance'),
+                      runningInfo(Icons.timer_outlined, community.runTime, '', 'Time')
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      runningInfo(Icons.recycling,
+                      runningInfo(Icons.recycling_outlined,
                           community.plogPoint.toString(), 'times', 'Plogging'),
-                      runningInfo(Icons.man, community.speed, '', 'Pace')
+                      runningInfo(Icons.directions_run, community.speed, '', 'Pace')
                     ],
                   )
                 ],
@@ -175,7 +175,7 @@ class _RecordDetailState extends State<RecordDetail> {
     );
   }
 
-  String getFormattedString(dynamic data, String info) {
+  getFormattedString(dynamic data, String info) {
     switch (info) {
       case 'Distance':
         double tmp = (data as int).toDouble();
@@ -214,7 +214,6 @@ class _RecordDetailState extends State<RecordDetail> {
       default:
         return data;
     }
-    return "";
   }
 
   runningInfo(IconData ic, dynamic data, String type, String info) {

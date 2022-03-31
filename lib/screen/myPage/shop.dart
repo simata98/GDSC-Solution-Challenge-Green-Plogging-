@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../theme/custom_color.dart';
@@ -33,28 +34,13 @@ class _ShopState extends State<Shop> {
                 TextButton(
                     onPressed: () {
                       setState(() {
-                        if(!donDec)
-                          donDec = !donDec;
+                        if (!donDec) donDec = !donDec;
                       });
                     },
                     child: Text(
                       'Donation',
                       style: TextStyle(
                           color: donDec ? Colors.black : Colors.grey,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
-                    )),
-                TextButton(
-                    onPressed: () {
-                      setState(() {
-                        if(donDec)
-                          donDec = !donDec;
-                      });
-                    },
-                    child: Text(
-                      'Decorate',
-                      style: TextStyle(
-                          color: donDec ? Colors.grey : Colors.black,
                           fontSize: 18,
                           fontWeight: FontWeight.bold),
                     )),
@@ -196,11 +182,25 @@ class _ShopState extends State<Shop> {
   //해당 포인트보다 많이 갖고 있으면 포인트만큼 차감. 아니면 메세지 출력
   donatePoint(int point) {
     _info.get().then((DocumentSnapshot value) {
-      if (value['point'] < point)
-        Fluttertoast.showToast(msg: 'need more points');
-      else {
+      if (value['point'] < point) {
+        Get.dialog(AlertDialog(
+          title: Text('Notification'),
+          content: Text('need more points'),
+          actions: [
+            TextButton(onPressed: () => Get.back(), child: Text('close'))
+          ],
+        ));
+      } else {
         _info.update({'point': FieldValue.increment(0 - point)});
-        Fluttertoast.showToast(msg: 'donated successfully');
+        Get.dialog(AlertDialog(
+          title: Text('Notification'),
+          content: Text('donated successfully'),
+          actions: [
+            TextButton(
+                onPressed: () => Get.back(),
+                child: Text('close'))
+          ],
+        ));
       }
     });
   }
