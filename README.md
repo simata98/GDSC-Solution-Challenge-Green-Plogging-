@@ -16,7 +16,7 @@
   - Main
   - Start Running
   - Start Plogging
-    - ML Part
+    - Trash Classification
   - Finish
 - [Sub_Function](#sub_function)
 - [API](#api)
@@ -26,7 +26,13 @@
 
 ### What is Plogging?
 
+<p align="center">
+<img width="500" alt="image" src="https://user-images.githubusercontent.com/87767242/161135838-2b728bb3-04cf-4a15-8574-3038fe0c1e91.jpg">  
+
+***`Just jogging and Just pick up the trash!`***
 Plogging is a combination of Jogging with picking up litter merging the Swedish verbs ***plocka*** upp (pick up) and ***jogga***(jog) gives the new Swedish verb ***plogga***, from which the workd plogging derives).
+The key to plogging is not just the concept of environmental protection of picking up trash, but approaching picking up trash as one of the health-training exercises. The advantage is that it consumes more physical strength than general jogging. While jogging normally with a garbage bag, if you encounter illegally dumped garbage, pick it up and put it in a garbage bag.
+In fact, according to a survey by Swedish fitness app Life Island, people who jog only for 30 minutes consume an average of 2355, but those who float at the same time consume 288를. In other words, it doubles the effectiveness of exercise.
 
 ## What is Sustainable Development Goals?
 
@@ -53,7 +59,7 @@ As mentioned above, the positive aspects of the environment and sustainable cons
 
 ![image](https://user-images.githubusercontent.com/33146152/160325415-8deaab92-23fd-44fe-aa66-74c3d70f5181.png)
 
-During the flogging process, you naturally bend your back. So we thought this posture was very similar to the prople from one of the famous paintings, "The Gleaners".
+During the plogging process, you naturally bend your back. So we thought this posture was very similar to the prople from one of the famous paintings, "The Gleaners".
 In Korean, "the Gleaners" sounds like "Isak". Therefore, our team decided the logo and application name in this way.
 
 ## Components
@@ -75,17 +81,40 @@ In Korean, "the Gleaners" sounds like "Isak". Therefore, our team decided the lo
 
 ## Main_Function
 
-### Plogging
+### PREVIEW
 
 <p align="center">
-  <img width="250" alt="스크린샷 2022-03-30 오후 10 54 04" src="https://user-images.githubusercontent.com/78309388/160851377-19092005-9590-49f8-82a9-9811b124eabd.png">
+  <img width="250" alt="스크린샷 2022-03-30 오후 10 54 04" src="https://user-images.githubusercontent.com/87767242/161129056-8fc8493f-88a9-4110-871b-d46e7c78dff2.gif">
   &nbsp;&nbsp;
-<img width="250" alt="스크린샷 2022-03-30 오후 10 52 48" src="https://user-images.githubusercontent.com/78309388/160851418-74aebe41-596e-44b2-a038-fe72552f87bd.png">
+
+### Main
+
+### Start Running
+
+<p align="center">
+  <img width="250" alt="스크린샷 2022-03-30 오후 10 54 04" src="https://user-images.githubusercontent.com/87767242/161132789-8aec3412-cb30-47d4-91a5-015494afb22b.gif">
+  &nbsp;&nbsp;
+  <p align="center">
+  <img width="250" alt="스크린샷 2022-03-30 오후 10 54 04" src="https://user-images.githubusercontent.com/87767242/161132580-5004fbfa-a02c-4931-b5d9-400ae1e68963.gif">
   &nbsp;&nbsp;
 
 </p>
-When a user starts plogging, app automatically marks the path you have walked. You can start plogging activity with just press the start button.
-Then, when user enter a resting state or press the start plogging button, it switch to a trash pick-up state.
+If you want to take a break from jogging, the app asks you if you want to do plogging. When you start plogging, the app automatically displays the route line in green and plogging starts. At this time, distance, time, and pace are not measured.
+
+```
+Run as you long as you can!
+```
+
+### Start Plogging
+
+<p align="center">
+  <img width="250" alt="스크린샷 2022-03-30 오후 10 54 04" src="https://user-images.githubusercontent.com/87767242/161130787-e7e3e2a1-f910-487e-ade6-62361473638a.png">
+  &nbsp;&nbsp;
+  <img width="250" alt="스크린샷 2022-03-30 오후 10 54 04" src="https://user-images.githubusercontent.com/87767242/161125239-ff4cbf61-71b7-4a7e-b0de-e76d716169ee.png">
+  &nbsp;&nbsp;
+
+</p>
+If you want to take a break from jogging, the app asks you if you want to do plogging. When you start plogging, the app automatically displays the route line in green and plogging starts. At this time, distance, time, and pace are not measured.
 
 ```
 Run as you long as you can!
@@ -111,9 +140,6 @@ the application will take care of what you picked up
 <img width="250" alt="post_detail" src="https://user-images.githubusercontent.com/78309388/160978597-d92b1158-8a68-4046-927c-77890725384c.gif">
 </p>
 
-
-
-
 After the plogging activity, you can share photos of you running activities, surrounding landscapes, or your trash to the community. Check out the records of your friends or people in the same area and leave feedback! If you click the view button on the post, you can check various information such as exercise distance, time, and number of plogging.
 
 ```
@@ -133,7 +159,6 @@ Lets share and brag!
 
 Check the rankings for your running and plogging records on the rankings page. Why not try competing while checking the overall, regional, and friend rankings respectively? Try running and plogging activities diligently to raise your ranking.
 
-
 ### Donation
 
 <p align="center">
@@ -144,8 +169,6 @@ Check the rankings for your running and plogging records on the rankings page. W
 </p>
 
 You can donate with points collected through plogging activities. If this app is supported by the government or city, we think it will be able to support more disadvantaged neighbors. Wouldn't it be proud if you donated the points you've worked hard for running and blogging to neighbors in need? Currently, donations can be made to large-scale volunteer organizations such as UNICEF and save-the-childeren.
-
-
 
 ## Sub_Function
 
