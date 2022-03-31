@@ -94,7 +94,7 @@ the application will take care of what you picked up
 <p align="center">
   <img width="250" alt="post_total" src="https://user-images.githubusercontent.com/78309388/160839959-bdb0348e-6e84-437c-a475-5c59508fb72e.png">
   &nbsp;&nbsp;
-<img width="250" alt="post_detail" src="https://user-images.githubusercontent.com/78309388/160840152-24846305-b631-4985-be87-dd786c687810.png"> 
+  <img width="250" alt="스크린샷 2022-03-31 오후 1 35 19" src="https://user-images.githubusercontent.com/78309388/160977541-73a8fd74-a0e5-4cb9-936e-62bfad36620d.png">
   &nbsp;&nbsp;
 <img width="250" alt="post_detail" src="https://user-images.githubusercontent.com/78309388/160849574-0a104303-69c7-4b59-b6ea-b389b5c2a3b7.gif">
 </p>
