@@ -12,6 +12,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
+import '../../model/map_model.dart';
 import '../main/main.dart';
 import '../../theme/custom_color.dart';
 
@@ -47,6 +48,11 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    //GetX 상태관리
+    //처음엔 main/main.dart 안에 있었으나
+    //라우팅을 위해 여기로 옮김
+    Get.put(MapModel());
+
     double width = MediaQuery.of(context).size.width;
     return AnimatedBuilder(
         animation: animationController,
@@ -213,7 +219,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
       try {
         await _auth.signInWithEmailAndPassword(
             email: email, password: password);
-        Get.to(mapMain()); //이부분을 홈으로 바꾸면 됨
+        Get.toNamed("/main"); //이부분을 홈으로 바꾸면 됨
       } catch (e) {
         Fluttertoast.showToast(msg: e.toString());
       }
