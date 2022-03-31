@@ -79,33 +79,32 @@ In Korean, "the Gleaners" sounds like "Isak". Therefore, our team decided the lo
     - Pixel 3a API 29
   - Galaxy S8 ( Android 9 )
 
-## Main_Function
+# Main_Function
 
-### PREVIEW
+## PREVIEW
 
 <p align="center">
   <img width="250" alt="스크린샷 2022-03-30 오후 10 54 04" src="https://user-images.githubusercontent.com/87767242/161129056-8fc8493f-88a9-4110-871b-d46e7c78dff2.gif">
   &nbsp;&nbsp;
 
-### Main
+## Main
 
-### Start Running
+## Start Running
 
 <p align="center">
   <img width="250" alt="스크린샷 2022-03-30 오후 10 54 04" src="https://user-images.githubusercontent.com/87767242/161132789-8aec3412-cb30-47d4-91a5-015494afb22b.gif">
   &nbsp;&nbsp;
-  <p align="center">
   <img width="250" alt="스크린샷 2022-03-30 오후 10 54 04" src="https://user-images.githubusercontent.com/87767242/161132580-5004fbfa-a02c-4931-b5d9-400ae1e68963.gif">
   &nbsp;&nbsp;
-
 </p>
+
 If you want to take a break from jogging, the app asks you if you want to do plogging. When you start plogging, the app automatically displays the route line in green and plogging starts. At this time, distance, time, and pace are not measured.
 
 ```
 Run as you long as you can!
 ```
 
-### Start Plogging
+## Start Plogging
 
 <p align="center">
   <img width="250" alt="스크린샷 2022-03-30 오후 10 54 04" src="https://user-images.githubusercontent.com/87767242/161130787-e7e3e2a1-f910-487e-ade6-62361473638a.png">
@@ -117,20 +116,55 @@ Run as you long as you can!
 If you want to take a break from jogging, the app asks you if you want to do plogging. When you start plogging, the app automatically displays the route line in green and plogging starts. At this time, distance, time, and pace are not measured.
 
 ```
-Run as you long as you can!
+That's it! Let's go plogging!
 ```
 
-### Trash Classification
+## Trash Classification
+
+### Classification Model
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/33146152/160343807-98ec65c3-ac39-4a5c-abef-d4644e7e94c4.png" alt="text" width="400" height="500" />
+<img width="400" alt="assets_ml_-MMARWLU6xXHUlsfby29_-MMAYgUCxGtR2ImywRm3__2020-07-20__9 07 42" src="https://user-images.githubusercontent.com/87767242/161139376-4ebc7db6-57b0-4ea4-be68-46678d32f19d.png">
+
+We discussed a lightweight deep learning model that can be driven on mobile through meetings and chose a model called MobileNetV3. Transfer learning was conducted through the data ([here](https://www.kaggle.com/datasets/jinfree/recycle-classification-dataset)), and this resulted in satisfactory accuracy.  
+
+<p align="center">
+<img width="1000" alt="assets_ml_-MMARWLU6xXHUlsfby29_-MMAYgUCxGtR2ImywRm3__2020-07-20__9 07 42" src="https://user-images.githubusercontent.com/87767242/161139901-6380cd0b-4315-4bc9-9d27-3b61b131d6f9.png">
+<img width="500" alt="assets_ml_-MMARWLU6xXHUlsfby29_-MMAYgUCxGtR2ImywRm3__2020-07-20__9 07 42" src="https://user-images.githubusercontent.com/87767242/161139890-e477e21f-8102-4259-8ec6-af04e61bf788.png">
 </p>
-During trash pick-up state, you can take a picture of the trash you picked up. Models learned with tensorflow automatically recognize garbage and qutomatically calssify which garbage user picked up. The more trash you pick up and shoot, the more plogging points you'll get.
+
+When I tested the actual product with a test case, I was satisfied with the results.
+
+### Mobile Testing
+
+#### Success to Plogging
+
+ <p align="center">
+<img src="https://user-images.githubusercontent.com/87767242/161146355-f072d75d-0bae-471e-9ac7-1fd132c3b571.gif" alt="text" width="400"  />
+</p>
+
+#### Faild to Plogging
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/87767242/161144670-9d349d2c-b398-489e-8f3a-25d08c88e0bb.gif" alt="text" width="400"  />
+</p>
+
+After converting the model into a tflite file, the model was transplanted into a mobile and tested. During plogging state, you can take a picture of the trash you picked up. Models learned with tensorflow automatically recognize garbage and automatically calssify which garbage user picked up. The more trash you pick up and shoot, the more plogging points you'll get.
+
 ```
 the application will take care of what you picked up
 ```
 
-### Community
+## Finish
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/87767242/161147414-54141552-0bcb-4a2d-ba7a-92e2e51b238a.png" alt="text" width="400"  />
+<img src="https://user-images.githubusercontent.com/87767242/161147827-f8c92a89-3f75-470a-8f0a-08edf06d042b.png" alt="text" width="400"  />
+</p>
+
+If you stop plogging and jogging is over, you can take pictures of the surrounding landscape, and if you press finish, your records are saved on the server. If you press the share button on the right, you can immediately write down your own post in the community.
+
+# Community
 
 <p align="center">
   <img width="250" alt="post_total" src="https://user-images.githubusercontent.com/78309388/160839959-bdb0348e-6e84-437c-a475-5c59508fb72e.png">
@@ -146,7 +180,7 @@ After the plogging activity, you can share photos of you running activities, sur
 Lets share and brag!
 ```
 
-### Ranking
+# Ranking
 
 <p align="center">
   <img width="250" alt="rank_friends" src="https://user-images.githubusercontent.com/78309388/160846291-9fe27542-b8c1-4b2d-a9e7-57a8083200ee.png">
@@ -159,7 +193,7 @@ Lets share and brag!
 
 Check the rankings for your running and plogging records on the rankings page. Why not try competing while checking the overall, regional, and friend rankings respectively? Try running and plogging activities diligently to raise your ranking.
 
-### Donation
+# Donation
 
 <p align="center">
   <img width="250" alt="donate" src="https://user-images.githubusercontent.com/78309388/160847056-6378ee13-279c-4af8-8330-0713cdb43939.png">
@@ -172,9 +206,9 @@ Check the rankings for your running and plogging records on the rankings page. W
 
 You can donate with points collected through plogging activities. If this app is supported by the government or city, we think it will be able to support more disadvantaged neighbors. Wouldn't it be proud if you donated the points you've worked hard for running and blogging to neighbors in need? Currently, donations can be made to large-scale volunteer organizations such as UNICEF and save-the-childeren.
 
-## Sub_Function
+# Sub_Function
 
-### Environment News
+## Environment News
 
 <p align="center">
   <img width="250" alt="news" src="https://user-images.githubusercontent.com/78309388/160847780-d48380ef-90d0-47fa-80e6-b3e743a0661c.png">
@@ -187,7 +221,7 @@ You can donate with points collected through plogging activities. If this app is
 
 You can view the latest environmental news on the News tab through the News API. Check out our environmental articles to get interested and join us in protecting our planet. Protecting the environment starts with a small concern for each and every one of us.
 
-### Cumulation of plogging activities
+## Cumulation of plogging activities
 
 <p align="center">
   <img width="250" alt="running_weekly" src="https://user-images.githubusercontent.com/78309388/160847933-caa85f8e-e800-4068-9fc9-ff8413a6aa1e.png">
@@ -199,7 +233,7 @@ You can view the latest environmental news on the News tab through the News API.
 
 You can see the progress of the accumulated plogging activity as a percentage. If you reach the challenge goal, earn points and participate in the donation! Weekly Challenges reset every week so you can earn points continuously. Many challenges that can keep users interest will be added continuosly.
 
-### Subscription ranking
+## Subscription ranking
 
 <p align="center">
   <img width="250" alt="ranking" src="https://user-images.githubusercontent.com/78309388/160849446-46dc4f0d-db61-45f5-9a9e-839e29e0333b.gif">
@@ -210,13 +244,41 @@ You can see the progress of the accumulated plogging activity as a percentage. I
 You can view the cumulative subscription order for this application.
 As the number of subscribers increases, you can see how many subscribers you are on the membership screen and how many subscribers you already have on the login screen.
 
-## API
+# Furthermore
+
+## More enhanced artificial intelligence
+
+Originally, we tried to make it  object class detection, not a classification model, but we couldn't make it. In the future development, we will change the model and make object recognition.
+
+## Map cluster
+
+<img width="500" alt="ranking" src="https://user-images.githubusercontent.com/87767242/161149750-781d53dc-168b-4cce-a838-c6633747808b.png">
+
+Map clustering makes it easier to see where garbage is concentrated visually, and we want to take action on where garbage is concentrated intensively.
+
+## Recycle Bigdata and EPR(Extended producer responsibility)
+
+<img width="300" alt="ranking" src="https://user-images.githubusercontent.com/87767242/161151267-16ecbbe9-0d13-47d1-b715-2e89e8e950d1.jpg">
+
+After collecting various data such as waste manufacturers, locations, and numbers, I want to apply EPR to manufacturers. A certain amount of recycling obligations are granted to manufacturers to recycle, and if they fail to comply with this, the producer is charged a recycling charge above the cost required for recycling.
+
+## Trash can location
+
+Picking up trash isn't the end of it. Since it has to be handled properly, users can check the location of the trash can during flogging, and other users can see the location of the trash can displayed.
+
+# Download APK
+
+[DOWNLOAD LINK](https://drive.google.com/file/d/1m-oT5Lv6Vq5z_PqPCZgku2fH7voLX5y2/view?usp=sharing)
+
+Please click the link to download it.
+
+# API
 
 ![image](https://user-images.githubusercontent.com/33146152/160411457-588efe7b-833b-48d8-9b19-cb614ba32b3b.png)
 
 we used News API to continuously update new environmental news.
 
-## Contributors
+# Contributors
 
 <table>
   <tr>
