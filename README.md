@@ -13,12 +13,14 @@
 - [Getting_Started](#getting_started)
 - [Components](#components)
 - [Main_Function](#main_function)
-  - Main
-  - Start Running
-  - Start Plogging
-    - Trash Classification
-  - Finish
+  - [Main](#main)
+  - [Start Running](#start-running)
+  - [Start Plogging](#start-plogging)
+  - [Trash Classification](#trash-classification)
+  - [Finish](#finish)
 - [Sub_Function](#sub_function)
+- [Futhermore](#furthermore)
+- [Download](#download-apk)
 - [API](#api)
 - [Contributors](#contributors)
 
@@ -88,6 +90,12 @@ In Korean, "the Gleaners" sounds like "Isak". Therefore, our team decided the lo
   &nbsp;&nbsp;
 
 ## Main
+
+<p align="center">
+<img width="250"  src="https://user-images.githubusercontent.com/87767242/161152654-1638f32f-9652-4902-b53a-fafcac1e3e53.png">
+<img width="250" alt="스크린샷 2022-03-30 오후 10 54 04" src="https://user-images.githubusercontent.com/87767242/161152663-82d12e0d-24d4-4669-8a2a-6d213143210e.png">
+</p>
+When you first install and log in, a description of plogging appears. You can set the zoom of the camera with plus and minus buttons, and the camera always shows the user.
 
 ## Start Running
 
