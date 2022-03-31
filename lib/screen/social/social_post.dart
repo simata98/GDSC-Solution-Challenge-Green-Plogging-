@@ -317,8 +317,9 @@ class _SocialPostState extends State<SocialPost> {
                   }
                 },
                 child: Container(
+                    height: 250,
                     width: MediaQuery.of(context).size.width,
-                    child: Image.network(data['map'], fit: BoxFit.fill)),
+                    child: Image.network(data['map'], fit: BoxFit.fitWidth)),
               );
             }),
         //포스트 내용

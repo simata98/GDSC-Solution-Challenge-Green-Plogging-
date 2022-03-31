@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -354,6 +355,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
         await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
         registerDetails();
+        inputChallengeDB();
         Fluttertoast.showToast(msg: '계정 생성이 완료되었습니다.');
         Navigator.pop(context);
       } catch (e) {
@@ -394,5 +396,63 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
     animationController.forward();
     return Text(format.format(animation!.value),
         style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold));
+  }
+
+  inputChallengeDB(){
+    final user = FirebaseAuth.instance.currentUser!.uid;
+    int number = 0;
+
+    //주간 기록 초기화
+    FirebaseFirestore.instance.collection('challenge')
+    .doc(user).collection('weekly').doc('running').set({'last_run' : number, 'oldTotalRun' : number});
+    FirebaseFirestore.instance.collection('challenge')
+    .doc(user).collection('weekly').doc('plogging').set({'last_plog' : number, 'oldTotalPlog' : number});
+
+    addWeekChall(user, 'running', 'run 1km', 'Run 1km!', 1000, 'https://firebasestorage.googleapis.com/v0/b/flutterfirebaseouthlogin.appspot.com/o/weekly_images%2Frun1km.png?alt=media&token=a63ec30e-0b2a-4517-9b96-39bdce50ad0d', 10);
+    addWeekChall(user, 'running', 'run 30min', 'Running for 30 minutes!', 10000, 'https://firebasestorage.googleapis.com/v0/b/flutterfirebaseouthlogin.appspot.com/o/weekly_images%2Frun30min.png?alt=media&token=5213357a-2ed5-47ef-9c1c-6deb9334c341', 20);
+    addWeekChall(user, 'running', 'run 3km', 'Run 3km!', 3000, 'https://firebasestorage.googleapis.com/v0/b/flutterfirebaseouthlogin.appspot.com/o/weekly_images%2Frun3km.png?alt=media&token=99775bd2-5558-43c5-81eb-ffbaf4d4b031', 30);
+    addWeekChall(user, 'plogging', 'plog 10times', 'Plog 10 times!', 10, 'https://firebasestorage.googleapis.com/v0/b/flutterfirebaseouthlogin.appspot.com/o/weekly_images%2Frun3km.png?alt=media&token=99775bd2-5558-43c5-81eb-ffbaf4d4b031', 10);
+    addWeekChall(user, 'plogging', 'plog 30 times', 'Plog 30 times!', 30, 'https://firebasestorage.googleapis.com/v0/b/flutterfirebaseouthlogin.appspot.com/o/weekly_images%2Frun1km.png?alt=media&token=a63ec30e-0b2a-4517-9b96-39bdce50ad0d', 20);
+    addWeekChall(user, 'plogging', 'plog 77times', 'Weekly Clean Master! (plog 77 times)', 77, 'https://firebasestorage.googleapis.com/v0/b/flutterfirebaseouthlogin.appspot.com/o/weekly_images%2Frun30min.png?alt=media&token=5213357a-2ed5-47ef-9c1c-6deb9334c341', 40);
+
+    addCumuChall(user, 'running', '100! 100! 100!', 100000, 500);
+    addCumuChall(user, 'running', '10km Running', 10000, 200);
+    addCumuChall(user, 'running', '20km Running', 20000, 200);
+    addCumuChall(user, 'running', '30km Running', 30000, 200);
+    addCumuChall(user, 'running', '50km Running', 50000, 300);
+    addCumuChall(user, 'running', 'Marathon', 42195, 195);
+    addCumuChall(user, 'running', 'One day running', 130000, 500);
+    addCumuChall(user, 'running', 'Running for 1hour', 7000, 100);
+    addCumuChall(user, 'running', 'Running for 2hours', 15000, 100);
+
+    addCumuChall(user, 'plogging', 'First Plogging', 1, 100);
+    addCumuChall(user, 'plogging', 'Plog 100 times', 100, 100);
+    addCumuChall(user, 'plogging', 'Plog 500 times', 500, 200);
+    addCumuChall(user, 'plogging', 'Jakpot! (plog 777)', 777, 300);
+    addCumuChall(user, 'plogging', 'Saver! (plog 911)', 911, 500);
+  }
+
+  //주간 챌린지들 추가
+  addWeekChall(String user, String type, String title, String comment, int goal, String image, int point){
+    FirebaseFirestore.instance.collection('challenge')
+    .doc(user).collection('weekly').doc(type).collection('week')
+    .doc(title).set({
+      'comment' : comment,
+      'goal' : goal,
+      'image' : image,
+      'point' : point,
+      'success' : true
+    });
+  }
+
+  addCumuChall(String user, String type, String docId, int goal, int point){
+    FirebaseFirestore.instance.collection('challenge')
+    .doc(user).collection('cumul').doc(type).collection('cumu')
+    .doc(docId).set({
+      'goal' : goal,
+      'point' : point,
+      'success' : true
+    });
+
   }
 }

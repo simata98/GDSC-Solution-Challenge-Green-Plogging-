@@ -78,7 +78,7 @@ class _MyRecordState extends State<MyRecord> {
                               height: 250,
                               width: MediaQuery.of(context).size.width,
                               child:
-                                  Image.network(data['map'], fit: BoxFit.fill)),
+                                  Image.network(data['map'], fit: BoxFit.fitWidth)),
                         ],
                       ),
                     ),

@@ -50,19 +50,22 @@ class _MyProfileState extends State<MyProfile> {
             return Column(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CircleAvatar(
-                      backgroundImage:
-                          NetworkImage('${snapshot.data!['image']}'),
-                      radius: 60,
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundImage:
+                              NetworkImage('${snapshot.data!['image']}'),
+                          radius: 60,
+                        ),
+                        Container(
+                            margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                            child: Text('${data!['nickname']}',
+                                style: TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.bold))),
+                      ],
                     ),
-                    Container(
-                        width: 100,
-                        margin: EdgeInsets.fromLTRB(30, 0, 40, 0),
-                        child: Text('${data!['nickname']}',
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold))),
                     IconButton(onPressed: () {}, icon: Icon(Icons.settings))
                   ],
                 ),
@@ -161,7 +164,7 @@ class _MyProfileState extends State<MyProfile> {
                             height: 250,
                             width: MediaQuery.of(context).size.width,
                             child:
-                                Image.network(data['map'], fit: BoxFit.fill)),
+                                Image.network(data['map'], fit: BoxFit.fitWidth)),
                       ],
                     ),
                   );
