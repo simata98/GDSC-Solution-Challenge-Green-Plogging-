@@ -82,7 +82,7 @@ Run as you long as you can!
   <img src="https://user-images.githubusercontent.com/33146152/160343807-98ec65c3-ac39-4a5c-abef-d4644e7e94c4.png" alt="text" width="400" height="500" />
 </p>
 During trash pick-up state, you can take a picture of the trash you picked up.
-Models learned with tensorflow automatically recognize garbage and qutomatically calssify which garbage user picked up. 
+Models learned with tensorflow automatically recognize garbage and qutomatically calssify which garbage user picked up. The more trash you pick up and shoot, the more plogging points you'll get.
 
 
 ```
@@ -154,7 +154,7 @@ You can view the latest environmental news on the News tab through the News API.
   <img width="250" alt="running_cumu" src="https://user-images.githubusercontent.com/78309388/160854223-dbb3b0bd-12da-4f98-9964-c5fc5a3a805e.gif">
 </p>
 
-You can see the progress of the accumulated plogging activity as a percentage. If you reach the challenge goal, earn points and participate in the donation! Weekly Challenges reset every week so you can earn points continuously.
+You can see the progress of the accumulated plogging activity as a percentage. If you reach the challenge goal, earn points and participate in the donation! Weekly Challenges reset every week so you can earn points continuously. More challenges will be added soon!
 
 
 
