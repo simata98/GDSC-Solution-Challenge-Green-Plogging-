@@ -71,12 +71,14 @@ class _PostDetailState extends State<PostDetail> {
               )),
               //사진들
               Container(
+                height: 250,
                 width: MediaQuery.of(context).size.width,
-                child: Image.network(Get.arguments['map'])
+                child: Image.network(Get.arguments['map'], fit: BoxFit.fitWidth,)
               ),
               Container(
+                height: 250,
                 width: MediaQuery.of(context).size.width,
-                child: Image.network(Get.arguments['view'])),
+                child: Image.network(Get.arguments['view'], fit: BoxFit.fitWidth,)),
               //거리, 시간, 플로깅 점수, 속도
               Container(
                 margin: EdgeInsets.only(top: 15, bottom: 15),

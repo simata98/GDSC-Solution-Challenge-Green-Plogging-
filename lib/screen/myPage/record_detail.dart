@@ -175,7 +175,7 @@ class _RecordDetailState extends State<RecordDetail> {
     );
   }
 
-  getFormattedString(dynamic data, String info) {
+  String getFormattedString(dynamic data, String info) {
     switch (info) {
       case 'Distance':
         double tmp = (data as int).toDouble();
@@ -212,7 +212,7 @@ class _RecordDetailState extends State<RecordDetail> {
           return "--:--";
         }
       default:
-        return data;
+        return '$data';
     }
   }
 
