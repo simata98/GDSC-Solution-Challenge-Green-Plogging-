@@ -142,7 +142,7 @@ You can donate with points collected through plogging activities. If this app is
   <img width="250" alt="news_detail" src="https://user-images.githubusercontent.com/78309388/160847810-333afafa-f667-44a5-90c1-770b1d23f5c5.png">
 </p>
 
-You can view the latest environmental news on the News tab through the News API. Check out our environmental articles to get interested and join us in protecting our planet.
+You can view the latest environmental news on the News tab through the News API. Check out our environmental articles to get interested and join us in protecting our planet. Protecting the environment starts with a small concern for each and every one of us.
 
 
 ### Cumulation of plogging activities
@@ -154,7 +154,7 @@ You can view the latest environmental news on the News tab through the News API.
   <img width="250" alt="running_cumu" src="https://user-images.githubusercontent.com/78309388/160854223-dbb3b0bd-12da-4f98-9964-c5fc5a3a805e.gif">
 </p>
 
-You can see the progress of the accumulated plogging activity as a percentage. If you reach the challenge goal, earn points and participate in the donation! Weekly Challenges reset every week so you can earn points continuously. More challenges will be added soon!
+You can see the progress of the accumulated plogging activity as a percentage. If you reach the challenge goal, earn points and participate in the donation! Weekly Challenges reset every week so you can earn points continuously. Many challenges that can keep users interest will be added continuosly.
 
 
 
