@@ -96,9 +96,7 @@ Run as you long as you can!
 <p align="center">
   <img src="https://user-images.githubusercontent.com/33146152/160343807-98ec65c3-ac39-4a5c-abef-d4644e7e94c4.png" alt="text" width="400" height="500" />
 </p>
-During trash pick-up state, you can take a picture of the trash you picked up.
-Models learned with tensorflow automatically recognize garbage and qutomatically calssify which garbage user picked up.
-
+During trash pick-up state, you can take a picture of the trash you picked up. Models learned with tensorflow automatically recognize garbage and qutomatically calssify which garbage user picked up. The more trash you pick up and shoot, the more plogging points you'll get.
 ```
 the application will take care of what you picked up
 ```
@@ -113,7 +111,10 @@ the application will take care of what you picked up
 <img width="250" alt="post_detail" src="https://user-images.githubusercontent.com/78309388/160978597-d92b1158-8a68-4046-927c-77890725384c.gif">
 </p>
 
-After the plogging activity, you can share photos of you running activities, surrounding landscapes, or your trash to the community. Check out the records of your friends or people in the same area and leave feedback!
+
+
+
+After the plogging activity, you can share photos of you running activities, surrounding landscapes, or your trash to the community. Check out the records of your friends or people in the same area and leave feedback! If you click the view button on the post, you can check various information such as exercise distance, time, and number of plogging.
 
 ```
 Lets share and brag!
@@ -130,7 +131,8 @@ Lets share and brag!
 
 </p>
 
-You can also share your plogging activities by region or friends.
+Check the rankings for your running and plogging records on the rankings page. Why not try competing while checking the overall, regional, and friend rankings respectively? Try running and plogging activities diligently to raise your ranking.
+
 
 ### Donation
 
@@ -141,7 +143,9 @@ You can also share your plogging activities by region or friends.
 
 </p>
 
-You can donate with points collected through plogging activities.
+You can donate with points collected through plogging activities. If this app is supported by the government or city, we think it will be able to support more disadvantaged neighbors. Wouldn't it be proud if you donated the points you've worked hard for running and blogging to neighbors in need? Currently, donations can be made to large-scale volunteer organizations such as UNICEF and save-the-childeren.
+
+
 
 ## Sub_Function
 
@@ -153,7 +157,7 @@ You can donate with points collected through plogging activities.
   <img width="250" alt="news_detail" src="https://user-images.githubusercontent.com/78309388/160847810-333afafa-f667-44a5-90c1-770b1d23f5c5.png">
 </p>
 
-You can view the latest environmental news on the News tab through the News API.
+You can view the latest environmental news on the News tab through the News API. Check out our environmental articles to get interested and join us in protecting our planet. Protecting the environment starts with a small concern for each and every one of us.
 
 ### Cumulation of plogging activities
 
@@ -165,7 +169,7 @@ You can view the latest environmental news on the News tab through the News API.
   <img width="250" alt="running_cumu" src="https://user-images.githubusercontent.com/78309388/160854223-dbb3b0bd-12da-4f98-9964-c5fc5a3a805e.gif">
 </p>
 
-You can see the progress of the accumulated plogging activity as a percentage
+You can see the progress of the accumulated plogging activity as a percentage. If you reach the challenge goal, earn points and participate in the donation! Weekly Challenges reset every week so you can earn points continuously. Many challenges that can keep users interest will be added continuosly.
 
 ### Subscription ranking
 
@@ -190,7 +194,7 @@ we used News API to continuously update new environmental news.
   <tr>
     <td align="center"><img src="https://avatars.githubusercontent.com/u/33146152?v=4" width="100px;" alt=""/><br /><b>Jeong Hyeong Lee</b><br/>📈📲🇰🇷</td>
     <td align="center"><img src="https://avatars.githubusercontent.com/u/87767242?v=4" width="100px;" alt=""/><br /><b>Chang Woo Choo</b><br/>🛠📲🇰🇷</td>
-    <td align="center"><img src="https://pixsector.com/cache/edf30b98/avbbe2b2f7695f1d91628.png" width="100px;" alt=""/><br /><b>Hyun Wook Jang</b><br/>🛠🖼🇰🇷</td>
+    <td align="center"><img src="https://avatars.githubusercontent.com/u/99856691?s=64&v=4" width="100px;" alt=""/><br /><b>Hyun Wook Jang</b><br/>🛠🖼🇰🇷</td>
     <td align="center"><img src="https://avatars.githubusercontent.com/u/78309388?v=4" width="100px;" alt=""/><br /><b>Jeong Woo Han</b><br/>🛠📲🇰🇷</td>
   <tr>
 <table>
