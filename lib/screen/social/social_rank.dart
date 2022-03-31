@@ -35,7 +35,6 @@ class _SocialRankState extends State<SocialRank> {
   ];
   var _selectedCity = 'Total';
   var _selectedIndex = 0;
-  List<DocumentSnapshot> _friendsList = [];
 
   @override
   Widget build(BuildContext context) {
