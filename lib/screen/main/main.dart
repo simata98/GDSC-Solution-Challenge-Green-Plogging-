@@ -63,8 +63,6 @@ class _mapMainState extends State<mapMain> {
     //앱바 높이
     final double _appBarHeight = _screenHeight * 0.065;
 
-    //GetX 상태관리
-    Get.put(MapModel());
     final getController = Get.put(Entry());
     getController.appbarHeight = _appBarHeight;
 

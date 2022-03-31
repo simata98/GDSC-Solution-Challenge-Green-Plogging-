@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../model/map_model.dart';
 import '../login/sign_in.dart';
 import 'guide_item.dart';
 

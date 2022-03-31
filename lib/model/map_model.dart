@@ -17,7 +17,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:screenshot/screenshot.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
@@ -27,6 +26,8 @@ import '../theme/custom_color.dart';
 
 class MapModel extends GetxController {
   static MapModel get to => Get.find<MapModel>();
+
+  String currentPath = '/main';
 
   GoogleMapController? mapController;
   CameraPosition? cameraPosition;

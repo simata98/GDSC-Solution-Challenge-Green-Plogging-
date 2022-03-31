@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:gdsc_solution/theme/custom_color.dart';
 import 'package:get/get.dart';
 
+import '../model/map_model.dart';
+
 class mainMapDrawer extends StatefulWidget {
   const mainMapDrawer({Key? key}) : super(key: key);
 
@@ -21,10 +23,19 @@ class _mainMapDrawerState extends State<mainMapDrawer> {
 
     final Size _infoSize = new Size(100, 150);
 
-    Widget makeColMenu(String menuContext, String namedPage) {
+    Widget makeColMenu(String menuContext, String nextPage) {
       return GestureDetector(
         onTap: () {
-          Get.toNamed(namedPage);
+          String currentPage = MapModel.to.currentPath;
+          if (currentPage == nextPage) {
+            Get.back();
+          } else if (nextPage == '/main') {
+            Get.offNamed(nextPage);
+          } else {
+            Get.toNamed(nextPage);
+          }
+
+          MapModel.to.currentPath = nextPage;
         },
         child: Container(
           alignment: Alignment.centerLeft,
