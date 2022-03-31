@@ -94,9 +94,9 @@ the application will take care of what you picked up
 <p align="center">
   <img width="250" alt="post_total" src="https://user-images.githubusercontent.com/78309388/160839959-bdb0348e-6e84-437c-a475-5c59508fb72e.png">
   &nbsp;&nbsp;
-<img width="250" alt="post_detail" src="https://user-images.githubusercontent.com/78309388/160840152-24846305-b631-4985-be87-dd786c687810.png"> 
+  <img width="250" alt="스크린샷 2022-03-31 오후 1 35 19" src="https://user-images.githubusercontent.com/78309388/160977541-73a8fd74-a0e5-4cb9-936e-62bfad36620d.png">
   &nbsp;&nbsp;
-<img width="250" alt="post_detail" src="https://user-images.githubusercontent.com/78309388/160849574-0a104303-69c7-4b59-b6ea-b389b5c2a3b7.gif">
+<img width="250" alt="post_detail" src="https://user-images.githubusercontent.com/78309388/160978597-d92b1158-8a68-4046-927c-77890725384c.gif">
 </p>
 
 
@@ -161,6 +161,8 @@ You can see the progress of the accumulated plogging activity as a percentage
 ### Subscription ranking
 <p align="center">
   <img width="250" alt="ranking" src="https://user-images.githubusercontent.com/78309388/160849446-46dc4f0d-db61-45f5-9a9e-839e29e0333b.gif">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img width="250" alt="ranking" src="https://user-images.githubusercontent.com/78309388/160979519-72dafdf7-e51f-43d8-92b7-ac7918d41468.gif">
 </p>
 
 You can view the cumulative subscription order for this application. 

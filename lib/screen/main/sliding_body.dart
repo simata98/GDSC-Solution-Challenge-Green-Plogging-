@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gdsc_solution/model/geo_entry.dart';
 import 'package:gdsc_solution/model/map_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:screenshot/screenshot.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:get/get.dart';
 import '../../theme/custom_color.dart';
