@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gdsc_solution/theme/custom_color.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class PostDetail extends StatefulWidget {
   const PostDetail({Key? key}) : super(key: key);
@@ -86,20 +87,62 @@ class _PostDetailState extends State<PostDetail> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         runningInfo(Icons.route_outlined, Get.arguments['distance'], 'km', 'Distance'),
-                        runningInfo(Icons.timer_outlined, Get.arguments['runTime'], 'min', 'Measure Time')
+                        runningInfo(Icons.timer_outlined, Get.arguments['runTime'], '', 'Time')
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         runningInfo(Icons.recycling_rounded, Get.arguments['plogPoint'], 'times', 'Plogging'),
-                        runningInfo(Icons.directions_run, Get.arguments['speed'], '', 'Average Speed')
+                        runningInfo(Icons.directions_run, Get.arguments['speed'], '', 'Pace')
                       ],
                     )
                   ],
                 ),
               )
         ])));
+  }
+
+
+  String getFormattedString(dynamic data, String info) {
+    switch (info) {
+      case 'Distance':
+        double tmp = (data as int).toDouble();
+        if (tmp == 0.0) {
+          return '0.0';
+        } else {
+          return (tmp / 1000000).toStringAsFixed(2);
+        }
+
+      case 'Pace':
+        double tmp = data as double;
+        if (tmp.isInfinite) {
+          return "--\'--\"";
+        } else {
+          return "${tmp ~/ 60}\'${(tmp % 60).toInt()}\"";
+        }
+
+      case 'Time':
+        int tmp = data as int;
+        print(tmp);
+        if (tmp != 0) {
+          if (StopWatchTimer.getRawMinute(tmp) >= 60) {
+            return '${StopWatchTimer.getDisplayTimeHours(tmp)}' +
+                ':' +
+                '${StopWatchTimer.getDisplayTimeMinute(tmp)}' +
+                ':' +
+                '${StopWatchTimer.getDisplayTimeSecond(tmp)}';
+          } else {
+            return '${StopWatchTimer.getRawMinute(tmp)}' +
+                ':' +
+                '${StopWatchTimer.getDisplayTimeSecond(tmp)}';
+          }
+        } else {
+          return "--:--";
+        }
+      default:
+        return '$data';
+    }
   }
 
   runningInfo(IconData ic, dynamic data , String type, String info){
@@ -126,7 +169,7 @@ class _PostDetailState extends State<PostDetail> {
               RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                      text: info != 'Distance' ? '$data' : '${data/1000}',
+                      text: getFormattedString(data, info),
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
