@@ -130,7 +130,7 @@ Check the rankings for your running and plogging records on the rankings page. W
 
 </p>
 
-You can donate with points collected through plogging activities. If this app is supported by the government or city, we think it will be able to support more disadvantaged neighbors.
+You can donate with points collected through plogging activities. If this app is supported by the government or city, we think it will be able to support more disadvantaged neighbors. Wouldn't it be proud if you donated the points you've worked hard for running and blogging to neighbors in need? Currently, donations can be made to large-scale volunteer organizations such as UNICEF and save-the-childeren.
 
 
 
@@ -142,7 +142,7 @@ You can donate with points collected through plogging activities. If this app is
   <img width="250" alt="news_detail" src="https://user-images.githubusercontent.com/78309388/160847810-333afafa-f667-44a5-90c1-770b1d23f5c5.png">
 </p>
 
-You can view the latest environmental news on the News tab through the News API.
+You can view the latest environmental news on the News tab through the News API. Check out our environmental articles to get interested and join us in protecting our planet.
 
 
 ### Cumulation of plogging activities
