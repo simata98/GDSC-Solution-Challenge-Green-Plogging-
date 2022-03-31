@@ -182,7 +182,7 @@ we used News API to continuously update new environmental news.
   <tr>
     <td align="center"><img src="https://avatars.githubusercontent.com/u/33146152?v=4" width="100px;" alt=""/><br /><b>Jeong Hyeong Lee</b><br/>📈📲🇰🇷</td>
     <td align="center"><img src="https://avatars.githubusercontent.com/u/87767242?v=4" width="100px;" alt=""/><br /><b>Chang Woo Choo</b><br/>🛠📲🇰🇷</td>
-    <td align="center"><img src="https://pixsector.com/cache/edf30b98/avbbe2b2f7695f1d91628.png" width="100px;" alt=""/><br /><b>Hyun Wook Jang</b><br/>🛠🖼🇰🇷</td>
+    <td align="center"><img src="https://avatars.githubusercontent.com/u/99856691?s=64&v=4" width="100px;" alt=""/><br /><b>Hyun Wook Jang</b><br/>🛠🖼🇰🇷</td>
     <td align="center"><img src="https://avatars.githubusercontent.com/u/78309388?v=4" width="100px;" alt=""/><br /><b>Jeong Woo Han</b><br/>🛠📲🇰🇷</td>
   <tr>
 <table>
