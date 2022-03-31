@@ -130,7 +130,7 @@ You can also share your plogging activities by region or friends.
 
 </p>
 
-You can donate with points collected through plogging activities. 
+You can donate with points collected through plogging activities. If this app is supported by the government or city, we think it will be able to support more disadvantaged neighbors.
 
 
 
