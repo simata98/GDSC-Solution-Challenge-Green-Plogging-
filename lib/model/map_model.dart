@@ -336,6 +336,17 @@ class MapModel extends GetxController {
         .collection('saved')
         .add(record.toMap());
     print("####################end to recording##############");
+
+    //유저 totalRun, totalPlog 최신화
+    FirebaseFirestore.instance
+    .collection('users')
+    .doc(FirebaseAuth.instance.currentUser!.uid)
+    .update({'totalRun' : FieldValue.increment(tmpDistance!)});
+
+    FirebaseFirestore.instance
+    .collection('users')
+    .doc(FirebaseAuth.instance.currentUser!.uid)
+    .update({'totalPlog' : FieldValue.increment(tmpPlogPoint!)});
   }
 
   Future<void> uploadCommunity(String comment) async {
