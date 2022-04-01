@@ -32,7 +32,7 @@
 <img width="500" alt="image" src="https://user-images.githubusercontent.com/87767242/161135838-2b728bb3-04cf-4a15-8574-3038fe0c1e91.jpg">  
 
 ***`Just jogging and Just pick up the trash!`***   
-Plogging is a combination of Jogging with picking up litter merging the Swedish verbs ***plocka*** upp (pick up) and ***jogga***(jog) gives the new Swedish verb ***plogga***, from which the workd plogging derives).
+Plogging is a combination of Jogging with picking up litter merging the Swedish verbs ***plocka*** upp (pick up) and ***jogga***(jog) gives the new Swedish verb ***plogga***.
 The key to plogging is not just the concept of environmental protection of picking up trash, but approaching picking up trash as one of the health-training exercises. The advantage is that it consumes more physical strength than general jogging. While jogging normally with a garbage bag, if you encounter illegally dumped garbage, pick it up and put it in a garbage bag.
 In fact, according to a survey by Swedish fitness app Life Island, people who jog only for 30 minutes consume an average of 2355, but those who float at the same time consume 288를. In other words, it doubles the effectiveness of exercise.
 
