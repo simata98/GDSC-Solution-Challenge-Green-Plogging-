@@ -106,7 +106,7 @@ When you first install and log in, a description of plogging appears. You can se
   &nbsp;&nbsp;
 </p>
 
-If you want to take a break from jogging, the app asks you if you want to do plogging. When you start plogging, the app automatically displays the route line in green and plogging starts. At this time, distance, time, and pace are not measured.
+Press the start button to start jogging. The paths you have been running through are marked in red, and the recording begins.
 
 ```
 Run as you long as you can!
@@ -157,7 +157,7 @@ When I tested the actual product with a test case, I was satisfied with the resu
 <img src="https://user-images.githubusercontent.com/87767242/161144670-9d349d2c-b398-489e-8f3a-25d08c88e0bb.gif" alt="text" width="400"  />
 </p>
 
-After converting the model into a tflite file, the model was transplanted into a mobile and tested. During plogging state, you can take a picture of the trash you picked up. Models learned with tensorflow automatically recognize garbage and automatically calssify which garbage user picked up. The more trash you pick up and shoot, the more plogging points you'll get.
+After converting the model into a tflite file, the model was transplanted into a mobile and tested. During plogging state, you can take a picture of the trash you picked up. Models learned with tensorflow automatically recognize garbage and automatically calssify which garbage user picked up. Then, the place where the garbage was picked up is marked with purple dots. The more trash you pick up and shoot, the more plogging points you'll get.
 
 ```
 the application will take care of what you picked up
