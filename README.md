@@ -280,7 +280,7 @@ It's a little boring to just use points for donations. If we collect points, we 
 
 ## Trash can location
 
-Picking up trash isn't the end of it. Since it has to be handled properly, users can check the location of the trash can during flogging, and other users can see the location of the trash can displayed.
+Picking up trash isn't the end of it. Since it has to be handled properly, users can check the location of the trash can during plogging, and other users can see the location of the trash can displayed.
 
 # Download APK
 
