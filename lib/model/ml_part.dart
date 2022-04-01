@@ -63,7 +63,7 @@ class MlPart extends GetxController {
           ),
           snackPosition: SnackPosition.TOP);
     } else {
-      Get.snackbar('Failed to Plogging!', 'Please make it recognized agina',
+      Get.snackbar('Failed to Plogging!', 'Please make it recognized again',
           margin: EdgeInsets.only(top: 20),
           maxWidth: Get.width * 0.8,
           backgroundColor: CustomColor.primary,
