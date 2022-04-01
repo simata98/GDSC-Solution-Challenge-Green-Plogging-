@@ -270,6 +270,14 @@ Map clustering makes it easier to see where garbage is concentrated visually, an
 
 After collecting various data such as waste manufacturers, locations, and numbers, I want to apply EPR to manufacturers. A certain amount of recycling obligations are granted to manufacturers to recycle, and if they fail to comply with this, the producer is charged a recycling charge above the cost required for recycling.
 
+## Various profile decorations
+
+<p align="center">
+<img width="200" alt="ranking" src="https://user-images.githubusercontent.com/87767242/161201288-221bb6c8-baf6-409c-ae84-b9604a552a32.gif">
+<img width="200" alt="ranking" src="https://user-images.githubusercontent.com/87767242/161201299-f76e2ebd-69c7-46dc-ac8e-30b5abd99588.gif">
+</p>
+It's a little boring to just use points for donations. If we collect points, we will buy something that allows us to decorate our profiles with special effects that move our profiles, and show off our decorated profiles in the community. This will allow people to collect more points.
+
 ## Trash can location
 
 Picking up trash isn't the end of it. Since it has to be handled properly, users can check the location of the trash can during flogging, and other users can see the location of the trash can displayed.

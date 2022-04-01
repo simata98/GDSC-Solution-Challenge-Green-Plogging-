@@ -347,6 +347,11 @@ class MapModel extends GetxController {
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .update({'totalPlog': FieldValue.increment(tmpPlogPoint!)});
+
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({'point': FieldValue.increment(tmpPlogPoint! * 10)});
   }
 
   Future<void> uploadCommunity(String comment) async {
