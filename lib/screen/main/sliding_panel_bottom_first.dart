@@ -55,8 +55,12 @@ class _SlidingPanelBottomFirstState extends State<SlidingPanelBottomFirst> {
                   child: InkWell(
                     onTap: () {
                       if (!Get.isSnackbarOpen) {
+<<<<<<< Updated upstream
                         Get.snackbar(
                             'Stop Running', 'Long press button to exit',
+=======
+                        Get.snackbar('러닝중지', '정지버튼을 길게 누르면 종료됩니다.',
+>>>>>>> Stashed changes
                             margin: EdgeInsets.only(top: 20),
                             maxWidth: MediaQuery.of(context).size.width * 0.8,
                             backgroundColor: CustomColor.primary,
@@ -71,6 +75,7 @@ class _SlidingPanelBottomFirstState extends State<SlidingPanelBottomFirst> {
                       }
                     },
                     onLongPress: () async {
+<<<<<<< Updated upstream
                       //일단 스탑워치 종료
                       MapModel.to.pauseRun();
 
@@ -105,6 +110,13 @@ class _SlidingPanelBottomFirstState extends State<SlidingPanelBottomFirst> {
                       MapModel.to.slidingPanelMinH.value = Get.height * 0.1;
                       MapModel.to.viewImage = File(tmp.path);
                       MapModel.to.slidingPanelType.value = 3;
+=======
+                      final tmp = await pickImage();
+                      MapModel.to.slidingPanelMinH.value = Get.height * 0.1;
+                      MapModel.to.image = File(tmp.path);
+                      MapModel.to.slidingPanelType.value = 3;
+                      MapModel.to.pauseRun();
+>>>>>>> Stashed changes
                     },
                     child: Container(
                       width: MapModel.to.panelHeight.value * 0.35,

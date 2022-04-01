@@ -190,7 +190,11 @@ class MapModel extends GetxController {
 
         if (startPlogging.value) {
           MapModel.to.polyline.add(Polyline(
+<<<<<<< Updated upstream
               polylineId: PolylineId(polylineId),
+=======
+              polylineId: PolylineId(event.toString()),
+>>>>>>> Stashed changes
               visible: true,
               points: tmp,
               width: 5,
@@ -199,7 +203,11 @@ class MapModel extends GetxController {
               color: Colors.green));
         } else {
           MapModel.to.polyline.add(Polyline(
+<<<<<<< Updated upstream
               polylineId: PolylineId(polylineId),
+=======
+              polylineId: PolylineId(event.toString()),
+>>>>>>> Stashed changes
               visible: true,
               points: tmp,
               width: 5,

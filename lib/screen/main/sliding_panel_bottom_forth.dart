@@ -60,12 +60,18 @@ class _SlidingPanelBottomForthState extends State<SlidingPanelBottomForth> {
                     color: CustomColor.primary,
                     borderRadius: const BorderRadius.all(Radius.circular(30)),
                     child: InkWell(
+<<<<<<< Updated upstream
                       onTap: () async {
                         MapModel.to.finishState.toggle();
                         //await MapModel.to.uploadRecord();
                         MapModel.to.uploadRecord();
 
                         //초기화
+=======
+                      onTap: () {
+                        MapModel.to.locationSubscription?.resume();
+                        MapModel.to.update();
+>>>>>>> Stashed changes
                         MapModel.to.slidingPanelMinH.value = 0.0;
                         MapModel.to.resetRun();
                         MapModel.to.slidingPanelType.value = 0;
