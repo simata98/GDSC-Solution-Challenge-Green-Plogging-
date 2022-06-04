@@ -20,8 +20,8 @@ class _StaticImageState extends State<StaticImage> {
   // this function loads the model
   loadTfModel() async {
     await Tflite.loadModel(
-      model: "assets/best-fp16.tflite",
-      labels: "assets/best-fp16.txt",
+      model: "assets/quanted_model.tflite",
+      labels: "assets/quanted_model.txt",
     );
   }
 
