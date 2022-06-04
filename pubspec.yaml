@@ -67,6 +67,7 @@ dependencies:
   sliding_up_panel: ^2.0.0+1
 
   shared_preferences: ^2.0.13
+  carousel_slider: ^4.1.1
   webfeed: ^0.7.0
 
 dev_dependencies:

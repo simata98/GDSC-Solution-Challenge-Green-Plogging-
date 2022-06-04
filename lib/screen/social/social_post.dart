@@ -5,6 +5,7 @@ import 'package:gdsc_solution/screen/social/find_user.dart';
 import 'package:gdsc_solution/screen/social/post_detail.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
+import 'dart:io';
 
 class SocialPost extends StatefulWidget {
   const SocialPost({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class _SocialPostState extends State<SocialPost> {
       .collection('users')
       .doc(FirebaseAuth.instance.currentUser!.uid);
   bool donDec = true;
+  bool isFriendsLoaded = false;
   final _cityList = [
     [
       'Total',
@@ -31,7 +33,13 @@ class _SocialPostState extends State<SocialPost> {
   ];
   var _selectedCity = 'Total';
   var _selectedIndex = 0;
+  var friendsList = [];
 
+  @override
+  void initState() {
+    loadFriends();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -120,7 +128,7 @@ class _SocialPostState extends State<SocialPost> {
                 ),
               ),
 
-        donDec ? showFriendsPost() : showRegionPost()
+        donDec ? isFriendsLoaded ? showFriendsPost() : CircularProgressIndicator() : showRegionPost()
       ]),
     ));
   }
@@ -167,7 +175,13 @@ class _SocialPostState extends State<SocialPost> {
                       .collection('users')
                       .doc('${data['uid']}')
                       .snapshots();
-                  return StreamBuilder<QuerySnapshot>(
+                  for(int i = 0; i<friendsList.length; i++){
+                    if(friendsList[i] == data['uid']){
+                      return postTile(context, st, data, data.id);
+                    }
+                  }
+                  return Container();
+                  /* return StreamBuilder<QuerySnapshot>(
                       stream: FirebaseFirestore.instance
                           .collection('friends')
                           .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -185,7 +199,7 @@ class _SocialPostState extends State<SocialPost> {
                             continue;
                         }
                         return Container();
-                      });
+                      }); */
                 });
           }
           return CircularProgressIndicator();
@@ -390,5 +404,19 @@ class _SocialPostState extends State<SocialPost> {
           .orderBy('time', descending: true);
     }
     return rank;
+  }
+
+  //친구 목록 불러오기
+  loadFriends() async{
+    friendsList.clear();
+    await FirebaseFirestore.instance.collection('friends')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('following')
+          .get().then((QuerySnapshot snapshot) => snapshot.docs.forEach((doc) {
+            friendsList.add(doc['fuid'].toString());
+           }));
+    setState(() {
+      isFriendsLoaded = true;
+    });
   }
 }
