@@ -69,6 +69,9 @@ dependencies:
   shared_preferences: ^2.0.13
   carousel_slider: ^4.1.1
   webfeed: ^0.7.0
+  learning_object_detection: ^0.0.2
+  learning_input_image: ^0.0.6+2
+  provider: ^6.0.3
 
 dev_dependencies:
   flutter_test:
