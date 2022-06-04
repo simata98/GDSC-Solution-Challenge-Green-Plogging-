@@ -1,6 +1,3 @@
-import 'package:gdsc_solution/components/customListTile.dart';
-import 'package:gdsc_solution/model/article_model.dart';
-import 'package:gdsc_solution/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:http/retry.dart';
@@ -24,7 +21,7 @@ class NewsState extends State<News> {
   static const String loadingFeedMsg = 'Loading Feed...';
   static const String feedLoadErrorMsg = 'Error Loading Feed...';
   static const String feedOpenErrorMsg = 'Error Opening Feed.';
-  static const String placeholderImg = '../../../assets/no_article_image.png';
+  static const String placeholderImg = 'assets/no_article_image.png';
   GlobalKey<RefreshIndicatorState>? _refreshKey;
 
   updateTitle(title) {
@@ -86,7 +83,7 @@ class NewsState extends State<News> {
     return Text(
       title,
       style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-      maxLines: 2,
+      maxLines: 3,
       overflow: TextOverflow.ellipsis,
     );
   }
@@ -109,8 +106,8 @@ class NewsState extends State<News> {
       child: CachedNetworkImage(
         placeholder: (context, url) => Image.asset(placeholderImg),
         imageUrl: imageUrl,
-        height: 50,
-        width: 70,
+        height: 80,
+        width: 80,
         alignment: Alignment.center,
         fit: BoxFit.fill,
       ),
@@ -135,7 +132,7 @@ class NewsState extends State<News> {
               subtitle: subtitle(item?.pubDate),
               leading: thumbnail(item?.media!.contents![0].url),
               trailing: rightIcon(),
-              contentPadding: EdgeInsets.all(5.0),
+              contentPadding: EdgeInsets.all(3.0),
               onTap: () => openFeed(item!.link!));
         });
   }
