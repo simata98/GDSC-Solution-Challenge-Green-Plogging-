@@ -5,7 +5,7 @@ import 'package:gdsc_solution/screen/social/find_user.dart';
 import 'package:gdsc_solution/screen/social/post_detail.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
-import 'dart:io';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class SocialPost extends StatefulWidget {
   const SocialPost({Key? key}) : super(key: key);
@@ -181,25 +181,6 @@ class _SocialPostState extends State<SocialPost> {
                     }
                   }
                   return Container();
-                  /* return StreamBuilder<QuerySnapshot>(
-                      stream: FirebaseFirestore.instance
-                          .collection('friends')
-                          .doc(FirebaseAuth.instance.currentUser!.uid)
-                          .collection('following')
-                          .snapshots(),
-                      builder: (context, snapshot3) {
-                        if (snapshot3.connectionState != ConnectionState.active)
-                          return Container();
-                        if (!snapshot3.hasData) return Container();
-                        var friendData = snapshot3.data;
-                        for (int i = 0; i < friendData!.docs.length; i++) {
-                          if (friendData.docs[i]['fuid'] == data['uid']) {
-                            return postTile(context, st, data, data.id);
-                          } else
-                            continue;
-                        }
-                        return Container();
-                      }); */
                 });
           }
           return CircularProgressIndicator();
@@ -289,7 +270,7 @@ class _SocialPostState extends State<SocialPost> {
                     ]);
               }),
             )),
-        //포스트 이미지 사진
+        //포스트 이미지 사진 및 좋아요
         StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('posts')
@@ -297,6 +278,7 @@ class _SocialPostState extends State<SocialPost> {
                 .collection('likers')
                 .snapshots(),
             builder: (context, snapshot) {
+              var imageList = [data['map'],data['view']];
               return GestureDetector(
                 onDoubleTap: () {
                   bool tf = true;
@@ -330,10 +312,19 @@ class _SocialPostState extends State<SocialPost> {
                         .update({'like_count': like});
                   }
                 },
-                child: Container(
+                child: CarouselSlider.builder(
+                  options: CarouselOptions(height: 250, viewportFraction: 1, enableInfiniteScroll: false),
+                  itemCount: imageList.length,
+                  itemBuilder: (context, index, realIndex){
+                    final urlImage = imageList[index];
+
+                    return buildImage(urlImage, index);
+                  },
+                )
+                /* child: Container(
                     height: 250,
                     width: MediaQuery.of(context).size.width,
-                    child: Image.network(data['map'], fit: BoxFit.fitWidth)),
+                    child: Image.network(data['map'], fit: BoxFit.fitWidth)), */
               );
             }),
         //포스트 내용
@@ -419,4 +410,10 @@ class _SocialPostState extends State<SocialPost> {
       isFriendsLoaded = true;
     });
   }
+
+  buildImage(String urlImage, int index) => Container(
+    color: Colors.grey,
+    width: double.infinity,
+    child: Image.network(urlImage, fit: BoxFit.fitWidth)
+  );
 }
