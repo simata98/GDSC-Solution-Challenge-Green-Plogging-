@@ -72,6 +72,8 @@ dependencies:
   learning_object_detection: ^0.0.2
   learning_input_image: ^0.0.6+2
   provider: ^6.0.3
+  google_ml_kit: ^0.11.0
+  google_mlkit_object_detection: ^0.3.0
 
 dev_dependencies:
   flutter_test:

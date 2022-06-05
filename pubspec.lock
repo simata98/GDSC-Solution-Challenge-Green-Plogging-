@@ -387,6 +387,104 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.5"
+  google_ml_kit:
+    dependency: "direct main"
+    description:
+      name: google_ml_kit
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.11.0"
+  google_mlkit_barcode_scanning:
+    dependency: transitive
+    description:
+      name: google_mlkit_barcode_scanning
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
+  google_mlkit_commons:
+    dependency: transitive
+    description:
+      name: google_mlkit_commons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
+  google_mlkit_digital_ink_recognition:
+    dependency: transitive
+    description:
+      name: google_mlkit_digital_ink_recognition
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
+  google_mlkit_entity_extraction:
+    dependency: transitive
+    description:
+      name: google_mlkit_entity_extraction
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
+  google_mlkit_face_detection:
+    dependency: transitive
+    description:
+      name: google_mlkit_face_detection
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
+  google_mlkit_image_labeling:
+    dependency: transitive
+    description:
+      name: google_mlkit_image_labeling
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
+  google_mlkit_language_id:
+    dependency: transitive
+    description:
+      name: google_mlkit_language_id
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
+  google_mlkit_object_detection:
+    dependency: "direct main"
+    description:
+      name: google_mlkit_object_detection
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
+  google_mlkit_pose_detection:
+    dependency: transitive
+    description:
+      name: google_mlkit_pose_detection
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
+  google_mlkit_selfie_segmentation:
+    dependency: transitive
+    description:
+      name: google_mlkit_selfie_segmentation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
+  google_mlkit_smart_reply:
+    dependency: transitive
+    description:
+      name: google_mlkit_smart_reply
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
+  google_mlkit_text_recognition:
+    dependency: transitive
+    description:
+      name: google_mlkit_text_recognition
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
+  google_mlkit_translation:
+    dependency: transitive
+    description:
+      name: google_mlkit_translation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
   google_sign_in:
     dependency: "direct main"
     description:
