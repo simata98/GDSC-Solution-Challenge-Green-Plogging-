@@ -20,7 +20,7 @@ class SlidingPanelBottomThird extends StatefulWidget {
 class _SlidingPanelBottomThirdState extends State<SlidingPanelBottomThird> {
   @override
   Widget build(BuildContext context) {
-    Get.put(MlPart());
+    Get.put(ObjectDetectorView());
     return Container(
       child: Row(
         children: <Widget>[
