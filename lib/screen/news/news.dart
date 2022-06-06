@@ -128,9 +128,9 @@ class NewsState extends State<News> {
         itemBuilder: (BuildContext context, int index) {
           final item = _feed?.items![index];
           return ListTile(
-              title: title(item?.title),
-              subtitle: subtitle(item?.pubDate),
-              leading: thumbnail(item?.media!.contents![0].url),
+              title: title(item?.title!),
+              subtitle: subtitle(item!.pubDate!),
+              leading: thumbnail(item.enclosure!.url),
               trailing: rightIcon(),
               contentPadding: EdgeInsets.all(3.0),
               onTap: () => openFeed(item!.link!));
