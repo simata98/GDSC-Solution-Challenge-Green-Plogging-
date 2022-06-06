@@ -133,7 +133,7 @@ class NewsState extends State<News> {
               leading: thumbnail(item.enclosure!.url),
               trailing: rightIcon(),
               contentPadding: EdgeInsets.all(3.0),
-              onTap: () => openFeed(item!.link!));
+              onTap: () => openFeed(item.link!));
         });
   }
 
