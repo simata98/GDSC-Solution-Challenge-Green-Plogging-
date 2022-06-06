@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
+import 'player_widget.dart';
 
 class News extends StatefulWidget {
   News() : super();
@@ -131,9 +132,9 @@ class NewsState extends State<News> {
               title: title(item?.title),
               subtitle: subtitle(item?.pubDate),
               leading: thumbnail(item?.media!.contents![0].url),
-              trailing: rightIcon(),
+              trailing: PlayerWidget(body: item!.description![0]),
               contentPadding: EdgeInsets.all(3.0),
-              onTap: () => openFeed(item!.link!));
+              onTap: () => openFeed(item.link!));
         });
   }
 
