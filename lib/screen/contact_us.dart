@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:contactus/contactus.dart';
 import 'package:gdsc_solution/theme/custom_color.dart';
 import 'package:typicons_flutter/typicons_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
