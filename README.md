@@ -255,7 +255,7 @@ As the number of subscribers increases, you can see how many subscribers you are
 
 ## Communicate with developers
 <p align="center">
-  <img width="304" alt="image" src="https://user-images.githubusercontent.com/78309388/172325821-058acd29-380c-4d0d-9fb8-f1d9f033c16c.png">
+  <img width="310" alt="image" src="https://user-images.githubusercontent.com/78309388/172326256-9f402331-69e1-4941-aea8-415f2b100347.png">
 </p>
 
 # Furthermore
