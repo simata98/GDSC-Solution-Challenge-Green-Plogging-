@@ -16,7 +16,7 @@
   - [Main](#main)
   - [Start Running](#start-running)
   - [Start Plogging](#start-plogging)
-  - [Trash Classification & Object Detection](#trash_classification_&_object_detection)
+  - [Trash Classification & Object Detection](#trash-classification-&-object-detection)
   - [Finish](#finish)
 - [Sub_Function](#sub_function)
 - [Futhermore](#furthermore)
@@ -127,7 +127,7 @@ If you want to take a break from jogging, the app asks you if you want to do plo
 That's it! Let's go plogging!
 ```
 
-## Trash_Classification_&_Object_Detection
+## Trash Classification & Object Detection
 
 ### Classification Model
 
