@@ -74,12 +74,11 @@ dependencies:
   learning_input_image: ^0.0.6+2
   provider: ^6.0.3
   google_ml_kit: ^0.11.0
-  google_mlkit_object_detection: ^0.3.0
   google_mlkit_commons: ^0.2.0
   audioplayers: ^0.20.1
   contactus: ^1.2.0
   typicons_flutter: ^0.5.0
-  google_mlkit_object_detection: ^0.4.0
+  google_mlkit_object_detection: ^0.3.0
 
 
 dev_dependencies:

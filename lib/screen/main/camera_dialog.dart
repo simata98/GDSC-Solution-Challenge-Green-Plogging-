@@ -119,7 +119,7 @@ class _CameraDialogState extends State<CameraDialog> {
   void _onScreenModeChanged(ScreenMode mode) {
     switch (mode) {
       case ScreenMode.gallery:
-        _initializeDetector(DetectionMode.single);
+        _initializeDetector(DetectionMode.singleImage);
         return;
 
       case ScreenMode.liveFeed:
