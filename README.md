@@ -184,7 +184,7 @@ If you stop plogging and jogging is over, you can take pictures of the surroundi
   &nbsp;&nbsp;
   <img width="250" alt="스크린샷 2022-03-31 오후 1 35 19" src="https://user-images.githubusercontent.com/78309388/160977541-73a8fd74-a0e5-4cb9-936e-62bfad36620d.png">
   &nbsp;&nbsp;
-<img width="250" alt="post_detail" src="https://user-images.githubusercontent.com/78309388/160978597-d92b1158-8a68-4046-927c-77890725384c.gif">
+<img width="250" alt="post_detail" src="https://user-images.githubusercontent.com/78309388/172351877-cceb5559-c9a7-439a-bec2-4ec6f1f7afa6.gif">
 </p>
 
 After the plogging activity, you can share photos of you running activities, surrounding landscapes, or your trash to the community. Check out the records of your friends or people in the same area and leave feedback! If you click the view button on the post, you can check various information such as exercise distance, time, and number of plogging.
