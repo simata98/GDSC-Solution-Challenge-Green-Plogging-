@@ -132,6 +132,10 @@ class _mainMapDrawerState extends State<mainMapDrawer> {
         SizedBox(
           height: 20,
         ),
+        makeColMenu('Contact Us', '/main/contact_us'),
+        SizedBox(
+          height: 20,
+        ),
       ],
     );
   }
