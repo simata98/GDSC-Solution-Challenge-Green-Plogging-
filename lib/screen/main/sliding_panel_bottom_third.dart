@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:gdsc_solution/screen/main/camera_dialog.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
@@ -40,7 +41,8 @@ class _SlidingPanelBottomThirdState extends State<SlidingPanelBottomThird> {
                   borderRadius: const BorderRadius.all(Radius.circular(100)),
                   child: InkWell(
                     onTap: () async {
-                      MlPart.to.getImage(ImageSource.camera);
+                      Get.dialog(new CameraDialog());
+                      //MlPart.to.getImage(ImageSource.camera);
                     },
                     child: Container(
                       width: MapModel.to.panelHeight.value * 0.35,

@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:gdsc_solution/screen/contact_us.dart';
 import 'package:gdsc_solution/screen/login/sign_in.dart';

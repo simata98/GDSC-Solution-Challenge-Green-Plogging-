@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:camera/camera.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -95,10 +96,15 @@ class MapModel extends GetxController {
 
   final finishState = false.obs;
 
+  // 오브젝트 디텍션을 위한 변수들
+  List<CameraDescription> cameras = [];
+  int? selectedItem;
+
   //여기 수정해야함
   @override
   void onInit() {
     super.onInit();
+    _getCameras();
   }
 
   @override
@@ -230,6 +236,10 @@ class MapModel extends GetxController {
     panelController?.close();
     pace.value = 0.0;
     start.toggle();
+  }
+
+  Future<void> _getCameras() async {
+    cameras = await availableCameras();
   }
 
   //canvas로 그려서 가져오기
