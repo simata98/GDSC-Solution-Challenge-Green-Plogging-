@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../model/map_model.dart';
 import '../../theme/custom_color.dart';
