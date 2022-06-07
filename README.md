@@ -219,15 +219,16 @@ You can donate with points collected through plogging activities. If this app is
 ## Environment News
 
 <p align="center">
-  <img width="250" alt="news" src="https://user-images.githubusercontent.com/78309388/160847780-d48380ef-90d0-47fa-80e6-b3e743a0661c.png">
+  <img width="250" alt="news" src="https://user-images.githubusercontent.com/33146152/172305400-d68bd7bd-b7e6-4ba9-b8d3-279eedc3f1b4.png">
 &nbsp;&nbsp;&nbsp;&nbsp;
-  <img width="250" alt="news_detail" src="https://user-images.githubusercontent.com/78309388/160847810-333afafa-f667-44a5-90c1-770b1d23f5c5.png">
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img width="250" alt="news_detail" src="https://user-images.githubusercontent.com/78309388/161123224-a3a74e48-7543-4bd4-b2b6-375545248e97.gif">
+  <img width="250" alt="news" src="https://user-images.githubusercontent.com/33146152/172304569-3f80ab0d-789f-49fa-87ee-aa97bc202c60.gif">
+&nbsp;&nbsp;&nbsp;&nbsp;
+  <img width="250" alt="news_detail" src="https://user-images.githubusercontent.com/33146152/172305120-66d98cdf-69f8-4104-b349-ee9a5285bbe8.gif">
+  
 
 </p>
 
-You can view the latest environmental news on the News tab through the News API. Check out our environmental articles to get interested and join us in protecting our planet. Protecting the environment starts with a small concern for each and every one of us.
+You can view the latest environmental news on the News tab through the Google News Rss. Check out Google news environmental articles to get interested and join us in protecting our planet. Protecting the environment starts with a small concern for each and every one of us.
 
 ## Cumulation of plogging activities
 
@@ -290,9 +291,9 @@ Please click the link to download it.
 
 # API
 
-![image](https://user-images.githubusercontent.com/33146152/160411457-588efe7b-833b-48d8-9b19-cb614ba32b3b.png)
+<img width="300" alt="rss_api" src="https://user-images.githubusercontent.com/33146152/172305715-cd6c4c6c-31f1-4727-a500-eb184f26c82a.png">
 
-we used News API to continuously update new environmental news.
+we used Google News Rss to continuously update new environmental news.
 
 # Contributors
 
