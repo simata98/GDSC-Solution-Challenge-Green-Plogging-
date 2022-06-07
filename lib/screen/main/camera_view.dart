@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_mlkit_commons/google_mlkit_commons.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -12,15 +13,15 @@ import '../../theme/custom_color.dart';
 enum ScreenMode { liveFeed, gallery }
 
 class CameraView extends StatefulWidget {
-  CameraView(
-      {Key? key,
-      required this.title,
-      required this.customPaint,
-      this.text,
-      required this.onImage,
-      //this.onScreenModeChanged,
-      this.initialDirection = CameraLensDirection.back})
-      : super(key: key);
+  CameraView({
+    Key? key,
+    required this.title,
+    required this.customPaint,
+    this.text,
+    required this.onImage,
+    //this.onScreenModeChanged,
+    this.initialDirection = CameraLensDirection.back,
+  }) : super(key: key);
 
   final String title;
   final CustomPaint? customPaint;
@@ -144,6 +145,7 @@ class _CameraViewState extends State<CameraView> {
       ResolutionPreset.high,
       enableAudio: false,
     );
+
     _controller?.initialize().then((_) {
       if (!mounted) {
         return;
@@ -157,6 +159,14 @@ class _CameraViewState extends State<CameraView> {
       });
       _controller?.startImageStream(_processCameraImage);
       setState(() {});
+    });
+
+    ever(MapModel.to.torch, (_) {
+      if (MapModel.to.torch.isFalse) {
+        _controller?.setFlashMode(FlashMode.torch);
+      } else {
+        _controller?.setFlashMode(FlashMode.off);
+      }
     });
   }
 
