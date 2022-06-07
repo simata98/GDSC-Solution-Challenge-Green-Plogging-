@@ -127,7 +127,7 @@ If you want to take a break from jogging, the app asks you if you want to do plo
 That's it! Let's go plogging!
 ```
 
-## Trash Classification
+## Trash Classification & Object Detection
 
 ### Classification Model
 
@@ -163,7 +163,7 @@ After converting the model into a tflite file, the model was transplanted into a
 the application will take care of what you picked up
 ```
 
-#### Trash Object Detection
+### Trash Object Detection
 <사진 들어갈 곳>
 
 After taking a picture of trash, it automatically recognizes and sorts trash so that user can see at a glance what kind of garbage user picked up. 
