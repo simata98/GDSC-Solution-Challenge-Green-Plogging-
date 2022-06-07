@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
@@ -28,7 +30,7 @@ class _PlayerWidgetState extends State<PlayerWidget> {
   PlayerMode mode;
 
   late AudioPlayer _audioPlayer;
-  late AudioPlayerState _audioPlayerState;
+  // late AudioPlayerState _audioPlayerState;
   late Duration _duration;
   late Duration _position;
 
@@ -68,17 +70,15 @@ class _PlayerWidgetState extends State<PlayerWidget> {
     return Stack(
       children: <Widget>[
         SizedBox(
-          height: 60.0,
-          width: 60.0,
+          height: 30.0,
+          width: 30.0,
           child: CircularProgressIndicator(
             backgroundColor: Colors.black,
             strokeWidth: 4.0,
             valueColor: AlwaysStoppedAnimation(
               Colors.greenAccent,
             ),
-            value: (_position != null &&
-                    _duration != null &&
-                    _position.inMilliseconds > 0 &&
+            value: (_position.inMilliseconds > 0 &&
                     _position.inMilliseconds < _duration.inMilliseconds)
                 ? _position.inMilliseconds / _duration.inMilliseconds
                 : 0.0,
@@ -123,12 +123,12 @@ class _PlayerWidgetState extends State<PlayerWidget> {
       });
     });
 
-    _audioPlayer.onPlayerStateChanged.listen((state) {
-      if (!mounted) return;
-      setState(() {
-        _audioPlayerState = state;
-      });
-    });
+    // _audioPlayer.onPlayerStateChanged.listen((state) {
+    //   if (!mounted) return;
+    //   setState(() {
+    //     _audioPlayerState = state;
+    //   });
+    // });
   }
 
   Future<int> _play(String body) async {
@@ -143,13 +143,12 @@ class _PlayerWidgetState extends State<PlayerWidget> {
         "$dir/" + DateTime.now().millisecondsSinceEpoch.toString() + ".mp3");
     await file.writeAsBytes(bytes);
 
-    final playPosition = (_position != null &&
-            _duration != null &&
-            _position.inMilliseconds > 0 &&
+    final playPosition = (_position.inMilliseconds > 0 &&
             _position.inMilliseconds < _duration.inMilliseconds)
         ? _position
         : null;
-    final result = await _audioPlayer.play(file.path,isLocal: true ,position: playPosition);
+    final result = await _audioPlayer.play(file.path,
+        isLocal: true, position: playPosition);
     if (result == 1) setState(() => _playerState = PlayerState.playing);
     return result;
   }
