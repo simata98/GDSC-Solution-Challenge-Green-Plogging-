@@ -253,6 +253,11 @@ You can see the progress of the accumulated plogging activity as a percentage. I
 You can view the cumulative subscription order for this application.
 As the number of subscribers increases, you can see how many subscribers you are on the membership screen and how many subscribers you already have on the login screen.
 
+## Communicate with developers
+<p align="center">
+  <img width="304" alt="image" src="https://user-images.githubusercontent.com/78309388/172325821-058acd29-380c-4d0d-9fb8-f1d9f033c16c.png">
+</p>
+
 # Furthermore
 
 ## More enhanced artificial intelligence
