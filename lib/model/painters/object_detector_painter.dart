@@ -5,13 +5,14 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_object_detection/google_mlkit_object_detection.dart';
 
+
 import '../map_model.dart';
 import 'coordinates_translator.dart';
 
 class ObjectDetectorPainter extends CustomPainter {
   ObjectDetectorPainter(this._objects, this.rotation, this.absoluteSize,
       this.cameraHeight, this.cameraWidth);
-
+  
   final List<DetectedObject> _objects;
   final Size absoluteSize;
   final InputImageRotation rotation;
@@ -76,7 +77,6 @@ class ObjectDetectorPainter extends CustomPainter {
           ..strokeWidth = 3.0
           ..color = Colors.lightGreenAccent;
       }
-
       final ParagraphBuilder builder = ParagraphBuilder(
         ParagraphStyle(
             textAlign: TextAlign.left,

@@ -6,10 +6,10 @@ import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
+import 'player_widget.dart';
 
 class News extends StatefulWidget {
   News() : super();
-  final String title = 'Environment Feeds';
   @override
   NewsState createState() => NewsState();
 }
@@ -36,8 +36,10 @@ class NewsState extends State<News> {
     });
   }
 
-  Future<void> openFeed(String url) async {
-    if (await canLaunch(url)) {
+  Future<void> openFeed(String? url) async {
+    if (url == null) {
+      url = "https://news.google.com/topstories?hl=ko&gl=KR&ceid=KR:ko";
+    } else if (await canLaunch(url)) {
       await launch(
         url,
         forceSafariVC: true,
@@ -75,7 +77,6 @@ class NewsState extends State<News> {
   void initState() {
     super.initState();
     _refreshKey = GlobalKey<RefreshIndicatorState>();
-    updateTitle(widget.title);
     load();
   }
 
@@ -101,17 +102,21 @@ class NewsState extends State<News> {
   }
 
   thumbnail(imageUrl) {
-    return Padding(
-      padding: EdgeInsets.only(left: 15.0),
-      child: CachedNetworkImage(
-        placeholder: (context, url) => Image.asset(placeholderImg),
-        imageUrl: imageUrl,
-        height: 80,
-        width: 80,
-        alignment: Alignment.center,
-        fit: BoxFit.fill,
-      ),
-    );
+    if (imageUrl == null) {
+      imageUrl = Image.asset(placeholderImg);
+    } else {
+      return Padding(
+        padding: EdgeInsets.only(left: 15.0),
+        child: CachedNetworkImage(
+          placeholder: (context, url) => Image.asset(placeholderImg),
+          imageUrl: imageUrl,
+          height: 80,
+          width: 80,
+          alignment: Alignment.center,
+          fit: BoxFit.fill,
+        ),
+      );
+    }
   }
 
   rightIcon() {
@@ -124,16 +129,17 @@ class NewsState extends State<News> {
 
   list() {
     return ListView.builder(
-        itemCount: _feed?.items!.length,
+        itemCount: _feed?.items?.length,
+        shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
-          final item = _feed?.items![index];
+          final item = _feed?.items?[index];
           return ListTile(
-              title: title(item?.title!),
-              subtitle: subtitle(item!.pubDate!),
-              leading: thumbnail(item.enclosure!.url),
+              title: title(item?.title),
+              subtitle: subtitle(item?.pubDate),
+              leading: thumbnail(item?.enclosure?.url),
               trailing: rightIcon(),
               contentPadding: EdgeInsets.all(3.0),
-              onTap: () => openFeed(item.link!));
+              onTap: () => openFeed(item?.link));
         });
   }
 

@@ -127,7 +127,7 @@ If you want to take a break from jogging, the app asks you if you want to do plo
 That's it! Let's go plogging!
 ```
 
-## Trash Classification
+## Trash Classification & Object Detection
 
 ### Classification Model
 
@@ -163,6 +163,11 @@ After converting the model into a tflite file, the model was transplanted into a
 the application will take care of what you picked up
 ```
 
+### Trash Object Detection
+<사진 들어갈 곳>
+
+After taking a picture of trash, it automatically recognizes and sorts trash so that user can see at a glance what kind of garbage user picked up. 
+
 ## Finish
 
 <p align="center">
@@ -179,7 +184,7 @@ If you stop plogging and jogging is over, you can take pictures of the surroundi
   &nbsp;&nbsp;
   <img width="250" alt="스크린샷 2022-03-31 오후 1 35 19" src="https://user-images.githubusercontent.com/78309388/160977541-73a8fd74-a0e5-4cb9-936e-62bfad36620d.png">
   &nbsp;&nbsp;
-<img width="250" alt="post_detail" src="https://user-images.githubusercontent.com/78309388/160978597-d92b1158-8a68-4046-927c-77890725384c.gif">
+<img width="250" alt="post_detail" src="https://user-images.githubusercontent.com/78309388/172351877-cceb5559-c9a7-439a-bec2-4ec6f1f7afa6.gif">
 </p>
 
 After the plogging activity, you can share photos of you running activities, surrounding landscapes, or your trash to the community. Check out the records of your friends or people in the same area and leave feedback! If you click the view button on the post, you can check various information such as exercise distance, time, and number of plogging.
@@ -219,15 +224,16 @@ You can donate with points collected through plogging activities. If this app is
 ## Environment News
 
 <p align="center">
-  <img width="250" alt="news" src="https://user-images.githubusercontent.com/78309388/160847780-d48380ef-90d0-47fa-80e6-b3e743a0661c.png">
+  <img width="250" alt="news" src="https://user-images.githubusercontent.com/33146152/172305400-d68bd7bd-b7e6-4ba9-b8d3-279eedc3f1b4.png">
 &nbsp;&nbsp;&nbsp;&nbsp;
-  <img width="250" alt="news_detail" src="https://user-images.githubusercontent.com/78309388/160847810-333afafa-f667-44a5-90c1-770b1d23f5c5.png">
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img width="250" alt="news_detail" src="https://user-images.githubusercontent.com/78309388/161123224-a3a74e48-7543-4bd4-b2b6-375545248e97.gif">
+  <img width="250" alt="news" src="https://user-images.githubusercontent.com/33146152/172304569-3f80ab0d-789f-49fa-87ee-aa97bc202c60.gif">
+&nbsp;&nbsp;&nbsp;&nbsp;
+  <img width="250" alt="news_detail" src="https://user-images.githubusercontent.com/33146152/172305120-66d98cdf-69f8-4104-b349-ee9a5285bbe8.gif">
+  
 
 </p>
 
-You can view the latest environmental news on the News tab through the News API. Check out our environmental articles to get interested and join us in protecting our planet. Protecting the environment starts with a small concern for each and every one of us.
+You can view the latest environmental news on the News tab through the Google News Rss. Check out Google news environmental articles to get interested and join us in protecting our planet. Protecting the environment starts with a small concern for each and every one of us.
 
 ## Cumulation of plogging activities
 
@@ -251,6 +257,15 @@ You can see the progress of the accumulated plogging activity as a percentage. I
 
 You can view the cumulative subscription order for this application.
 As the number of subscribers increases, you can see how many subscribers you are on the membership screen and how many subscribers you already have on the login screen.
+
+## Communicate with developers
+<p align="center">
+  <img width="250" alt="image" src="https://user-images.githubusercontent.com/78309388/172326256-9f402331-69e1-4941-aea8-415f2b100347.png">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img width="250" alt="running_cumu" src="https://user-images.githubusercontent.com/78309388/172327758-a9d16767-fabb-440b-8113-4e9a6e879b0d.gif">
+</p>
+
+When using the app, if there are points that you think are lacking or if there are features that you would like to be added, please communicate with the developers through the contact us page.
 
 # Furthermore
 
@@ -290,9 +305,9 @@ Please click the link to download it.
 
 # API
 
-![image](https://user-images.githubusercontent.com/33146152/160411457-588efe7b-833b-48d8-9b19-cb614ba32b3b.png)
+<img width="300" alt="rss_api" src="https://user-images.githubusercontent.com/33146152/172305715-cd6c4c6c-31f1-4727-a500-eb184f26c82a.png">
 
-we used News API to continuously update new environmental news.
+we used Google News Rss to continuously update new environmental news.
 
 # Contributors
 
