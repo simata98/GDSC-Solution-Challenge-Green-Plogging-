@@ -16,7 +16,7 @@
   - [Main](#main)
   - [Start Running](#start-running)
   - [Start Plogging](#start-plogging)
-  - [Trash Classification & Object Detection](#classification-model)
+  - [Trash Classification & Object Detection](#trash_classification_&_object_detection)
   - [Finish](#finish)
 - [Sub_Function](#sub_function)
 - [Futhermore](#furthermore)
