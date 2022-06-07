@@ -16,7 +16,7 @@
   - [Main](#main)
   - [Start Running](#start-running)
   - [Start Plogging](#start-plogging)
-  - [Trash Classification](#trash-classification)
+  - [Trash Classification & Object Detection](#trash_classification_&_object_detection)
   - [Finish](#finish)
 - [Sub_Function](#sub_function)
 - [Futhermore](#furthermore)
@@ -127,7 +127,7 @@ If you want to take a break from jogging, the app asks you if you want to do plo
 That's it! Let's go plogging!
 ```
 
-## Trash Classification & Object Detection
+## Trash_Classification_&_Object_Detection
 
 ### Classification Model
 
@@ -163,8 +163,20 @@ After converting the model into a tflite file, the model was transplanted into a
 the application will take care of what you picked up
 ```
 
-### Trash Object Detection
-<사진 들어갈 곳>
+## Trash Object Detection ( New Feature )
+#### Preview
+The previous model was not the one we finally wanted. It was a model that classified only four things and could not be processed in real time. However, after mentoring at this gdsc, we were finally able to implement the method we wanted.
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/87767242/172432196-fbbd64a9-20c5-42cd-aa6d-40e24e334c30.gif" alt="text" width="400"  />
+</p>
+Real-time object detection and image labeling functions are used to implement more effective plogging. It recognizes several objects as shown, and among them, it is possible to be plogging the target red rectangle. The implementation of this used object detection among ML kits supported by Google, and this function was recommended to us by a mentor during gdsc mentoring. It was easy to use these features during the few remaining deadlines, and the results were successful.
+
+#### Doing Plogging
+<p align="center">
+<img src="https://user-images.githubusercontent.com/87767242/172425780-cfa7ec25-ee23-4677-9a5d-37f9fa07c960.gif" alt="text" width="400"  />
+<img src="https://user-images.githubusercontent.com/87767242/172425790-a382944e-728c-4f65-a516-ce933d659116.gif" alt="text" width="400"  />
+</p>
 
 After taking a picture of trash, it automatically recognizes and sorts trash so that user can see at a glance what kind of garbage user picked up. 
 
@@ -269,10 +281,6 @@ When using the app, if there are points that you think are lacking or if there a
 
 # Furthermore
 
-## More enhanced artificial intelligence
-
-Originally, we tried to make it  object class detection, not a classification model, but we couldn't make it. In the future development, we will change the model and make object recognition.
-
 ## Map cluster
 
 <img width="500" alt="ranking" src="https://user-images.githubusercontent.com/87767242/161149750-781d53dc-168b-4cce-a838-c6633747808b.png">
@@ -308,6 +316,10 @@ Please click the link to download it.
 <img width="300" alt="rss_api" src="https://user-images.githubusercontent.com/33146152/172305715-cd6c4c6c-31f1-4727-a500-eb184f26c82a.png">
 
 we used Google News Rss to continuously update new environmental news.
+
+<img width="300" alt="rss_api" src="https://user-images.githubusercontent.com/87767242/172434544-00181bc0-4b5a-4a07-abb0-a53fc16af7af.png">
+
+we used Google ML Kit to streaming object detection and image labeling.
 
 # Contributors
 
