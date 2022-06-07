@@ -255,8 +255,12 @@ As the number of subscribers increases, you can see how many subscribers you are
 
 ## Communicate with developers
 <p align="center">
-  <img width="310" alt="image" src="https://user-images.githubusercontent.com/78309388/172326256-9f402331-69e1-4941-aea8-415f2b100347.png">
+  <img width="250" alt="image" src="https://user-images.githubusercontent.com/78309388/172326256-9f402331-69e1-4941-aea8-415f2b100347.png">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img width="250" alt="running_cumu" src="https://user-images.githubusercontent.com/78309388/172327758-a9d16767-fabb-440b-8113-4e9a6e879b0d.gif">
 </p>
+
+When using the app, if there are points that you think are lacking or if there are features that you would like to be added, please communicate with the developers through the contact us page.
 
 # Furthermore
 
