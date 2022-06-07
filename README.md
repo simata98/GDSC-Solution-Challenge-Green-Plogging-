@@ -164,7 +164,8 @@ the application will take care of what you picked up
 ```
 
 ### Trash Object Detection
-<사진 들어갈 곳>
+<img src="https://user-images.githubusercontent.com/87767242/172425780-cfa7ec25-ee23-4677-9a5d-37f9fa07c960.gif" alt="text" width="400"  />
+<img src="https://user-images.githubusercontent.com/87767242/172425790-a382944e-728c-4f65-a516-ce933d659116.gif" alt="text" width="400"  />
 
 After taking a picture of trash, it automatically recognizes and sorts trash so that user can see at a glance what kind of garbage user picked up. 
 
