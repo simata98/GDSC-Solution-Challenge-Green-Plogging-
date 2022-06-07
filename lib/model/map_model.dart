@@ -99,6 +99,7 @@ class MapModel extends GetxController {
   // 오브젝트 디텍션을 위한 변수들
   List<CameraDescription> cameras = [];
   int? selectedItem;
+  final torch = false.obs;
 
   //여기 수정해야함
   @override

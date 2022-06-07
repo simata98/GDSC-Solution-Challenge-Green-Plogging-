@@ -84,31 +84,91 @@ class _CameraDialogState extends State<CameraDialog> {
                 initialDirection: CameraLensDirection.back,
               ),
             ),
-            Expanded(
-              child: Container(
-                  child: Center(
-                child: Material(
-                  clipBehavior: Clip.hardEdge,
-                  color: CustomColor.primaryBold,
-                  borderRadius: const BorderRadius.all(Radius.circular(100)),
-                  child: InkWell(
-                    onTap: () async {
-                      pickup();
-                    },
-                    child: Container(
+            SizedBox(
+              height: _dialogHeight * 0.03,
+            ),
+            Row(
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: Container(
+                    child: SizedBox(
                       width: _dialogHeight * 0.2,
-                      height: _dialogHeight * 0.1,
-                      child: Center(
-                          child: Text('Pick Up',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w700))),
                     ),
                   ),
                 ),
-              )),
+                Flexible(
+                  flex: 2,
+                  child: Container(
+                    child: SizedBox(
+                      width: _dialogHeight * 0.2,
+                    ),
+                  ),
+                ),
+                Flexible(
+                  flex: 2,
+                  child: Container(
+                      child: Center(
+                    child: Material(
+                      clipBehavior: Clip.hardEdge,
+                      color: CustomColor.primaryBold,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(100)),
+                      child: InkWell(
+                        onTap: () async {
+                          pickup();
+                        },
+                        child: Container(
+                          width: _dialogHeight * 0.2,
+                          height: _dialogHeight * 0.1,
+                          child: Center(
+                              child: Text('Pick Up',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w700))),
+                        ),
+                      ),
+                    ),
+                  )),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: Container(
+                    child: SizedBox(
+                      width: _dialogHeight * 0.2,
+                    ),
+                  ),
+                ),
+                Flexible(
+                  flex: 2,
+                  child: Container(
+                      child: Center(
+                    child: Material(
+                      clipBehavior: Clip.hardEdge,
+                      color: CustomColor.primaryBold,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(100)),
+                      child: InkWell(
+                        onTap: () async {
+                          torchOn();
+                        },
+                        child: Container(
+                          width: _dialogHeight * 0.08,
+                          height: _dialogHeight * 0.08,
+                          child: Center(
+                              child: Icon(
+                            Icons.flash_on_outlined,
+                            size: _dialogHeight * 0.05,
+                            color: Colors.white,
+                          )),
+                        ),
+                      ),
+                    ),
+                  )),
+                )
+              ],
             )
           ],
         ),
@@ -289,5 +349,9 @@ class _CameraDialogState extends State<CameraDialog> {
           size: 30,
         ),
         snackPosition: SnackPosition.TOP);
+  }
+
+  void torchOn() {
+    MapModel.to.torch.toggle();
   }
 }
