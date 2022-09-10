@@ -1,4 +1,9 @@
-# GDSC top 10
+<p align="center">
+<img width="300" alt="image" src="https://user-images.githubusercontent.com/87767242/189479410-54b2b70f-0b1b-4938-81d8-3e659d03a68c.svg">
+<h3 align="center">This project was ranked in the top 10 of the 2022 <a href="https://developers.google.com/community/gdsc-solution-challenge">Google Solution Challenge.</a></h3>
+<h4 align="center">Thank you for Everyone!!</a></h4>
+
+<br/><br/><br/><br/>
 
 # Isak, green plogging flutter application
 
